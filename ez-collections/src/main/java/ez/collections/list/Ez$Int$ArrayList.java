@@ -2,6 +2,7 @@ package ez.collections.list;
 
 import ez.collections.Ez$Int$Collection;
 import ez.collections.Ez$Int$Iterator;
+import ez.collections.misc.PrimitiveHashCalculator;
 
 public class Ez$Int$ArrayList implements Ez$Int$List {
     private static final int DEFAULT_CAPACITY = 10;
@@ -215,10 +216,9 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
 
     @Override
     public int hashCode() {
-        // TODO it doesn't touch array elements now
         int hash = 0;
         for (int i = 0; i < size; i++) {
-            hash = hash * HASHCODE_MULTIPLIER + HASHCODE_INCREMENT;
+            hash = (hash + PrimitiveHashCalculator.getHash(array[i])) * HASHCODE_MULTIPLIER + HASHCODE_INCREMENT;
         }
         return hash;
     }

@@ -86,7 +86,9 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         for (TypeInfo typeInfo : TypeInfo.values()) {
             String typeName = typeInfo.typeName;
             String generatedClassName = CLASS_NAME_PATTERN.matcher(className).replaceAll(typeName);
-            generateSourceCode(source, new File(target.getParent(), generatedClassName + ".java"), typeInfo);
+            if (!className.equals(generatedClassName)) {
+                generateSourceCode(source, new File(target.getParent(), generatedClassName + ".java"), typeInfo);
+            }
         }
     }
 
