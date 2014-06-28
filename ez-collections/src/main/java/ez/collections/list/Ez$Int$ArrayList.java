@@ -1,9 +1,9 @@
 package ez.collections.list;
 
-import ez.collections.EzIntCollection;
-import ez.collections.EzIntIterator;
+import ez.collections.Ez$Int$Collection;
+import ez.collections.Ez$Int$Iterator;
 
-public class EzIntArrayList implements EzIntList {
+public class Ez$Int$ArrayList implements Ez$Int$List {
     private static final int DEFAULT_CAPACITY = 10;
     private static final double ENLARGE_SCALE = 2.0;
     private static final int HASHCODE_MULTIPLIER = 1664525;
@@ -12,11 +12,11 @@ public class EzIntArrayList implements EzIntList {
     private int[] array;
     private int size;
 
-    public EzIntArrayList() {
+    public Ez$Int$ArrayList() {
         this(DEFAULT_CAPACITY);
     }
 
-    public EzIntArrayList(int capacity) {
+    public Ez$Int$ArrayList(int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException("Capacity must be non-negative");
         }
@@ -24,16 +24,16 @@ public class EzIntArrayList implements EzIntList {
         size = 0;
     }
 
-    public EzIntArrayList(EzIntCollection collection) {
+    public Ez$Int$ArrayList(Ez$Int$Collection collection) {
         size = collection.size();
         array = new int[size];
         int i = 0;
-        for (EzIntIterator iterator = collection.iterator(); iterator.hasNext(); ) {
+        for (Ez$Int$Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
             array[i++] = iterator.next();
         }
     }
 
-    public EzIntArrayList(int[] srcArray) {
+    public Ez$Int$ArrayList(int[] srcArray) {
         size = srcArray.length;
         array = new int[size];
         System.arraycopy(srcArray, 0, array, 0, size);
@@ -60,8 +60,8 @@ public class EzIntArrayList implements EzIntList {
     }
 
     @Override
-    public EzIntIterator iterator() {
-        return new EzIntArrayListIterator();
+    public Ez$Int$Iterator iterator() {
+        return new Ez$Int$ArrayListIterator();
     }
 
     @Override
@@ -200,7 +200,7 @@ public class EzIntArrayList implements EzIntList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EzIntArrayList that = (EzIntArrayList) o;
+        Ez$Int$ArrayList that = (Ez$Int$ArrayList) o;
 
         if (size != that.size) {
             return false;
@@ -222,7 +222,7 @@ public class EzIntArrayList implements EzIntList {
         return hash;
     }
 
-    private class EzIntArrayListIterator implements EzIntIterator {
+    private class Ez$Int$ArrayListIterator implements Ez$Int$Iterator {
         private int curIndex = 0;
 
         @Override

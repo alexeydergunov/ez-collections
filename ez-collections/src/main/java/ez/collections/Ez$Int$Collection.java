@@ -1,13 +1,13 @@
 package ez.collections;
 
-public interface EzIntCollection {
+public interface Ez$Int$Collection {
     int size();
 
     boolean isEmpty();
 
     boolean contains(int element);
 
-    EzIntIterator iterator();
+    Ez$Int$Iterator iterator();
 
     int[] toArray();
 

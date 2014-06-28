@@ -5,10 +5,10 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-public class EzIntArrayListTest {
+public class Ez$Int$ArrayListTest {
     @Test
     public void testAdd() {
-        EzIntArrayList list = new EzIntArrayList(1);
+        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
         int[] array = new int[42];
         for (int i = 0; i < array.length; i++) {
             array[i] = i + 1;
@@ -21,7 +21,7 @@ public class EzIntArrayListTest {
 
     @Test
     public void testRemove() {
-        EzIntArrayList list = new EzIntArrayList(1);
+        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
         for (int i = 1; i <= 5; i++) {
             list.add(i);
         }
@@ -54,7 +54,7 @@ public class EzIntArrayListTest {
 
     @Test
      public void testInsert() {
-        EzIntArrayList list = new EzIntArrayList(1);
+        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
         for (int i = 1; i <= 3; i++) {
             list.add(i);
         }
@@ -80,7 +80,7 @@ public class EzIntArrayListTest {
 
     @Test
     public void testSet() {
-        EzIntArrayList list = new EzIntArrayList(1);
+        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
         for (int i = 1; i <= 3; i++) {
             list.add(i);
         }
@@ -104,7 +104,7 @@ public class EzIntArrayListTest {
 
     @Test
     public void testPushPopBack() {
-        EzIntArrayList list = new EzIntArrayList(1);
+        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
         for (int i = 1; i <= 3; i++) {
             list.add(i);
         }
@@ -133,7 +133,7 @@ public class EzIntArrayListTest {
     @Test
     public void testIndexOf() {
         int[] srcArray = new int[] {1, 2, 3, 2, 1, 2, 3, 2, 1};
-        EzIntArrayList list = new EzIntArrayList(srcArray);
+        Ez$Int$ArrayList list = new Ez$Int$ArrayList(srcArray);
         Assert.assertEquals(list.toArray(), srcArray);
         Assert.assertEquals(list.indexOf(1), 0);
         Assert.assertEquals(list.indexOf(2), 1);

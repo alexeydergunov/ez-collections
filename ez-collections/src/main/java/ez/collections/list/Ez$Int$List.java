@@ -1,9 +1,9 @@
 package ez.collections.list;
 
-import ez.collections.EzIntCollection;
-import ez.collections.EzIntIterator;
+import ez.collections.Ez$Int$Collection;
+import ez.collections.Ez$Int$Iterator;
 
-public interface EzIntList extends EzIntCollection {
+public interface Ez$Int$List extends Ez$Int$Collection {
     @Override
     int size();
 
@@ -14,7 +14,7 @@ public interface EzIntList extends EzIntCollection {
     boolean contains(int element);
 
     @Override
-    EzIntIterator iterator();
+    Ez$Int$Iterator iterator();
 
     @Override
     int[] toArray();

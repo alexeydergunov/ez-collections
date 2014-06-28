@@ -1,6 +1,6 @@
 package ez.collections;
 
-public interface EzIntIterator {
+public interface Ez$Int$Iterator {
     boolean hasNext();
 
     int next();
