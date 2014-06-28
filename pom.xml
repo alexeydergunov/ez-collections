@@ -5,17 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ez-collections</groupId>
-    <artifactId>ez-collections</artifactId>
+    <artifactId>ez-collections-parent</artifactId>
+    <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>ez-replace-maven-plugin</module>
+        <module>ez-collections</module>
+    </modules>
 
-    <name>EZ Collections</name>
+    <name>EZ Collections Parent</name>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.8.8</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>
