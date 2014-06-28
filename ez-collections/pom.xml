@@ -12,6 +12,24 @@
     <artifactId>ez-collections</artifactId>
     <name>EZ Collections</name>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>ez-collections</groupId>
+                <artifactId>ez-replace-maven-plugin</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>helloworld</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
