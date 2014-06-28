@@ -22,15 +22,25 @@
                     <execution>
                         <phase>generate-sources</phase>
                         <goals>
-                            <goal>helloworld</goal>
+                            <goal>replace-types</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <sourceDirectory>src/main/java</sourceDirectory>
+                    <targetDirectory>target/generated-sources/java</targetDirectory>
+                </configuration>
             </plugin>
         </plugins>
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>ez-collections</groupId>
+            <artifactId>ez-replace-maven-plugin</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
