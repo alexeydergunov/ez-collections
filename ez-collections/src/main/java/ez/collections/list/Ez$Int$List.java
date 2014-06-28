@@ -11,19 +11,19 @@ public interface Ez$Int$List extends Ez$Int$Collection {
     boolean isEmpty();
 
     @Override
-    boolean contains(int element);
+    boolean contains(/*T*/int/*T*/ element);
 
     @Override
     Ez$Int$Iterator iterator();
 
     @Override
-    int[] toArray();
+    /*T*/int/*T*/[] toArray();
 
     @Override
-    boolean add(int element);
+    boolean add(/*T*/int/*T*/ element);
 
     @Override
-    boolean remove(int element);
+    boolean remove(/*T*/int/*T*/ element);
 
     @Override
     void clear();
@@ -34,15 +34,15 @@ public interface Ez$Int$List extends Ez$Int$Collection {
     @Override
     int hashCode();
 
-    int get(int index);
+    /*T*/int/*T*/ get(int index);
 
-    int set(int index, int element);
+    /*T*/int/*T*/ set(int index, /*T*/int/*T*/ element);
 
-    void insert(int index, int element);
+    void insert(int index, /*T*/int/*T*/ element);
 
-    int removeAt(int index);
+    /*T*/int/*T*/ removeAt(int index);
 
-    int indexOf(int element);
+    int indexOf(/*T*/int/*T*/ element);
 
-    int lastIndexOf(int element);
+    int lastIndexOf(/*T*/int/*T*/ element);
 }

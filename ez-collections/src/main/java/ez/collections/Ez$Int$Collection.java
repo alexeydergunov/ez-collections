@@ -5,15 +5,15 @@ public interface Ez$Int$Collection {
 
     boolean isEmpty();
 
-    boolean contains(int element);
+    boolean contains(/*T*/int/*T*/ element);
 
     Ez$Int$Iterator iterator();
 
-    int[] toArray();
+    /*T*/int/*T*/[] toArray();
 
-    boolean add(int element);
+    boolean add(/*T*/int/*T*/ element);
 
-    boolean remove(int element);
+    boolean remove(/*T*/int/*T*/ element);
 
     void clear();
 

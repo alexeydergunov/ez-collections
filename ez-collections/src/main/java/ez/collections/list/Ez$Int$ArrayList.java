@@ -9,7 +9,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     private static final int HASHCODE_MULTIPLIER = 1664525;
     private static final int HASHCODE_INCREMENT = 1013904223;
 
-    private int[] array;
+    private /*T*/int/*T*/[] array;
     private int size;
 
     public Ez$Int$ArrayList() {
@@ -20,22 +20,22 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
         if (capacity < 0) {
             throw new IllegalArgumentException("Capacity must be non-negative");
         }
-        array = new int[capacity];
+        array = new /*T*/int/*T*/[capacity];
         size = 0;
     }
 
     public Ez$Int$ArrayList(Ez$Int$Collection collection) {
         size = collection.size();
-        array = new int[size];
+        array = new /*T*/int/*T*/[size];
         int i = 0;
         for (Ez$Int$Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
             array[i++] = iterator.next();
         }
     }
 
-    public Ez$Int$ArrayList(int[] srcArray) {
+    public Ez$Int$ArrayList(/*T*/int/*T*/[] srcArray) {
         size = srcArray.length;
-        array = new int[size];
+        array = new /*T*/int/*T*/[size];
         System.arraycopy(srcArray, 0, array, 0, size);
     }
 
@@ -50,7 +50,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     }
 
     @Override
-    public boolean contains(int element) {
+    public boolean contains(/*T*/int/*T*/ element) {
         for (int i = 0; i < size; i++) {
             if (array[i] == element) {
                 return true;
@@ -65,14 +65,14 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     }
 
     @Override
-    public int[] toArray() {
-        int[] result = new int[size];
+    public /*T*/int/*T*/[] toArray() {
+        /*T*/int/*T*/[] result = new /*T*/int/*T*/[size];
         System.arraycopy(array, 0, result, 0, size);
         return result;
     }
 
     @Override
-    public boolean add(int element) {
+    public boolean add(/*T*/int/*T*/ element) {
         if (size == array.length) {
             enlarge();
         }
@@ -81,7 +81,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     }
 
     @Override
-    public boolean remove(int element) {
+    public boolean remove(/*T*/int/*T*/ element) {
         for (int i = 0; i < size; i++) {
             if (array[i] == element) {
                 //noinspection ManualArrayCopy
@@ -101,7 +101,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     }
 
     @Override
-    public int get(int index) {
+    public /*T*/int/*T*/ get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " is out of range, size = " + size);
         }
@@ -109,17 +109,17 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     }
 
     @Override
-    public int set(int index, int element) {
+    public /*T*/int/*T*/ set(int index, /*T*/int/*T*/ element) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " is out of range, size = " + size);
         }
-        int oldElement = array[index];
+        /*T*/int/*T*/ oldElement = array[index];
         array[index] = element;
         return oldElement;
     }
 
     @Override
-    public void insert(int index, int element) {
+    public void insert(int index, /*T*/int/*T*/ element) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index " + index + " is out of range, size = " + size);
         }
@@ -135,11 +135,11 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     }
 
     @Override
-    public int removeAt(int index) {
+    public /*T*/int/*T*/ removeAt(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " is out of range, size = " + size);
         }
-        int removedElement = array[index];
+        /*T*/int/*T*/ removedElement = array[index];
         //noinspection ManualArrayCopy
         for (int i = index + 1; i < size; i++) {
             array[i - 1] = array[i];
@@ -148,21 +148,21 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
         return removedElement;
     }
 
-    public void pushBack(int element) {
+    public void pushBack(/*T*/int/*T*/ element) {
         if (size == array.length) {
             enlarge();
         }
         array[size++] = element;
     }
 
-    public int back() {
+    public /*T*/int/*T*/ back() {
         if (size == 0) {
             throw new IndexOutOfBoundsException("Trying to call back() on empty ArrayList");
         }
         return array[size - 1];
     }
 
-    public int popBack() {
+    public /*T*/int/*T*/ popBack() {
         if (size == 0) {
             throw new IndexOutOfBoundsException("Trying to call popBack() on empty ArrayList");
         }
@@ -170,7 +170,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     }
 
     @Override
-    public int indexOf(int element) {
+    public int indexOf(/*T*/int/*T*/ element) {
         for (int i = 0; i < size; i++) {
             if (array[i] == element) {
                 return i;
@@ -180,7 +180,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     }
 
     @Override
-    public int lastIndexOf(int element) {
+    public int lastIndexOf(/*T*/int/*T*/ element) {
         for (int i = size - 1; i >= 0; i--) {
             if (array[i] == element) {
                 return i;
@@ -191,7 +191,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
 
     private void enlarge() {
         int newSize = Math.max(size + 1, (int) (size * ENLARGE_SCALE));
-        int[] newArray = new int[newSize];
+        /*T*/int/*T*/[] newArray = new /*T*/int/*T*/[newSize];
         System.arraycopy(array, 0, newArray, 0, size);
         array = newArray;
     }
@@ -215,6 +215,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
 
     @Override
     public int hashCode() {
+        // TODO it doesn't touch array elements now
         int hash = 0;
         for (int i = 0; i < size; i++) {
             hash = hash * HASHCODE_MULTIPLIER + HASHCODE_INCREMENT;
@@ -231,7 +232,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
         }
 
         @Override
-        public int next() {
+        public /*T*/int/*T*/ next() {
             return array[curIndex++];
         }
     }
