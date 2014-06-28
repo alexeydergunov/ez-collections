@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-public class Ez$Int$ArrayListTest {
+public class EzIntArrayListTest {
     @Test
     public void testAdd() {
         Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
