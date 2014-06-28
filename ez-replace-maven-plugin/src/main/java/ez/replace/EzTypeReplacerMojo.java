@@ -4,7 +4,6 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.plexus.util.FileUtils;
 
 import java.io.*;
 import java.util.regex.Pattern;
@@ -52,7 +51,6 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         getLog().info("sourceDirectory = " + sourceDirectory);
         getLog().info("targetDirectory = " + targetDirectory);
         try {
-            FileUtils.deleteDirectory(targetDirectory);
             //noinspection ResultOfMethodCallIgnored
             targetDirectory.mkdirs();
             processTree(sourceDirectory, targetDirectory);
@@ -87,7 +85,10 @@ public class EzTypeReplacerMojo extends AbstractMojo {
             String typeName = typeInfo.typeName;
             String generatedClassName = CLASS_NAME_PATTERN.matcher(className).replaceAll(typeName);
             if (!className.equals(generatedClassName)) {
-                generateSourceCode(source, new File(target.getParent(), generatedClassName + ".java"), typeInfo);
+                File generatedTarget = new File(target.getParent(), generatedClassName + ".java");
+                if (!generatedTarget.exists()) {
+                    generateSourceCode(source, generatedTarget, typeInfo);
+                }
             }
         }
     }
