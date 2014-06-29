@@ -144,4 +144,12 @@ public class EzIntArrayListTest {
         Assert.assertEquals(list.lastIndexOf(3), 6);
         Assert.assertEquals(list.lastIndexOf(4), -1);
     }
+
+    @Test
+    public void testToString() {
+        Assert.assertEquals(new Ez$Int$ArrayList(new int[0]).toString(), "[]");
+        Assert.assertEquals(new Ez$Int$ArrayList(new int[] {1}).toString(), "[1]");
+        Assert.assertEquals(new Ez$Int$ArrayList(new int[] {1, 2}).toString(), "[1, 2]");
+        Assert.assertEquals(new Ez$Int$ArrayList(new int[] {1, 2, 3}).toString(), "[1, 2, 3]");
+    }
 }
