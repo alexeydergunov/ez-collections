@@ -125,7 +125,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " is out of range, size = " + size);
         }
-        /*T*/int/*T*/ oldElement = array[index];
+        final /*T*/int/*T*/ oldElement = array[index];
         array[index] = element;
         return oldElement;
     }
@@ -151,7 +151,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " is out of range, size = " + size);
         }
-        /*T*/int/*T*/ removedElement = array[index];
+        final /*T*/int/*T*/ removedElement = array[index];
         //noinspection ManualArrayCopy
         for (int i = index + 1; i < size; i++) {
             array[i - 1] = array[i];
