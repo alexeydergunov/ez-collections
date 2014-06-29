@@ -9,8 +9,8 @@ import java.util.Collection;
 public class Ez$Int$ArrayList implements Ez$Int$List {
     private static final int DEFAULT_CAPACITY = 10;
     private static final double ENLARGE_SCALE = 2.0;
-    private static final int HASHCODE_MULTIPLIER = 1664525;
-    private static final int HASHCODE_INCREMENT = 1013904223;
+    private static final int HASHCODE_INITIAL_VALUE = 0x811c9dc5;
+    private static final int HASHCODE_MULTIPLIER = 0x01000193;
 
     private /*T*/int/*T*/[] array;
     private int size;
@@ -227,9 +227,9 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
 
     @Override
     public int hashCode() {
-        int hash = 0;
+        int hash = HASHCODE_INITIAL_VALUE;
         for (int i = 0; i < size; i++) {
-            hash = (hash + PrimitiveHashCalculator.getHash(array[i])) * HASHCODE_MULTIPLIER + HASHCODE_INCREMENT;
+            hash = (hash ^ PrimitiveHashCalculator.getHash(array[i])) * HASHCODE_MULTIPLIER;
         }
         return hash;
     }
