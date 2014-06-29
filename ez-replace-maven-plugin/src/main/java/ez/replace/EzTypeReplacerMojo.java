@@ -12,26 +12,29 @@ import java.util.regex.Pattern;
 @Mojo(name = "replace-types")
 public class EzTypeReplacerMojo extends AbstractMojo {
     private static enum TypeInfo {
-        BOOLEAN("boolean", "Boolean"),
-        BYTE("byte", "Byte"),
-        SHORT("short", "Short"),
-        CHAR("char", "Char"),
-        INT("int", "Int"),
-        LONG("long", "Long"),
-        FLOAT("float", "Float"),
-        DOUBLE("double", "Double");
+        BOOLEAN("boolean", "Boolean", "Boolean"),
+        BYTE("byte", "Byte", "Byte"),
+        SHORT("short", "Short", "Short"),
+        CHAR("char", "Char", "Character"),
+        INT("int", "Int", "Integer"),
+        LONG("long", "Long", "Long"),
+        FLOAT("float", "Float", "Float"),
+        DOUBLE("double", "Double", "Double");
 
         private final String primitiveName;
         private final String typeName;
+        private final String wrapperName;
 
-        private TypeInfo(String primitiveName, String typeName) {
+        private TypeInfo(String primitiveName, String typeName, String wrapperName) {
             this.primitiveName = primitiveName;
             this.typeName = typeName;
+            this.wrapperName = wrapperName;
         }
     }
 
     private static final Pattern CLASS_NAME_PATTERN = Pattern.compile("\\$.*?\\$");
     private static final Pattern PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*T\\*/.*/\\*T\\*/");
+    private static final Pattern WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*W\\*/.*/\\*W\\*/");
 
     private static final FileFilter JAVA_FILTER = new FileFilter() {
         @Override
@@ -120,6 +123,9 @@ public class EzTypeReplacerMojo extends AbstractMojo {
     private String transformToken(String s, TypeInfo typeInfo) {
         if (s.contains("/*T*/")) {
             s = PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfo.primitiveName);
+        }
+        if (s.contains("/*W*/")) {
+            s = WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfo.wrapperName);
         }
         if (s.contains("$")) {
             s = CLASS_NAME_PATTERN.matcher(s).replaceAll(typeInfo.typeName);

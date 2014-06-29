@@ -4,6 +4,8 @@ import ez.collections.Ez$Int$Collection;
 import ez.collections.Ez$Int$Iterator;
 import ez.collections.misc.PrimitiveHashCalculator;
 
+import java.util.Collection;
+
 public class Ez$Int$ArrayList implements Ez$Int$List {
     private static final int DEFAULT_CAPACITY = 10;
     private static final double ENLARGE_SCALE = 2.0;
@@ -38,6 +40,15 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
         size = srcArray.length;
         array = new /*T*/int/*T*/[size];
         System.arraycopy(srcArray, 0, array, 0, size);
+    }
+
+    public Ez$Int$ArrayList(Collection</*W*/Integer/*W*/> javaCollection) {
+        size = javaCollection.size();
+        array = new /*T*/int/*T*/[size];
+        int i = 0;
+        for (/*T*/int/*T*/ element : javaCollection) {
+            array[i++] = element;
+        }
     }
 
     @Override

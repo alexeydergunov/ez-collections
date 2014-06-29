@@ -3,7 +3,9 @@ package ez.collections.list;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class EzIntArrayListTest {
     @Test
@@ -151,5 +153,21 @@ public class EzIntArrayListTest {
         Assert.assertEquals(new Ez$Int$ArrayList(new int[] {1}).toString(), "[1]");
         Assert.assertEquals(new Ez$Int$ArrayList(new int[] {1, 2}).toString(), "[1, 2]");
         Assert.assertEquals(new Ez$Int$ArrayList(new int[] {1, 2, 3}).toString(), "[1, 2, 3]");
+    }
+
+    @Test
+    public void testCreationFromJavaCollection() {
+        for (int length = 0; length < 20; length++) {
+            int[] array = new int[length];
+            for (int i = 0; i < length; i++) {
+                array[i] = i + 100501;
+            }
+            List<Integer> javaList = new ArrayList<Integer>(length);
+            for (int i = 0; i < length; i++) {
+                javaList.add(array[i]);
+            }
+            Ez$Int$ArrayList list = new Ez$Int$ArrayList(javaList);
+            Assert.assertEquals(list.toArray(), array);
+        }
     }
 }
