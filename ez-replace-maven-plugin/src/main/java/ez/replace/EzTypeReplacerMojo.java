@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class EzTypeReplacerMojo extends AbstractMojo {
     private static enum TypeInfo {
         BOOLEAN("boolean", "Boolean"),
+        BYTE("byte", "Byte"),
         SHORT("short", "Short"),
         CHAR("char", "Char"),
         INT("int", "Int"),
@@ -23,7 +24,7 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         private final String primitiveName;
         private final String typeName;
 
-        TypeInfo(String primitiveName, String typeName) {
+        private TypeInfo(String primitiveName, String typeName) {
             this.primitiveName = primitiveName;
             this.typeName = typeName;
         }

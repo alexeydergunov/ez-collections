@@ -8,6 +8,10 @@ public final class PrimitiveHashCalculator {
         return x ? 1 : 0;
     }
 
+    public static int getHash(byte x) {
+        return x;
+    }
+
     public static int getHash(short x) {
         return x;
     }
