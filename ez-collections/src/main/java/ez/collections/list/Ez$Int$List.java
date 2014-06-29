@@ -34,6 +34,9 @@ public interface Ez$Int$List extends Ez$Int$Collection {
     @Override
     int hashCode();
 
+    @Override
+    String toString();
+
     /*T*/int/*T*/ get(int index);
 
     /*T*/int/*T*/ set(int index, /*T*/int/*T*/ element);

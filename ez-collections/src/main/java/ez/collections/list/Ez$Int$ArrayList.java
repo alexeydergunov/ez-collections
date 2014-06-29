@@ -223,6 +223,20 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
         return hash;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (int i = 0; i < size; i++) {
+            sb.append(array[i]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append(']');
+        return sb.toString();
+    }
+
     private class Ez$Int$ArrayListIterator implements Ez$Int$Iterator {
         private int curIndex = 0;
 

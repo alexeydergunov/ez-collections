@@ -22,4 +22,7 @@ public interface Ez$Int$Collection {
 
     @Override
     int hashCode();
+
+    @Override
+    String toString();
 }
