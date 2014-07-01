@@ -5,6 +5,7 @@ import ez.collections.Ez$Int$Iterator;
 import ez.collections.misc.PrimitiveHashCalculator;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 public class Ez$Int$ArrayList implements Ez$Int$List {
     private static final int DEFAULT_CAPACITY = 10;
@@ -258,6 +259,9 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
 
         @Override
         public /*T*/int/*T*/ next() {
+            if (curIndex == size) {
+                throw new NoSuchElementException("Iterator doesn't have more elements");
+            }
             return array[curIndex++];
         }
     }
