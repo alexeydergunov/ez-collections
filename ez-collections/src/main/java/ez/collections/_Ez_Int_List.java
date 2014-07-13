@@ -1,7 +1,4 @@
-package ez.collections.list;
-
-import ez.collections._Ez_Int_Collection;
-import ez.collections._Ez_Int_Iterator;
+package ez.collections;
 
 /**
  * The root interface for lists.

@@ -2,6 +2,7 @@ package ez.collections.list;
 
 import ez.collections._Ez_Int_Collection;
 import ez.collections._Ez_Int_Iterator;
+import ez.collections._Ez_Int_List;
 import ez.collections.misc.PrimitiveHashCalculator;
 
 import java.util.Collection;

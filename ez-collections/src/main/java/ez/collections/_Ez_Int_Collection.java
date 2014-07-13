@@ -9,7 +9,7 @@ package ez.collections;
  * implementation of every collection for every primitive type. It greatly increases the performance.
  * @author Alexey Dergunov
  * @since 0.0.1
- * @see ez.collections.list._Ez_Int_List
+ * @see _Ez_Int_List
  */
 public interface _Ez_Int_Collection {
     /**
