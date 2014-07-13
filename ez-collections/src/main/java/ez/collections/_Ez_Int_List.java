@@ -55,7 +55,7 @@ public interface _Ez_Int_List extends _Ez_Int_Collection {
     /**
      * Adds the element into this list.
      * @param element the element to be added
-     * @return always returns {@code true} (for compatibility with the parent interface {@link ez.collections._Ez_Int_Collection})
+     * @return always returns {@code true} (for compatibility with the parent interface {@link _Ez_Int_Collection})
      */
     @Override
     boolean add(/*T*/int/*T*/ element);

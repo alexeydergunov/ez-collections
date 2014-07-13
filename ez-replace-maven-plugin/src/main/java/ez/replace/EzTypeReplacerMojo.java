@@ -6,6 +6,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("UnusedDeclaration")
@@ -36,6 +37,8 @@ public class EzTypeReplacerMojo extends AbstractMojo {
 
     private static final Pattern CLASS_NAME_PATTERN = Pattern.compile("_.*?_");
     private static final Pattern PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*T\\*/.*/\\*T\\*/");
+    private static final Pattern KEY_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*K\\*/.*/\\*K\\*/");
+    private static final Pattern VALUE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*V\\*/.*/\\*V\\*/");
     private static final Pattern WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*W\\*/.*/\\*W\\*/");
 
     private static final FileFilter JAVA_FILTER = new FileFilter() {
@@ -89,18 +92,50 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         String className = fileName.substring(0, fileName.length() - 5);
         if (className.startsWith("_")) {
             className = className.substring(1);
-            for (TypeInfo typeInfo : TypeInfo.values()) {
-                String typeName = typeInfo.typeName;
-                String generatedClassName = CLASS_NAME_PATTERN.matcher(className).replaceAll(typeName);
-                File generatedTarget = new File(target.getParent(), generatedClassName + ".java");
-                if (!generatedTarget.exists()) {
-                    generateSourceCode(source, generatedTarget, typeInfo);
-                }
+            int replacementsCount = 0;
+            Matcher matcher = CLASS_NAME_PATTERN.matcher(className);
+            while (matcher.find()) {
+                replacementsCount++;
             }
+            if (replacementsCount == 1) {
+                // collection
+                for (TypeInfo typeInfo : TypeInfo.values()) {
+                    String generatedClassName = replaceSequentially(
+                            CLASS_NAME_PATTERN, className, typeInfo.typeName);
+                    File generatedTarget = new File(target.getParent(), generatedClassName + ".java");
+                    if (!generatedTarget.exists()) {
+                        generateSourceCode(source, generatedTarget, typeInfo);
+                    }
+                }
+                return;
+            }
+            if (replacementsCount == 2) {
+                // map
+                for (TypeInfo keyTypeInfo : TypeInfo.values()) {
+                    for (TypeInfo valueTypeInfo : TypeInfo.values()) {
+                        String generatedClassName = replaceSequentially(
+                                CLASS_NAME_PATTERN, className, keyTypeInfo.typeName, valueTypeInfo.typeName);
+                        File generatedTarget = new File(target.getParent(), generatedClassName + ".java");
+                        if (!generatedTarget.exists()) {
+                            generateSourceCode(source, generatedTarget, keyTypeInfo, valueTypeInfo);
+                        }
+                    }
+                }
+                return;
+            }
+            throw new IllegalStateException("There should be only 1 or 2 type names in the class name");
         }
     }
 
-    private void generateSourceCode(File source, File target, TypeInfo typeInfo) throws IOException {
+    private String replaceSequentially(Pattern pattern, String initialString, String... replacements) {
+        String result = initialString;
+        for (String replacement : replacements) {
+            result = pattern.matcher(result).replaceFirst(replacement);
+        }
+        return result;
+    }
+
+    private void generateSourceCode(File source, File target, TypeInfo... typeInfos) throws IOException {
         getLog().info("Generating " + source + " to " + target);
         BufferedReader reader = new BufferedReader(new FileReader(source));
         PrintWriter writer = new PrintWriter(target);
@@ -109,7 +144,7 @@ public class EzTypeReplacerMojo extends AbstractMojo {
             for (int charCode = reader.read(); charCode != -1; charCode = reader.read()) {
                 char c = (char) charCode;
                 if (isTokenDelimiter(c)) {
-                    String transformed = transformToken(currentToken.toString(), typeInfo);
+                    String transformed = transformToken(currentToken.toString(), typeInfos);
                     writer.print(transformed);
                     currentToken.setLength(0);
                     writer.print(c);
@@ -117,7 +152,7 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                     currentToken.append(c);
                 }
             }
-            writer.print(transformToken(currentToken.toString(), typeInfo));
+            writer.print(transformToken(currentToken.toString(), typeInfos));
         } finally {
             reader.close();
             writer.close();
@@ -128,16 +163,50 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         return Character.isWhitespace(c) || TOKEN_DELIMITERS.contains(Character.toString(c));
     }
 
-    private String transformToken(String s, TypeInfo typeInfo) {
+    private String transformToken(String s, TypeInfo... typeInfos) {
         if (s.contains("/*T*/")) {
-            s = PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfo.primitiveName);
+            if (typeInfos.length != 1) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*T*/");
+            }
+            s = PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
         }
         if (s.contains("/*W*/")) {
-            s = WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfo.wrapperName);
+            if (typeInfos.length != 1) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*W*/");
+            }
+            s = WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].wrapperName);
         }
+
+        if (s.contains("/*K*/")) {
+            if (typeInfos.length != 2) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*K*/");
+            }
+            s = KEY_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
+        }
+        if (s.contains("/*V*/")) {
+            if (typeInfos.length != 2) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*V*/");
+            }
+            s = VALUE_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[1].primitiveName);
+        }
+
         if (s.startsWith("_")) {
             s = s.substring(1);
-            s = CLASS_NAME_PATTERN.matcher(s).replaceAll(typeInfo.typeName);
+            Matcher matcher = CLASS_NAME_PATTERN.matcher(s);
+            StringBuffer sb = new StringBuffer();
+            int i = 0;
+            while (matcher.find()) {
+                matcher.appendReplacement(sb, typeInfos[i++].typeName);
+            }
+            matcher.appendTail(sb);
+            if (i != typeInfos.length) {
+                throw new IllegalArgumentException("Wrong number of TypeInfo's were passed to transformToken()");
+            }
+            s = sb.toString();
         }
         return s;
     }
