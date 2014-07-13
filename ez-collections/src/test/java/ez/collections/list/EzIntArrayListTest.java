@@ -105,27 +105,27 @@ public class EzIntArrayListTest {
     }
 
     @Test
-    public void testPushPopBack() {
+    public void testAddRemoveLast() {
         _Ez_Int_ArrayList list = new _Ez_Int_ArrayList(1);
         for (int i = 1; i <= 3; i++) {
             list.add(i);
         }
         Assert.assertEquals(list.toArray(), new int[] {1, 2, 3});
-        list.pushBack(4);
+        list.addLast(4);
         Assert.assertEquals(list.toArray(), new int[] {1, 2, 3, 4});
-        Assert.assertEquals(list.back(), 4);
-        Assert.assertEquals(list.popBack(), 4);
+        Assert.assertEquals(list.getLast(), 4);
+        Assert.assertEquals(list.removeLast(), 4);
         Assert.assertEquals(list.toArray(), new int[] {1, 2, 3});
         for (int i = 3; i >= 1; i--) {
-            Assert.assertEquals(list.popBack(), i);
+            Assert.assertEquals(list.removeLast(), i);
         }
         try {
-            list.back();
+            list.getLast();
         } catch (IndexOutOfBoundsException e) {
             // as expected
         }
         try {
-            list.popBack();
+            list.removeLast();
         } catch (IndexOutOfBoundsException e) {
             // as expected
         }

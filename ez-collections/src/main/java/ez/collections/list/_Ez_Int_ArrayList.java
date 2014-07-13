@@ -3,12 +3,13 @@ package ez.collections.list;
 import ez.collections._Ez_Int_Collection;
 import ez.collections._Ez_Int_Iterator;
 import ez.collections._Ez_Int_List;
+import ez.collections._Ez_Int_Stack;
 import ez.collections.misc.PrimitiveHashCalculator;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
-public class _Ez_Int_ArrayList implements _Ez_Int_List {
+public class _Ez_Int_ArrayList implements _Ez_Int_List, _Ez_Int_Stack {
     private static final int DEFAULT_CAPACITY = 10;
     private static final double ENLARGE_SCALE = 2.0;
     private static final int HASHCODE_INITIAL_VALUE = 0x811c9dc5;
@@ -162,23 +163,26 @@ public class _Ez_Int_ArrayList implements _Ez_Int_List {
         return removedElement;
     }
 
-    public void pushBack(/*T*/int/*T*/ element) {
+    @Override
+    public void addLast(/*T*/int/*T*/ element) {
         if (size == array.length) {
             enlarge();
         }
         array[size++] = element;
     }
 
-    public /*T*/int/*T*/ back() {
+    @Override
+    public /*T*/int/*T*/ getLast() {
         if (size == 0) {
-            throw new IndexOutOfBoundsException("Trying to call back() on empty ArrayList");
+            throw new IndexOutOfBoundsException("Trying to call getLast() on empty ArrayList");
         }
         return array[size - 1];
     }
 
-    public /*T*/int/*T*/ popBack() {
+    @Override
+    public /*T*/int/*T*/ removeLast() {
         if (size == 0) {
-            throw new IndexOutOfBoundsException("Trying to call popBack() on empty ArrayList");
+            throw new IndexOutOfBoundsException("Trying to call removeLast() on empty ArrayList");
         }
         return array[--size];
     }
