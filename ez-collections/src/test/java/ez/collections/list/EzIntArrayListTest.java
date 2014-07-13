@@ -10,7 +10,7 @@ import java.util.List;
 public class EzIntArrayListTest {
     @Test
     public void testAdd() {
-        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
+        _Ez_Int_ArrayList list = new _Ez_Int_ArrayList(1);
         int[] array = new int[42];
         for (int i = 0; i < array.length; i++) {
             array[i] = i + 1;
@@ -23,7 +23,7 @@ public class EzIntArrayListTest {
 
     @Test
     public void testRemove() {
-        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
+        _Ez_Int_ArrayList list = new _Ez_Int_ArrayList(1);
         for (int i = 1; i <= 5; i++) {
             list.add(i);
         }
@@ -54,9 +54,9 @@ public class EzIntArrayListTest {
         Assert.assertEquals(list.remove(3), false);
     }
 
-    @Test
+     @Test
      public void testInsert() {
-        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
+        _Ez_Int_ArrayList list = new _Ez_Int_ArrayList(1);
         for (int i = 1; i <= 3; i++) {
             list.add(i);
         }
@@ -82,7 +82,7 @@ public class EzIntArrayListTest {
 
     @Test
     public void testSet() {
-        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
+        _Ez_Int_ArrayList list = new _Ez_Int_ArrayList(1);
         for (int i = 1; i <= 3; i++) {
             list.add(i);
         }
@@ -106,7 +106,7 @@ public class EzIntArrayListTest {
 
     @Test
     public void testPushPopBack() {
-        Ez$Int$ArrayList list = new Ez$Int$ArrayList(1);
+        _Ez_Int_ArrayList list = new _Ez_Int_ArrayList(1);
         for (int i = 1; i <= 3; i++) {
             list.add(i);
         }
@@ -135,7 +135,7 @@ public class EzIntArrayListTest {
     @Test
     public void testIndexOf() {
         int[] srcArray = new int[] {1, 2, 3, 2, 1, 2, 3, 2, 1};
-        Ez$Int$ArrayList list = new Ez$Int$ArrayList(srcArray);
+        _Ez_Int_ArrayList list = new _Ez_Int_ArrayList(srcArray);
         Assert.assertEquals(list.toArray(), srcArray);
         Assert.assertEquals(list.indexOf(1), 0);
         Assert.assertEquals(list.indexOf(2), 1);
@@ -149,10 +149,10 @@ public class EzIntArrayListTest {
 
     @Test
     public void testToString() {
-        Assert.assertEquals(new Ez$Int$ArrayList(new int[0]).toString(), "[]");
-        Assert.assertEquals(new Ez$Int$ArrayList(new int[] {1}).toString(), "[1]");
-        Assert.assertEquals(new Ez$Int$ArrayList(new int[] {1, 2}).toString(), "[1, 2]");
-        Assert.assertEquals(new Ez$Int$ArrayList(new int[] {1, 2, 3}).toString(), "[1, 2, 3]");
+        Assert.assertEquals(new _Ez_Int_ArrayList(new int[0]).toString(), "[]");
+        Assert.assertEquals(new _Ez_Int_ArrayList(new int[] {1}).toString(), "[1]");
+        Assert.assertEquals(new _Ez_Int_ArrayList(new int[] {1, 2}).toString(), "[1, 2]");
+        Assert.assertEquals(new _Ez_Int_ArrayList(new int[] {1, 2, 3}).toString(), "[1, 2, 3]");
     }
 
     @Test
@@ -166,7 +166,7 @@ public class EzIntArrayListTest {
             for (int i = 0; i < length; i++) {
                 javaList.add(array[i]);
             }
-            Ez$Int$ArrayList list = new Ez$Int$ArrayList(javaList);
+            _Ez_Int_ArrayList list = new _Ez_Int_ArrayList(javaList);
             Assert.assertEquals(list.toArray(), array);
         }
     }

@@ -62,7 +62,7 @@
                         </goals>
                         <configuration>
                             <excludes>
-                                <exclude>**/*$*$*.class</exclude>
+                                <exclude>**/_*.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -80,7 +80,7 @@
                         </goals>
                         <configuration>
                             <excludes>
-                                <exclude>**/*$*$*.java</exclude>
+                                <exclude>**/_*.java</exclude>
                             </excludes>
                         </configuration>
                     </execution>

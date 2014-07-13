@@ -1,13 +1,13 @@
 package ez.collections.list;
 
-import ez.collections.Ez$Int$Collection;
-import ez.collections.Ez$Int$Iterator;
+import ez.collections._Ez_Int_Collection;
+import ez.collections._Ez_Int_Iterator;
 import ez.collections.misc.PrimitiveHashCalculator;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
-public class Ez$Int$ArrayList implements Ez$Int$List {
+public class _Ez_Int_ArrayList implements _Ez_Int_List {
     private static final int DEFAULT_CAPACITY = 10;
     private static final double ENLARGE_SCALE = 2.0;
     private static final int HASHCODE_INITIAL_VALUE = 0x811c9dc5;
@@ -16,11 +16,11 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     private /*T*/int/*T*/[] array;
     private int size;
 
-    public Ez$Int$ArrayList() {
+    public _Ez_Int_ArrayList() {
         this(DEFAULT_CAPACITY);
     }
 
-    public Ez$Int$ArrayList(int capacity) {
+    public _Ez_Int_ArrayList(int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException("Capacity must be non-negative");
         }
@@ -28,22 +28,22 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
         size = 0;
     }
 
-    public Ez$Int$ArrayList(Ez$Int$Collection collection) {
+    public _Ez_Int_ArrayList(_Ez_Int_Collection collection) {
         size = collection.size();
         array = new /*T*/int/*T*/[size];
         int i = 0;
-        for (Ez$Int$Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
+        for (_Ez_Int_Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
             array[i++] = iterator.next();
         }
     }
 
-    public Ez$Int$ArrayList(/*T*/int/*T*/[] srcArray) {
+    public _Ez_Int_ArrayList(/*T*/int/*T*/[] srcArray) {
         size = srcArray.length;
         array = new /*T*/int/*T*/[size];
         System.arraycopy(srcArray, 0, array, 0, size);
     }
 
-    public Ez$Int$ArrayList(Collection</*W*/Integer/*W*/> javaCollection) {
+    public _Ez_Int_ArrayList(Collection</*W*/Integer/*W*/> javaCollection) {
         size = javaCollection.size();
         array = new /*T*/int/*T*/[size];
         int i = 0;
@@ -73,8 +73,8 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     }
 
     @Override
-    public Ez$Int$Iterator iterator() {
-        return new Ez$Int$ArrayListIterator();
+    public _Ez_Int_Iterator iterator() {
+        return new _Ez_Int_ArrayListIterator();
     }
 
     @Override
@@ -213,7 +213,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Ez$Int$ArrayList that = (Ez$Int$ArrayList) o;
+        _Ez_Int_ArrayList that = (_Ez_Int_ArrayList) o;
 
         if (size != that.size) {
             return false;
@@ -249,7 +249,7 @@ public class Ez$Int$ArrayList implements Ez$Int$List {
         return sb.toString();
     }
 
-    private class Ez$Int$ArrayListIterator implements Ez$Int$Iterator {
+    private class _Ez_Int_ArrayListIterator implements _Ez_Int_Iterator {
         private int curIndex = 0;
 
         @Override

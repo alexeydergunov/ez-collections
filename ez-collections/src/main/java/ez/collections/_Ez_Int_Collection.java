@@ -9,9 +9,9 @@ package ez.collections;
  * implementation of every collection for every primitive type. It greatly increases the performance.
  * @author Alexey Dergunov
  * @since 0.0.1
- * @see ez.collections.list.Ez$Int$List
+ * @see ez.collections.list._Ez_Int_List
  */
-public interface Ez$Int$Collection {
+public interface _Ez_Int_Collection {
     /**
      * Returns the size of the collection, i.e. the number of elements in it.
      * @return the size of the collection
@@ -35,7 +35,7 @@ public interface Ez$Int$Collection {
      * Returns the iterator which can be used to go through the elements of this collection.
      * @return the iterator to go through the elements of this collection
      */
-    Ez$Int$Iterator iterator();
+    _Ez_Int_Iterator iterator();
 
     /**
      * Returns the array which contains all elements in this collection. This method always allocates new array, so you

@@ -8,7 +8,7 @@ package ez.collections;
  * @author Alexey Dergunov
  * @since 0.0.1
  */
-public interface Ez$Int$Iterator {
+public interface _Ez_Int_Iterator {
     /**
      * Checks if the iterator has more available elements.
      * @return {@code true} if the iterator has more elements, {@code false} otherwise

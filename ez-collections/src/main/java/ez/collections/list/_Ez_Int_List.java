@@ -1,7 +1,7 @@
 package ez.collections.list;
 
-import ez.collections.Ez$Int$Collection;
-import ez.collections.Ez$Int$Iterator;
+import ez.collections._Ez_Int_Collection;
+import ez.collections._Ez_Int_Iterator;
 
 /**
  * The root interface for lists.
@@ -15,7 +15,7 @@ import ez.collections.Ez$Int$Iterator;
  * @author Alexey Dergunov
  * @since 0.0.1
  */
-public interface Ez$Int$List extends Ez$Int$Collection {
+public interface _Ez_Int_List extends _Ez_Int_Collection {
     /**
      * Returns the size of the list, i.e. the number of elements in it.
      * @return the size of the list
@@ -44,7 +44,7 @@ public interface Ez$Int$List extends Ez$Int$Collection {
      * @return the iterator to go through the elements of this list
      */
     @Override
-    Ez$Int$Iterator iterator();
+    _Ez_Int_Iterator iterator();
 
     /**
      * Returns the array which contains all elements in this list, in the same order as they were contained in the
@@ -58,7 +58,7 @@ public interface Ez$Int$List extends Ez$Int$Collection {
     /**
      * Adds the element into this list.
      * @param element the element to be added
-     * @return always returns {@code true} (for compatibility with the parent interface {@link Ez$Int$Collection})
+     * @return always returns {@code true} (for compatibility with the parent interface {@link ez.collections._Ez_Int_Collection})
      */
     @Override
     boolean add(/*T*/int/*T*/ element);

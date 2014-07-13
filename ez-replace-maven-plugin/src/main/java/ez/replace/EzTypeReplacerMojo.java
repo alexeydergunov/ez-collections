@@ -32,7 +32,9 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         }
     }
 
-    private static final Pattern CLASS_NAME_PATTERN = Pattern.compile("\\$.*?\\$");
+    private static final String TOKEN_DELIMITERS = "[](){}<>.,;";
+
+    private static final Pattern CLASS_NAME_PATTERN = Pattern.compile("_.*?_");
     private static final Pattern PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*T\\*/.*/\\*T\\*/");
     private static final Pattern WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*W\\*/.*/\\*W\\*/");
 
@@ -85,10 +87,11 @@ public class EzTypeReplacerMojo extends AbstractMojo {
     private void processFile(File source, File target) throws IOException {
         String fileName = source.getName();
         String className = fileName.substring(0, fileName.length() - 5);
-        for (TypeInfo typeInfo : TypeInfo.values()) {
-            String typeName = typeInfo.typeName;
-            String generatedClassName = CLASS_NAME_PATTERN.matcher(className).replaceAll(typeName);
-            if (!className.equals(generatedClassName)) {
+        if (className.startsWith("_")) {
+            className = className.substring(1);
+            for (TypeInfo typeInfo : TypeInfo.values()) {
+                String typeName = typeInfo.typeName;
+                String generatedClassName = CLASS_NAME_PATTERN.matcher(className).replaceAll(typeName);
                 File generatedTarget = new File(target.getParent(), generatedClassName + ".java");
                 if (!generatedTarget.exists()) {
                     generateSourceCode(source, generatedTarget, typeInfo);
@@ -103,14 +106,15 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         PrintWriter writer = new PrintWriter(target);
         try {
             StringBuilder currentToken = new StringBuilder();
-            for (int c = reader.read(); c != -1; c = reader.read()) {
-                if (Character.isWhitespace(c)) {
+            for (int charCode = reader.read(); charCode != -1; charCode = reader.read()) {
+                char c = (char) charCode;
+                if (isTokenDelimiter(c)) {
                     String transformed = transformToken(currentToken.toString(), typeInfo);
                     writer.print(transformed);
                     currentToken.setLength(0);
-                    writer.print((char) c);
+                    writer.print(c);
                 } else {
-                    currentToken.append((char) c);
+                    currentToken.append(c);
                 }
             }
             writer.print(transformToken(currentToken.toString(), typeInfo));
@@ -120,6 +124,10 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         }
     }
 
+    private boolean isTokenDelimiter(char c) {
+        return Character.isWhitespace(c) || TOKEN_DELIMITERS.contains(Character.toString(c));
+    }
+
     private String transformToken(String s, TypeInfo typeInfo) {
         if (s.contains("/*T*/")) {
             s = PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfo.primitiveName);
@@ -127,7 +135,8 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         if (s.contains("/*W*/")) {
             s = WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfo.wrapperName);
         }
-        if (s.contains("$")) {
+        if (s.startsWith("_")) {
+            s = s.substring(1);
             s = CLASS_NAME_PATTERN.matcher(s).replaceAll(typeInfo.typeName);
         }
         return s;
