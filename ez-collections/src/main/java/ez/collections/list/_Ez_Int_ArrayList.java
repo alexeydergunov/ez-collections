@@ -174,7 +174,7 @@ public class _Ez_Int_ArrayList implements _Ez_Int_List, _Ez_Int_Stack {
     @Override
     public /*T*/int/*T*/ getLast() {
         if (size == 0) {
-            throw new IndexOutOfBoundsException("Trying to call getLast() on empty ArrayList");
+            throw new NoSuchElementException("Trying to call getLast() on empty ArrayList");
         }
         return array[size - 1];
     }
@@ -182,7 +182,7 @@ public class _Ez_Int_ArrayList implements _Ez_Int_List, _Ez_Int_Stack {
     @Override
     public /*T*/int/*T*/ removeLast() {
         if (size == 0) {
-            throw new IndexOutOfBoundsException("Trying to call removeLast() on empty ArrayList");
+            throw new NoSuchElementException("Trying to call removeLast() on empty ArrayList");
         }
         return array[--size];
     }

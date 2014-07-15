@@ -10,6 +10,12 @@ package ez.collections;
  * @author Alexey Dergunov
  * @since 0.0.1
  * @see _Ez_Int_List
+ * @see _Ez_Int_Queue
+ * @see _Ez_Int_Stack
+ * @see _Ez_Int_Deque
+ * @see _Ez_Int_PriorityQueue
+ * @see _Ez_Int_Set
+ * @see _Ez_Int_SortedSet
  */
 public interface _Ez_Int_Collection {
     /**

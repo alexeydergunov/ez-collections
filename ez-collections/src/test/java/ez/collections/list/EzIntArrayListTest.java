@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class EzIntArrayListTest {
     @Test
@@ -121,12 +122,12 @@ public class EzIntArrayListTest {
         }
         try {
             list.getLast();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NoSuchElementException e) {
             // as expected
         }
         try {
             list.removeLast();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NoSuchElementException e) {
             // as expected
         }
         Assert.assertEquals(list.toArray(), new int[0]);
