@@ -29,7 +29,7 @@ public interface _Ez_Int_PriorityQueue extends _Ez_Int_Collection {
      * @return {@code true} if the priority queue contains the specified element, {@code false} otherwise
      */
     @Override
-    boolean contains(/*T*/int/*T*/ element);
+    boolean contains(/*C*/int/*C*/ element);
 
     /**
      * Returns the iterator which can be used to go through the elements of this priority queue. It is not guaranteed
@@ -46,7 +46,7 @@ public interface _Ez_Int_PriorityQueue extends _Ez_Int_Collection {
      * @return the array which contains all elements in this priority queue
      */
     @Override
-    /*T*/int/*T*/[] toArray();
+    /*C*/int/*C*/[] toArray();
 
     /**
      * Adds the element into this priority queue.
@@ -54,7 +54,7 @@ public interface _Ez_Int_PriorityQueue extends _Ez_Int_Collection {
      * @return always returns {@code true} (for compatibility with the parent interface {@link _Ez_Int_Collection})
      */
     @Override
-    boolean add(/*T*/int/*T*/ element);
+    boolean add(/*C*/int/*C*/ element);
 
     /**
      * Removes the element from this priority queue. If this priority queue contains many instances of this element,
@@ -64,7 +64,7 @@ public interface _Ez_Int_PriorityQueue extends _Ez_Int_Collection {
      * changed), {@code false} otherwise
      */
     @Override
-    boolean remove(/*T*/int/*T*/ element);
+    boolean remove(/*C*/int/*C*/ element);
 
     /**
      * Removes all elements from this priority queue.
@@ -102,12 +102,12 @@ public interface _Ez_Int_PriorityQueue extends _Ez_Int_Collection {
      * @return the minimal element in the priority queue
      * @throws java.util.NoSuchElementException if the priority queue is empty
      */
-    /*T*/int/*T*/ getFirst();
+    /*C*/int/*C*/ getFirst();
 
     /**
      * Removes the minimal element in the priority queue.
      * @return the removed element
      * @throws java.util.NoSuchElementException if the priority queue is empty
      */
-    /*T*/int/*T*/ removeFirst();
+    /*C*/int/*C*/ removeFirst();
 }

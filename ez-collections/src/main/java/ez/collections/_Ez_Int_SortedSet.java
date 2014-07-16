@@ -10,19 +10,19 @@ public interface _Ez_Int_SortedSet extends _Ez_Int_Set {
     boolean isEmpty();
 
     @Override
-    boolean contains(/*T*/int/*T*/ element);
+    boolean contains(/*C*/int/*C*/ element);
 
     @Override
     _Ez_Int_Iterator iterator();
 
     @Override
-    /*T*/int/*T*/[] toArray();
+    /*C*/int/*C*/[] toArray();
 
     @Override
-    boolean add(/*T*/int/*T*/ element);
+    boolean add(/*C*/int/*C*/ element);
 
     @Override
-    boolean remove(/*T*/int/*T*/ element);
+    boolean remove(/*C*/int/*C*/ element);
 
     @Override
     void clear();
@@ -36,19 +36,19 @@ public interface _Ez_Int_SortedSet extends _Ez_Int_Set {
     @Override
     String toString();
 
-    /*T*/int/*T*/ getFirst();
+    /*C*/int/*C*/ getFirst();
 
-    /*T*/int/*T*/ getLast();
+    /*C*/int/*C*/ getLast();
 
-    /*T*/int/*T*/ removeFirst();
+    /*C*/int/*C*/ removeFirst();
 
-    /*T*/int/*T*/ removeLast();
+    /*C*/int/*C*/ removeLast();
 
-    /*T*/int/*T*/ floor(/*T*/int/*T*/ element);
+    /*C*/int/*C*/ floor(/*C*/int/*C*/ element);
 
-    /*T*/int/*T*/ ceiling(/*T*/int/*T*/ element);
+    /*C*/int/*C*/ ceiling(/*C*/int/*C*/ element);
 
-    /*T*/int/*T*/ lower(/*T*/int/*T*/ element);
+    /*C*/int/*C*/ lower(/*C*/int/*C*/ element);
 
-    /*T*/int/*T*/ higher(/*T*/int/*T*/ element);
+    /*C*/int/*C*/ higher(/*C*/int/*C*/ element);
 }

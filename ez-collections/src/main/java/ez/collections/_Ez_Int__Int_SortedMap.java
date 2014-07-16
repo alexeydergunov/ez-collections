@@ -10,22 +10,22 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
     boolean isEmpty();
 
     @Override
-    boolean containsKey(/*K*/int/*K*/ key);
+    boolean containsKey(/*KC*/int/*KC*/ key);
 
     @Override
-    /*V*/int/*V*/ get(/*K*/int/*K*/ key);
+    /*V*/int/*V*/ get(/*KC*/int/*KC*/ key);
 
     @Override
-    /*V*/int/*V*/ put(/*K*/int/*K*/ key, /*V*/int/*V*/ value);
+    /*V*/int/*V*/ put(/*KC*/int/*KC*/ key, /*V*/int/*V*/ value);
 
     @Override
-    /*V*/int/*V*/ remove(/*K*/int/*K*/ key);
+    /*V*/int/*V*/ remove(/*KC*/int/*KC*/ key);
 
     @Override
     void clear();
 
     @Override
-    /*K*/int/*K*/[] keys();
+    /*KC*/int/*KC*/[] keys();
 
     @Override
     /*V*/int/*V*/[] values();
@@ -42,9 +42,9 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
     @Override
     String toString();
 
-    /*K*/int/*K*/ getFirstKey();
+    /*KC*/int/*KC*/ getFirstKey();
 
-    /*K*/int/*K*/ getLastKey();
+    /*KC*/int/*KC*/ getLastKey();
 
     /*V*/int/*V*/ getFirstValue();
 
@@ -54,11 +54,11 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
 
     void removeLast();
 
-    /*K*/int/*K*/ floorKey(/*K*/int/*K*/ key);
+    /*KC*/int/*KC*/ floorKey(/*KC*/int/*KC*/ key);
 
-    /*K*/int/*K*/ ceilingKey(/*K*/int/*K*/ key);
+    /*KC*/int/*KC*/ ceilingKey(/*KC*/int/*KC*/ key);
 
-    /*K*/int/*K*/ lowerKey(/*K*/int/*K*/ key);
+    /*KC*/int/*KC*/ lowerKey(/*KC*/int/*KC*/ key);
 
-    /*K*/int/*K*/ higherKey(/*K*/int/*K*/ key);
+    /*KC*/int/*KC*/ higherKey(/*KC*/int/*KC*/ key);
 }
