@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class EzIntArrayListTest {
+public class EzArrayListTest {
     @Test
     public void testAdd() {
         _Ez_Int_ArrayList list = new _Ez_Int_ArrayList(1);
