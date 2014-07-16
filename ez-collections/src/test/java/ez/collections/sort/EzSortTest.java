@@ -1,5 +1,6 @@
 package ez.collections.sort;
 
+import ez.collections._Ez_Int_Comparator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -105,5 +106,39 @@ public class EzSortTest {
         int[] b = {100500};
         _Ez_Int_Sort.sort(b);
         Assert.assertEquals(b, new int[] {100500});
+    }
+
+    private void reverse(int[] a) {
+        int n = a.length;
+        for (int i = 0; i < (n >>> 1); i++) {
+            int tmp = a[i];
+            a[i] = a[n - 1 - i];
+            a[n - 1 - i] = tmp;
+        }
+    }
+
+    @Test
+    public void testReverseSortWithComparator() {
+        _Ez_Int_Comparator reverseCmp = new _Ez_Int_Comparator() {
+            @Override
+            public int compare(int a, int b) {
+                if (a > b) return -1;
+                if (a < b) return 1;
+                return 0;
+            }
+        };
+        Random rnd = new Random(322);
+        for (int it = 0; it < 100; it++) {
+            int length = 50000 + rnd.nextInt(50000);
+            int[] sorted = new int[length];
+            int[] array = new int[length];
+            for (int i = 0; i < length; i++) {
+                sorted[i] = array[i] = rnd.nextInt();
+            }
+            Arrays.sort(sorted);
+            reverse(sorted);
+            _Ez_Int_SortWithComparator.sort(array, reverseCmp);
+            Assert.assertEquals(array, sorted);
+        }
     }
 }
