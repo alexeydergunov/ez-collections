@@ -33,10 +33,14 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         }
     }
 
+    private static class UnsupportedTypeException extends Exception {
+    }
+
     private static final String TOKEN_DELIMITERS = "[](){}<>.,;";
 
     private static final Pattern CLASS_NAME_PATTERN = Pattern.compile("_.*?_");
     private static final Pattern PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*T\\*/.*/\\*T\\*/");
+    private static final Pattern COMPARABLE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*C\\*/.*/\\*C\\*/");
     private static final Pattern KEY_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*K\\*/.*/\\*K\\*/");
     private static final Pattern VALUE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*V\\*/.*/\\*V\\*/");
     private static final Pattern WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*W\\*/.*/\\*W\\*/");
@@ -136,40 +140,54 @@ public class EzTypeReplacerMojo extends AbstractMojo {
     }
 
     private void generateSourceCode(File source, File target, TypeInfo... typeInfos) throws IOException {
-        getLog().info("Generating " + source + " to " + target);
         BufferedReader reader = new BufferedReader(new FileReader(source));
-        PrintWriter writer = new PrintWriter(target);
+        StringBuilder result = new StringBuilder();
         try {
             StringBuilder currentToken = new StringBuilder();
             for (int charCode = reader.read(); charCode != -1; charCode = reader.read()) {
                 char c = (char) charCode;
                 if (isTokenDelimiter(c)) {
                     String transformed = transformToken(currentToken.toString(), typeInfos);
-                    writer.print(transformed);
+                    result.append(transformed);
                     currentToken.setLength(0);
-                    writer.print(c);
+                    result.append(c);
                 } else {
                     currentToken.append(c);
                 }
             }
-            writer.print(transformToken(currentToken.toString(), typeInfos));
+            result.append(transformToken(currentToken.toString(), typeInfos));
+        } catch (UnsupportedTypeException e) {
+            return;
         } finally {
             reader.close();
-            writer.close();
         }
+        getLog().info("Generating " + source.getName() + " to " + target.getName());
+        PrintWriter writer = new PrintWriter(target);
+        writer.print(result);
+        writer.close();
     }
 
     private boolean isTokenDelimiter(char c) {
         return Character.isWhitespace(c) || TOKEN_DELIMITERS.contains(Character.toString(c));
     }
 
-    private String transformToken(String s, TypeInfo... typeInfos) {
+    private String transformToken(String s, TypeInfo... typeInfos) throws UnsupportedTypeException {
         if (s.contains("/*T*/")) {
             if (typeInfos.length != 1) {
                 throw new IllegalArgumentException(
                         typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*T*/");
             }
             s = PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
+        }
+        if (s.contains("/*C*/")) {
+            if (typeInfos.length != 1) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*C*/");
+            }
+            if (typeInfos[0] == TypeInfo.BOOLEAN) {
+                throw new UnsupportedTypeException();
+            }
+            s = COMPARABLE_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
         }
         if (s.contains("/*W*/")) {
             if (typeInfos.length != 1) {
