@@ -34,6 +34,9 @@ public class EzTypeReplacerMojo extends AbstractMojo {
     }
 
     private static class UnsupportedTypeException extends Exception {
+        private UnsupportedTypeException(String message) {
+            super(message);
+        }
     }
 
     private static final String TOKEN_DELIMITERS = "[](){}<>.,;";
@@ -45,6 +48,7 @@ public class EzTypeReplacerMojo extends AbstractMojo {
     private static final Pattern COMPARABLE_KEY_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*KC\\*/.*/\\*KC\\*/");
     private static final Pattern VALUE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*V\\*/.*/\\*V\\*/");
     private static final Pattern WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*W\\*/.*/\\*W\\*/");
+    private static final Pattern COMPARABLE_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*WC\\*/.*/\\*WC\\*/");
 
     private static final FileFilter JAVA_FILTER = new FileFilter() {
         @Override
@@ -186,7 +190,7 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                         typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*C*/");
             }
             if (typeInfos[0] == TypeInfo.BOOLEAN) {
-                throw new UnsupportedTypeException();
+                throw new UnsupportedTypeException("/*C*/ cannot be boolean");
             }
             s = COMPARABLE_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
         }
@@ -196,6 +200,16 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                         typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*W*/");
             }
             s = WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].wrapperName);
+        }
+        if (s.contains("/*WC*/")) {
+            if (typeInfos.length != 1) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*WC*/");
+            }
+            if (typeInfos[0] == TypeInfo.BOOLEAN) {
+                throw new UnsupportedTypeException("/*WC*/ cannot be boolean");
+            }
+            s = COMPARABLE_WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].wrapperName);
         }
 
         if (s.contains("/*K*/")) {
@@ -211,7 +225,7 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                         typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*KC*/");
             }
             if (typeInfos[0] == TypeInfo.BOOLEAN) {
-                throw new UnsupportedTypeException();
+                throw new UnsupportedTypeException("/*KC*/ cannot be boolean");
             }
             s = COMPARABLE_KEY_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
         }
