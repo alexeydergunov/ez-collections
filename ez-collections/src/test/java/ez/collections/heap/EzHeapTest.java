@@ -1,5 +1,6 @@
 package ez.collections.heap;
 
+import ez.collections._Ez_Int_Iterator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -161,6 +162,27 @@ public class EzHeapTest {
             } catch (NoSuchElementException e) {
                 // as expected
             }
+        }
+    }
+
+    @Test
+    public void testIterator() {
+        _Ez_Int_Heap heap = new _Ez_Int_Heap();
+        for (int i = 0; i < 42; i++) {
+            Assert.assertTrue(heap.add(i));
+        }
+        Assert.assertEquals(heap.size(), 42);
+        int[] heapArray = heap.toArray();
+        _Ez_Int_Iterator it = heap.iterator();
+        for (int i = 0; i < 42; i++) {
+            Assert.assertTrue(it.hasNext());
+            Assert.assertEquals(it.next(), heapArray[i]);
+        }
+        Assert.assertFalse(it.hasNext());
+        try {
+            it.next();
+        } catch (NoSuchElementException e) {
+            // as expected
         }
     }
 

@@ -1,5 +1,6 @@
 package ez.collections.list;
 
+import ez.collections._Ez_Int_Iterator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -146,6 +147,26 @@ public class EzArrayListTest {
         Assert.assertEquals(list.lastIndexOf(2), 7);
         Assert.assertEquals(list.lastIndexOf(3), 6);
         Assert.assertEquals(list.lastIndexOf(4), -1);
+    }
+
+    @Test
+    public void testIterator() {
+        _Ez_Int_ArrayList list = new _Ez_Int_ArrayList();
+        for (int i = 0; i < 42; i++) {
+            Assert.assertTrue(list.add(i));
+        }
+        Assert.assertEquals(list.size(), 42);
+        _Ez_Int_Iterator it = list.iterator();
+        for (int i = 0; i < 42; i++) {
+            Assert.assertTrue(it.hasNext());
+            Assert.assertEquals(it.next(), i);
+        }
+        Assert.assertFalse(it.hasNext());
+        try {
+            it.next();
+        } catch (NoSuchElementException e) {
+            // as expected
+        }
     }
 
     @Test
