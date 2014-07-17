@@ -5,7 +5,7 @@ public final class PrimitiveHashCalculator {
     }
 
     public static int getHash(boolean x) {
-        return x ? 1 : 0;
+        return x ? 1231 : 1237; // as in Boolean.hashCode()
     }
 
     public static int getHash(byte x) {
