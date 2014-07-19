@@ -6,6 +6,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.*;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,9 +66,14 @@ public class EzTypeReplacerMojo extends AbstractMojo {
     @Parameter
     private File targetDirectory;
 
+    @SuppressWarnings({"UnusedDeclaration", "MismatchedQueryAndUpdateOfCollection"})
+    @Parameter
+    private Set<String> excludedClasses; // we don't generate classes that are not ready
+
     public void execute() throws MojoExecutionException {
         getLog().info("sourceDirectory = " + sourceDirectory);
         getLog().info("targetDirectory = " + targetDirectory);
+        getLog().info("excludedClasses = " + excludedClasses);
         try {
             //noinspection ResultOfMethodCallIgnored
             targetDirectory.mkdirs();
@@ -104,6 +110,10 @@ public class EzTypeReplacerMojo extends AbstractMojo {
     private void processFile(File source, File target) throws IOException {
         String fileName = source.getName();
         String className = fileName.substring(0, fileName.length() - 5);
+        if (excludedClasses.contains(className)) {
+            getLog().info("Don't generate " + fileName + " since it's excluded");
+            return;
+        }
         if (className.startsWith("_")) {
             className = className.substring(1);
             int replacementsCount = 0;
