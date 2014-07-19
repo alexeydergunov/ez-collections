@@ -92,6 +92,11 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                     childTarget.mkdir();
                 }
                 processTree(childSource, childTarget);
+                //noinspection ConstantConditions
+                if (childTarget.listFiles().length == 0) {
+                    //noinspection ResultOfMethodCallIgnored
+                    childTarget.delete();
+                }
             }
         }
     }
