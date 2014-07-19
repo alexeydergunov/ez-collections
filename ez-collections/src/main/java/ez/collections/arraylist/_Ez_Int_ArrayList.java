@@ -1,4 +1,4 @@
-package ez.collections.list;
+package ez.collections.arraylist;
 
 import ez.collections._Ez_Int_Collection;
 import ez.collections._Ez_Int_Iterator;
