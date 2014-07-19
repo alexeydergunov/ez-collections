@@ -8,8 +8,7 @@ package ez.collections;
  * beginning or to the end of the deque or remove elements from the beginning or from the end.
  * @author Alexey Dergunov
  * @since 0.0.1
- * @see _Ez_Int_Queue
- * @see _Ez_Int_Stack
+ * @see ez.collections.arraydeque._Ez_Int_ArrayDeque
  */
 public interface _Ez_Int_Deque extends _Ez_Int_Queue, _Ez_Int_Stack {
     /**

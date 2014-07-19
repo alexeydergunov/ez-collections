@@ -7,8 +7,7 @@ package ez.collections;
  * to add elements to the end and get/remove elements from the beginning.
  * @author Alexey Dergunov
  * @since 0.0.1
- * @see _Ez_Int_Stack
- * @see _Ez_Int_Deque
+ * @see ez.collections.arraydeque._Ez_Int_ArrayDeque
  */
 public interface _Ez_Int_Queue extends _Ez_Int_Collection {
     /**

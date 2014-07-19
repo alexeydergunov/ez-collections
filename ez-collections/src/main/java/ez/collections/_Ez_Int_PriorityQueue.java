@@ -7,6 +7,7 @@ package ez.collections;
  * different implementations). Priority queue allows you to add elements and get/remove the minimal element.
  * @author Alexey Dergunov
  * @since 0.0.1
+ * @see ez.collections.heap._Ez_Int_Heap
  */
 public interface _Ez_Int_PriorityQueue extends _Ez_Int_Collection {
     /**

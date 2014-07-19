@@ -8,8 +8,8 @@ package ez.collections;
  * which provides the full functionality of stack.
  * @author Alexey Dergunov
  * @since 0.0.1
- * @see _Ez_Int_Queue
- * @see _Ez_Int_Deque
+ * @see ez.collections.arraylist._Ez_Int_ArrayList
+ * @see ez.collections.arraydeque._Ez_Int_ArrayDeque
  */
 public interface _Ez_Int_Stack extends _Ez_Int_Collection {
     /**

@@ -11,6 +11,8 @@ package ez.collections;
  * {@code size() - 1}.
  * @author Alexey Dergunov
  * @since 0.0.1
+ * @see ez.collections.arraylist._Ez_Int_ArrayList
+ * @see ez.collections.arraydeque._Ez_Int_ArrayDeque
  */
 public interface _Ez_Int_List extends _Ez_Int_Collection {
     /**

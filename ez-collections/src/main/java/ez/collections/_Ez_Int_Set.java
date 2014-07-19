@@ -8,7 +8,6 @@ package ez.collections;
  * {@link #contains}. Child interfaces can give you more functionality.
  * @author Alexey Dergunov
  * @since 0.0.1
- * @see _Ez_Int_SortedSet
  */
 public interface _Ez_Int_Set extends _Ez_Int_Collection {
     /**
