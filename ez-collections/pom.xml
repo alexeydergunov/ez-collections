@@ -98,12 +98,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>ez-collections</groupId>
-            <artifactId>ez-replace-maven-plugin</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.8.8</version>
