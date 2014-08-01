@@ -1,5 +1,6 @@
 package ez.collections.heap;
 
+import ez.collections._Ez_Int_Comparator;
 import ez.collections._Ez_Int_Iterator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -23,10 +24,31 @@ public class EzHeapTest {
         }
     }
 
+    private void reverse(int[] a) {
+        int n = a.length;
+        for (int i = 0; i < (n >>> 1); i++) {
+            swap(a, i, n - 1 - i);
+        }
+    }
+
     private void validateHeapArray(_Ez_Int_Heap heap) {
         int[] heapArray = heap.toArray();
         for (int i = 1; i < heapArray.length; i++) {
             Assert.assertTrue(heapArray[(i - 1) >>> 1] <= heapArray[i]);
+        }
+    }
+
+    private void validateMaxHeapArray(_Ez_Int_MaxHeap heap) {
+        int[] heapArray = heap.toArray();
+        for (int i = 1; i < heapArray.length; i++) {
+            Assert.assertTrue(heapArray[(i - 1) >>> 1] >= heapArray[i]);
+        }
+    }
+
+    private void validateCustomHeapArray(_Ez_Int_CustomHeap heap, _Ez_Int_Comparator cmp) {
+        int[] heapArray = heap.toArray();
+        for (int i = 1; i < heapArray.length; i++) {
+            Assert.assertTrue(cmp.compare(heapArray[(i - 1) >>> 1], heapArray[i]) <= 0);
         }
     }
 
@@ -150,6 +172,92 @@ public class EzHeapTest {
                 Assert.assertEquals(heap.getFirst(), x);
                 Assert.assertEquals(heap.removeFirst(), x);
                 validateHeapArray(heap);
+            }
+            Assert.assertTrue(heap.isEmpty());
+            try {
+                heap.getFirst();
+            } catch (NoSuchElementException e) {
+                // as expected
+            }
+            try {
+                heap.removeFirst();
+            } catch (NoSuchElementException e) {
+                // as expected
+            }
+        }
+    }
+
+    @Test
+    public void testGetRemoveFirstForMaxHeap() {
+        Random rnd = new Random(322);
+        for (int it = 0; it < 9200; it++) {
+            int length = 1 + rnd.nextInt(105);
+            int[] array = new int[length];
+            if (rnd.nextBoolean()) {
+                for (int i = 0; i < length; i++) {
+                    array[i] = i + 1;
+                }
+            } else {
+                for (int i = 0; i < length; i++) {
+                    array[i] = 1 + rnd.nextInt(length);
+                }
+            }
+            shuffle(array, rnd);
+            _Ez_Int_MaxHeap heap = new _Ez_Int_MaxHeap(array);
+            validateMaxHeapArray(heap);
+            Arrays.sort(array);
+            reverse(array);
+            for (int x : array) {
+                Assert.assertEquals(heap.getFirst(), x);
+                Assert.assertEquals(heap.removeFirst(), x);
+                validateMaxHeapArray(heap);
+            }
+            Assert.assertTrue(heap.isEmpty());
+            try {
+                heap.getFirst();
+            } catch (NoSuchElementException e) {
+                // as expected
+            }
+            try {
+                heap.removeFirst();
+            } catch (NoSuchElementException e) {
+                // as expected
+            }
+        }
+    }
+
+    @Test
+    public void testGetRemoveFirstForCustomHeap() {
+        _Ez_Int_Comparator reverseCmp = new _Ez_Int_Comparator() {
+            @Override
+            public int compare(int a, int b) {
+                if (a > b) return -1;
+                if (a < b) return 1;
+                return 0;
+            }
+        };
+        Random rnd = new Random(322);
+        for (int it = 0; it < 9090; it++) {
+            int length = 1 + rnd.nextInt(111);
+            int[] array = new int[length];
+            if (rnd.nextBoolean()) {
+                for (int i = 0; i < length; i++) {
+                    array[i] = i + 1;
+                }
+            } else {
+                for (int i = 0; i < length; i++) {
+                    array[i] = 1 + rnd.nextInt(length);
+                }
+            }
+            shuffle(array, rnd);
+            _Ez_Int_CustomHeap heap = new _Ez_Int_CustomHeap(array, reverseCmp);
+            validateCustomHeapArray(heap, reverseCmp);
+            Arrays.sort(array);
+            reverse(array);
+            for (int x : array) {
+                Assert.assertEquals(heap.getFirst(), x);
+                Assert.assertEquals(heap.removeFirst(), x);
+                validateCustomHeapArray(heap, reverseCmp);
             }
             Assert.assertTrue(heap.isEmpty());
             try {
