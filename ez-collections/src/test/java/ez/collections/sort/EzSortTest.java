@@ -135,7 +135,7 @@ public class EzSortTest {
     }
 
     @Test
-    public void testSortWithComparator() {
+    public void testCustomSort() {
         _Ez_Int_Comparator reverseCmp = new _Ez_Int_Comparator() {
             @Override
             public int compare(int a, int b) {
@@ -154,7 +154,7 @@ public class EzSortTest {
             }
             Arrays.sort(sorted);
             reverse(sorted);
-            _Ez_Int_SortWithComparator.sort(array, reverseCmp);
+            _Ez_Int_CustomSort.sort(array, reverseCmp);
             Assert.assertEquals(array, sorted);
         }
     }

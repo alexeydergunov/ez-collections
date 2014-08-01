@@ -5,13 +5,13 @@ import ez.collections._Ez_Int_Comparator;
 import java.util.Random;
 
 // TODO javadocs for class and public methods
-// TODO maybe unite classes Sort, ReverseSort and SortWithComparator? think about it
-public final class _Ez_Int_SortWithComparator {
+// TODO maybe unite classes Sort, ReverseSort and CustomSort? think about it
+public final class _Ez_Int_CustomSort {
     private static final double HEAPSORT_DEPTH_COEFFICIENT = 2.0;
 
     private static Random rnd = new Random(322);
 
-    private _Ez_Int_SortWithComparator() {
+    private _Ez_Int_CustomSort() {
     }
 
     private static int maxQuickSortDepth(int length) {

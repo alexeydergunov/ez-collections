@@ -5,7 +5,7 @@ import ez.collections._Ez_Int_Comparator;
 import ez.collections._Ez_Int_Iterator;
 import ez.collections._Ez_Int_PriorityQueue;
 import ez.collections.misc.PrimitiveHashCalculator;
-import ez.collections.sort._Ez_Int_SortWithComparator;
+import ez.collections.sort._Ez_Int_CustomSort;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
@@ -202,8 +202,8 @@ public class _Ez_Int_CustomHeap implements _Ez_Int_PriorityQueue {
         }
         /*C*/int/*C*/[] thisArray = toArray();
         /*C*/int/*C*/[] thatArray = that.toArray();
-        _Ez_Int_SortWithComparator.sort(thisArray, cmp);
-        _Ez_Int_SortWithComparator.sort(thatArray, cmp);
+        _Ez_Int_CustomSort.sort(thisArray, cmp);
+        _Ez_Int_CustomSort.sort(thatArray, cmp);
         for (int i = 0; i < size; i++) {
             if (thisArray[i] != thatArray[i]) {
                 return false;
@@ -215,7 +215,7 @@ public class _Ez_Int_CustomHeap implements _Ez_Int_PriorityQueue {
     @Override
     public int hashCode() {
         /*C*/int/*C*/[] array = toArray();
-        _Ez_Int_SortWithComparator.sort(array, cmp);
+        _Ez_Int_CustomSort.sort(array, cmp);
         int hash = HASHCODE_INITIAL_VALUE;
         for (int i = 0; i < size; i++) {
             hash = (hash ^ PrimitiveHashCalculator.getHash(array[i])) * HASHCODE_MULTIPLIER;
@@ -226,7 +226,7 @@ public class _Ez_Int_CustomHeap implements _Ez_Int_PriorityQueue {
     @Override
     public String toString() {
         /*C*/int/*C*/[] array = toArray();
-        _Ez_Int_SortWithComparator.sort(array, cmp);
+        _Ez_Int_CustomSort.sort(array, cmp);
         StringBuilder sb = new StringBuilder();
         sb.append('[');
         for (int i = 0; i < size; i++) {
