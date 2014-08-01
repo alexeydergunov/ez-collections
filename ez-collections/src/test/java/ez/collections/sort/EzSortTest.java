@@ -118,7 +118,24 @@ public class EzSortTest {
     }
 
     @Test
-    public void testReverseSortWithComparator() {
+    public void testReverseSort() {
+        Random rnd = new Random(322);
+        for (int it = 0; it < 100; it++) {
+            int length = 50000 + rnd.nextInt(50000);
+            int[] sorted = new int[length];
+            int[] array = new int[length];
+            for (int i = 0; i < length; i++) {
+                sorted[i] = array[i] = rnd.nextInt();
+            }
+            Arrays.sort(sorted);
+            reverse(sorted);
+            _Ez_Int_ReverseSort.sort(array);
+            Assert.assertEquals(array, sorted);
+        }
+    }
+
+    @Test
+    public void testSortWithComparator() {
         _Ez_Int_Comparator reverseCmp = new _Ez_Int_Comparator() {
             @Override
             public int compare(int a, int b) {

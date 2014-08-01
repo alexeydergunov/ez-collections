@@ -5,7 +5,7 @@ import ez.collections._Ez_Int_Comparator;
 import java.util.Random;
 
 // TODO javadocs for class and public methods
-// TODO maybe unite classes Sort and SortWithComparator? think about it
+// TODO maybe unite classes Sort, ReverseSort and SortWithComparator? think about it
 public final class _Ez_Int_SortWithComparator {
     private static final double HEAPSORT_DEPTH_COEFFICIENT = 2.0;
 
