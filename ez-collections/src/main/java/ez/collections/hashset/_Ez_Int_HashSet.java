@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class _Ez_Int_HashSet implements _Ez_Int_Set {
-    private static final int DEFAULT_CAPACITY = 16;
+    private static final int DEFAULT_CAPACITY = 8;
     private static final double ENLARGE_NON_FREE_CELLS_RATIO = 0.5;
     private static final double REBUILD_REMOVED_CELLS_RATIO = 0.25;
     private static final int HASHCODE_INITIAL_VALUE = 0x811c9dc5;
