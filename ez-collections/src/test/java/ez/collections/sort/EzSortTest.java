@@ -35,7 +35,7 @@ public class EzSortTest {
             int[] sorted = new int[length];
             int[] permutation = new int[length];
             for (int i = 0; i < length; i++) {
-                sorted[i] = permutation[i] = length;
+                sorted[i] = permutation[i] = i;
             }
             genPermutations(sorted, permutation, 0, length);
         }
