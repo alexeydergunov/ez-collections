@@ -1,7 +1,7 @@
 package ez.collections;
 
 public interface _Ez_Int_SortedSet extends _Ez_Int_Set {
-    // TODO null issues, e.g. when there is no higher element
+    // TODO null issues, e.g. when there is no higher element - consider returning special 'null value'
 
     @Override
     int size();
@@ -51,4 +51,6 @@ public interface _Ez_Int_SortedSet extends _Ez_Int_Set {
     /*C*/int/*C*/ lower(/*C*/int/*C*/ element);
 
     /*C*/int/*C*/ higher(/*C*/int/*C*/ element);
+
+    boolean wasCorrectValueReturned();
 }
