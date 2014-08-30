@@ -267,7 +267,6 @@ public class EzHashSetTest {
                     Assert.assertFalse(set1.equals(set2));
                     Assert.assertFalse(set2.equals(set1));
                 }
-
             }
         }
     }
