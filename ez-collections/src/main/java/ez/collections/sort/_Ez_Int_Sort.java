@@ -18,7 +18,7 @@ import java.util.Random;
 public final class _Ez_Int_Sort {
     private static final double HEAPSORT_DEPTH_COEFFICIENT = 2.0;
 
-    private static Random rnd = new Random(322);
+    private static Random rnd = new Random();
 
     private _Ez_Int_Sort() {
     }
