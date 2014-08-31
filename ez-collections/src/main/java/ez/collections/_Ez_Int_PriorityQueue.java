@@ -8,6 +8,8 @@ package ez.collections;
  * @author Alexey Dergunov
  * @since 0.0.1
  * @see ez.collections.heap._Ez_Int_Heap
+ * @see ez.collections.heap._Ez_Int_MaxHeap
+ * @see ez.collections.heap._Ez_Int_CustomHeap
  */
 public interface _Ez_Int_PriorityQueue extends _Ez_Int_Collection {
     /**
