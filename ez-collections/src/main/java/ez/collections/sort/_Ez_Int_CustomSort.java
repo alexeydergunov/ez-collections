@@ -50,8 +50,14 @@ public final class _Ez_Int_CustomSort {
      * @param left the left bound of the range, inclusive
      * @param right the right bound of the range, exclusive
      * @param cmp the comparator which defines the order
+     * @throws IllegalArgumentException if the range is incorrect (if
+     * {@code left > right || left < 0 || right > a.length})
      */
     public static void sort(/*C*/int/*C*/[] a, int left, int right, _Ez_Int_Comparator cmp) {
+        if (left > right || left < 0 || right > a.length) {
+            throw new IllegalArgumentException(
+                    "Incorrect range [" + left + ", " + right + ") was specified for sorting, length = " + a.length);
+        }
         quickSort(a, left, right, cmp, 0, maxQuickSortDepth(right - left));
     }
 
@@ -80,6 +86,7 @@ public final class _Ez_Int_CustomSort {
     }
 
     private static void heapSort(/*C*/int/*C*/[] a, int offset, int size, _Ez_Int_Comparator cmp) {
+        // If size <= 1, nothing is executed
         for (int i = (size >>> 1) - 1; i >= 0; i--) {
             down(a, i, offset, size, cmp);
         }

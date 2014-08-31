@@ -99,6 +99,43 @@ public class EzSortTest {
     }
 
     @Test
+    public void testRangeSort() {
+        int[] a = {7, 6, 5, 4, 3, 2, 1};
+        try {
+            _Ez_Int_Sort.sort(a, 5, 4);
+        } catch (IllegalArgumentException e) {
+            // as expected
+        }
+        try {
+            _Ez_Int_Sort.sort(a, -1, 4);
+        } catch (IllegalArgumentException e) {
+            // as expected
+        }
+        try {
+            _Ez_Int_Sort.sort(a, 5, 8);
+        } catch (IllegalArgumentException e) {
+            // as expected
+        }
+        Assert.assertEquals(a, new int[] {7, 6, 5, 4, 3, 2, 1});
+        for (int i = 0; i <= 7; i++) {
+            _Ez_Int_Sort.sort(a, i, i);
+            Assert.assertEquals(a, new int[] {7, 6, 5, 4, 3, 2, 1});
+        }
+        for (int i = 0; i < 7; i++) {
+            _Ez_Int_Sort.sort(a, i, i + 1);
+            Assert.assertEquals(a, new int[] {7, 6, 5, 4, 3, 2, 1});
+        }
+        _Ez_Int_Sort.sort(a, 0, 2);
+        Assert.assertEquals(a, new int[] {6, 7, 5, 4, 3, 2, 1});
+        _Ez_Int_Sort.sort(a, 5, 7);
+        Assert.assertEquals(a, new int[] {6, 7, 5, 4, 3, 1, 2});
+        _Ez_Int_Sort.sort(a, 2, 5);
+        Assert.assertEquals(a, new int[] {6, 7, 3, 4, 5, 1, 2});
+        _Ez_Int_Sort.sort(a, 0, 7);
+        Assert.assertEquals(a, new int[] {1, 2, 3, 4, 5, 6, 7});
+    }
+
+    @Test
     public void testZeroAndOneElementArrays() {
         int[] a = new int[0];
         _Ez_Int_Sort.sort(a);

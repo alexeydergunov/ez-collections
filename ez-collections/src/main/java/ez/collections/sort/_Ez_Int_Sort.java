@@ -44,8 +44,14 @@ public final class _Ez_Int_Sort {
      * @param a the array, which interval [left, right) is to be sorted.
      * @param left the left bound of the range, inclusive
      * @param right the right bound of the range, exclusive
+     * @throws IllegalArgumentException if the range is incorrect (if
+     * {@code left > right || left < 0 || right > a.length})
      */
     public static void sort(/*C*/int/*C*/[] a, int left, int right) {
+        if (left > right || left < 0 || right > a.length) {
+            throw new IllegalArgumentException(
+                    "Incorrect range [" + left + ", " + right + ") was specified for sorting, length = " + a.length);
+        }
         quickSort(a, left, right, 0, maxQuickSortDepth(right - left));
     }
 
@@ -74,6 +80,7 @@ public final class _Ez_Int_Sort {
     }
 
     private static void heapSort(/*C*/int/*C*/[] a, int offset, int size) {
+        // If size <= 1, nothing is executed
         for (int i = (size >>> 1) - 1; i >= 0; i--) {
             down(a, i, offset, size);
         }
