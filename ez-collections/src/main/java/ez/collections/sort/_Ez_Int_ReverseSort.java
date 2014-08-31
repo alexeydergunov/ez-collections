@@ -2,7 +2,19 @@ package ez.collections.sort;
 
 import java.util.Random;
 
-// TODO javadocs for class and public methods
+/**
+ * Provides the sort methods for the reverse (descending) ordering.
+ * <p>
+ * The sorting is implemented as a quicksort with randomization, but when the recursion depth becomes too large, it is
+ * switched to a heapsort (this algorithm is also known as introsort). Unlike methods in {@link java.util.Arrays},
+ * which are implemented as only quicksort (it has some heuristics but still can be slowed down to O(n^2)), introsort
+ * guarantees O(n log(n)) performance on all arrays.
+ * <p>
+ * In general this implementation is slower than the one in {@link java.util.Arrays}, so if you are absolutely sure
+ * that nobody will give you an anti-quicksort array, you can use a standard algorithm.
+ * @author Alexey Dergunov
+ * @since 0.0.1
+ */
 public final class _Ez_Int_ReverseSort {
     private static final double HEAPSORT_DEPTH_COEFFICIENT = 2.0;
 
@@ -19,10 +31,20 @@ public final class _Ez_Int_ReverseSort {
         return (int) (HEAPSORT_DEPTH_COEFFICIENT * log);
     }
 
+    /**
+     * Sorts the specified array in the descending order.
+     * @param a the array to be sorted.
+     */
     public static void sort(/*C*/int/*C*/[] a) {
         quickSort(a, 0, a.length, 0, maxQuickSortDepth(a.length));
     }
 
+    /**
+     * Sorts the subarray [left, right) of the specified array in the descending order.
+     * @param a the array, which interval [left, right) is to be sorted.
+     * @param left the left bound of the range, inclusive
+     * @param right the right bound of the range, exclusive
+     */
     public static void sort(/*C*/int/*C*/[] a, int left, int right) {
         quickSort(a, left, right, 0, maxQuickSortDepth(right - left));
     }

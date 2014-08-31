@@ -4,8 +4,21 @@ import ez.collections._Ez_Int_Comparator;
 
 import java.util.Random;
 
-// TODO javadocs for class and public methods
 // TODO maybe unite classes Sort, ReverseSort and CustomSort? think about it
+/**
+ * Provides the sort methods for the custom ordering.
+ * <p>
+ * The sorting is implemented as a quicksort with randomization, but when the recursion depth becomes too large, it is
+ * switched to a heapsort (this algorithm is also known as introsort). Unlike methods in {@link java.util.Arrays},
+ * which are implemented as only quicksort (it has some heuristics but still can be slowed down to O(n^2)), introsort
+ * guarantees O(n log(n)) performance on all arrays.
+ * <p>
+ * In general this implementation is slower than the one in {@link java.util.Arrays}, so if you are absolutely sure
+ * that nobody will give you an anti-quicksort array, you can use a standard algorithm.
+ * @author Alexey Dergunov
+ * @since 0.0.1
+ * @see ez.collections._Ez_Int_Comparator
+ */
 public final class _Ez_Int_CustomSort {
     private static final double HEAPSORT_DEPTH_COEFFICIENT = 2.0;
 
@@ -22,10 +35,22 @@ public final class _Ez_Int_CustomSort {
         return (int) (HEAPSORT_DEPTH_COEFFICIENT * log);
     }
 
+    /**
+     * Sorts the specified array in the custom order.
+     * @param a the array to be sorted.
+     * @param cmp the comparator which defines the order
+     */
     public static void sort(/*C*/int/*C*/[] a, _Ez_Int_Comparator cmp) {
         quickSort(a, 0, a.length, cmp, 0, maxQuickSortDepth(a.length));
     }
 
+    /**
+     * Sorts the subarray [left, right) of the specified array in the custom order.
+     * @param a the array, which interval [left, right) is to be sorted.
+     * @param left the left bound of the range, inclusive
+     * @param right the right bound of the range, exclusive
+     * @param cmp the comparator which defines the order
+     */
     public static void sort(/*C*/int/*C*/[] a, int left, int right, _Ez_Int_Comparator cmp) {
         quickSort(a, left, right, cmp, 0, maxQuickSortDepth(right - left));
     }
