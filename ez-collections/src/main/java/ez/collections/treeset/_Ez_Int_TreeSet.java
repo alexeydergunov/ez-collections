@@ -26,10 +26,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
     private int[] p;
     private boolean[] color;
 
-    // TODO add size field, add swapping with last element while removing
-    private int totalNodes;
-    private int removedNodes;
-
+    private int size;
     private int root;
     private boolean wasCorrectValueReturned;
 
@@ -48,8 +45,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
         p = new int[capacity];
         color = new boolean[capacity];
         color[NULL] = BLACK;
-        totalNodes = 0;
-        removedNodes = 0;
+        size = 0;
         root = NULL;
         wasCorrectValueReturned = false;
     }
@@ -77,12 +73,12 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
 
     @Override
     public int size() {
-        return totalNodes - removedNodes;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return size() == 0;
+        return size == 0;
     }
 
     @Override
@@ -107,7 +103,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
 
     @Override
     public /*C*/int/*C*/[] toArray() {
-        /*C*/int/*C*/[] result = new /*C*/int/*C*/[size()];
+        /*C*/int/*C*/[] result = new /*C*/int/*C*/[size];
         for (int i = 0, x = firstNode(); x != NULL; x = successorNode(x), i++) {
             result[i] = key[x];
         }
@@ -129,10 +125,10 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                 return false;
             }
         }
-        if (totalNodes == color.length - 1) {
+        if (size == color.length - 1) {
             enlarge();
         }
-        int z = ++totalNodes;
+        int z = ++size;
         key[z] = element;
         p[z] = y;
         if (y == NULL) {
@@ -187,7 +183,29 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
         if (color[y] == BLACK) {
             fixAfterRemove(x);
         }
-        removedNodes++;
+        // Swap with last
+        if (y != size) {
+            // copy fields
+            key[y] = key[size];
+            left[y] = left[size];
+            right[y] = right[size];
+            p[y] = p[size];
+            color[y] = color[size];
+            // fix the children's parents
+            p[left[size]] = y;
+            p[right[size]] = y;
+            // fix one of the parent's children
+            if (left[p[size]] == size) {
+                left[p[size]] = y;
+            } else {
+                right[p[size]] = y;
+            }
+            // fix root
+            if (root == size) {
+                root = y;
+            }
+        }
+        size--;
     }
 
     private int successorNode(int x) {
@@ -347,8 +365,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
     @Override
     public void clear() {
         color[NULL] = BLACK;
-        totalNodes = 0;
-        removedNodes = 0;
+        size = 0;
         root = NULL;
         wasCorrectValueReturned = false;
     }
@@ -563,7 +580,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
         if (o == null || getClass() != o.getClass()) return false;
         _Ez_Int_TreeSet that = (_Ez_Int_TreeSet) o;
 
-        if (size() != that.size()) {
+        if (size != that.size) {
             return false;
         }
         for (int x = firstNode(), y = that.firstNode();
