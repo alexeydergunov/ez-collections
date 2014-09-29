@@ -10,6 +10,7 @@ package ez.collections;
  * @author Alexey Dergunov
  * @since 0.0.1
  * @see ez.collections.treeset._Ez_Int_TreeSet
+ * @see ez.collections.treeset._Ez_Int_CustomTreeSet
  */
 public interface _Ez_Int_SortedSet extends _Ez_Int_Set {
     // TODO null issues, e.g. when there is no higher element - consider returning special 'null value'

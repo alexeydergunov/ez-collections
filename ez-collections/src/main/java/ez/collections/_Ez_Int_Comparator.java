@@ -6,6 +6,7 @@ package ez.collections;
  * @since 0.0.1
  * @see ez.collections.sort._Ez_Int_Sort
  * @see ez.collections.heap._Ez_Int_CustomHeap
+ * @see ez.collections.treeset._Ez_Int_CustomTreeSet
  */
 public interface _Ez_Int_Comparator {
     /**

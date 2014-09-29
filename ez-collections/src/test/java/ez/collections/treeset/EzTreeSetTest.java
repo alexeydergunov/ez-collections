@@ -1,6 +1,7 @@
 package ez.collections.treeset;
 
 import ez.collections._Ez_Int_Collection;
+import ez.collections._Ez_Int_Comparator;
 import ez.collections._Ez_Int_Iterator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -85,9 +86,95 @@ public class EzTreeSetTest {
         }
     }
 
+    private void testPermutationForReverseComparator(int[] array) {
+        int n = array.length;
+        _Ez_Int_Comparator cmp = new _Ez_Int_Comparator() {
+            @Override
+            public int compare(int a, int b) {
+                if (a > b) return -1;
+                if (a < b) return 1;
+                return 0;
+            }
+        };
+        _Ez_Int_CustomTreeSet set = new _Ez_Int_CustomTreeSet(0, cmp);
+        for (int it = 0; it < 3; it++) {
+            Assert.assertTrue(set.isEmpty());
+            for (int i = 0; i < n; i++) {
+                Assert.assertTrue(set.add(array[i]));
+                Assert.assertEquals(set.size(), i + 1);
+                Assert.assertFalse(set.isEmpty());
+            }
+            //noinspection ForLoopReplaceableByForEach
+            for (int i = 0; i < n; i++) {
+                Assert.assertFalse(set.add(array[i]));
+                Assert.assertEquals(set.size(), n);
+                Assert.assertFalse(set.isEmpty());
+            }
+            for (int i = -1; i <= n; i++) {
+                Assert.assertEquals(set.contains(i), 0 <= i && i < n);
+                Assert.assertEquals(set.size(), n);
+                Assert.assertFalse(set.isEmpty());
+            }
+            Assert.assertEquals(set.getFirst(), n - 1);
+            Assert.assertTrue(set.wasCorrectValueReturned());
+            Assert.assertEquals(set.getLast(), 0);
+            Assert.assertTrue(set.wasCorrectValueReturned());
+            for (int i = -2; i <= n + 1; i++) {
+                int lower = set.lower(i);
+                if (i < n - 1) {
+                    Assert.assertEquals(lower, Math.max(i + 1, 0));
+                    Assert.assertTrue(set.wasCorrectValueReturned());
+                } else {
+                    Assert.assertFalse(set.wasCorrectValueReturned());
+                }
+                int higher = set.higher(i);
+                if (i > 0) {
+                    Assert.assertEquals(higher, Math.min(i - 1, n - 1));
+                    Assert.assertTrue(set.wasCorrectValueReturned());
+                } else {
+                    Assert.assertFalse(set.wasCorrectValueReturned());
+                }
+                int floor = set.floor(i);
+                if (i < n) {
+                    Assert.assertEquals(floor, Math.max(i, 0));
+                    Assert.assertTrue(set.wasCorrectValueReturned());
+                } else {
+                    Assert.assertFalse(set.wasCorrectValueReturned());
+                }
+                int ceiling = set.ceiling(i);
+                if (i >= 0) {
+                    Assert.assertEquals(ceiling, Math.min(i, n - 1));
+                    Assert.assertTrue(set.wasCorrectValueReturned());
+                } else {
+                    Assert.assertFalse(set.wasCorrectValueReturned());
+                }
+            }
+            int removed = 0;
+            for (int i = -1; i <= n; i++) {
+                boolean contains = (0 <= i && i < n);
+                int x = contains ? array[i] : i;
+                if (x == n - 1) {
+                    Assert.assertEquals(set.removeFirst(), x);
+                    Assert.assertTrue(set.wasCorrectValueReturned());
+                } else if (x == 0) {
+                    Assert.assertEquals(set.removeLast(), x);
+                    Assert.assertTrue(set.wasCorrectValueReturned());
+                } else {
+                    Assert.assertEquals(set.remove(x), contains);
+                }
+                if (contains) {
+                    removed++;
+                }
+                Assert.assertEquals(set.size(), n - removed);
+            }
+            set.clear();
+        }
+    }
+
     private void genPermutations(int[] permutation, int left, int length) {
         if (left >= length - 1) {
             testPermutation(permutation);
+            testPermutationForReverseComparator(permutation);
             return;
         }
         for (int i = left; i < length; i++) {
@@ -133,6 +220,7 @@ public class EzTreeSetTest {
             }
             shuffle(a, rnd);
             testPermutation(a);
+            testPermutationForReverseComparator(a);
         }
     }
 
@@ -147,6 +235,7 @@ public class EzTreeSetTest {
             }
             shuffle(a, rnd);
             testPermutation(a);
+            testPermutationForReverseComparator(a);
         }
     }
 
