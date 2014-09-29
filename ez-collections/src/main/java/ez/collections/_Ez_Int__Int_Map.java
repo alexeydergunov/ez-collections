@@ -1,7 +1,7 @@
 package ez.collections;
 
 public interface _Ez_Int__Int_Map {
-    // TODO what to return if there is no value for a certain key?
+    // TODO null issues, e.g. when there is no value for a certain key - consider returning special 'null value'
 
     int size();
 
@@ -14,6 +14,8 @@ public interface _Ez_Int__Int_Map {
     /*V*/int/*V*/ put(/*K*/int/*K*/ key, /*V*/int/*V*/ value);
 
     /*V*/int/*V*/ remove(/*K*/int/*K*/ key);
+
+    boolean wasCorrectValueReturned();
 
     void clear();
 

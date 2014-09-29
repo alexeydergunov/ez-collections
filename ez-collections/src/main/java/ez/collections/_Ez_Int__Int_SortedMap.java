@@ -1,7 +1,9 @@
 package ez.collections;
 
+import ez.collections.tuples._Ez_Int__Int_Pair;
+
 public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
-    // TODO null issues, e.g. when there is no higher key
+    // TODO null issues, e.g. when there is no higher key - consider returning special 'null value'
 
     @Override
     int size();
@@ -20,6 +22,9 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
 
     @Override
     /*V*/int/*V*/ remove(/*KC*/int/*KC*/ key);
+
+    @Override
+    boolean wasCorrectValueReturned();
 
     @Override
     void clear();
@@ -46,13 +51,9 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
 
     /*KC*/int/*KC*/ getLastKey();
 
-    /*V*/int/*V*/ getFirstValue();
+    _Ez_Int__Int_Pair getFirstEntry();
 
-    /*V*/int/*V*/ getLastValue();
-
-    void removeFirst();
-
-    void removeLast();
+    _Ez_Int__Int_Pair getLastEntry();
 
     /*KC*/int/*KC*/ floorKey(/*KC*/int/*KC*/ key);
 
@@ -61,4 +62,12 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
     /*KC*/int/*KC*/ lowerKey(/*KC*/int/*KC*/ key);
 
     /*KC*/int/*KC*/ higherKey(/*KC*/int/*KC*/ key);
+
+    _Ez_Int__Int_Pair floorEntry(/*KC*/int/*KC*/ key);
+
+    _Ez_Int__Int_Pair ceilingEntry(/*KC*/int/*KC*/ key);
+
+    _Ez_Int__Int_Pair lowerEntry(/*KC*/int/*KC*/ key);
+
+    _Ez_Int__Int_Pair higherEntry(/*KC*/int/*KC*/ key);
 }
