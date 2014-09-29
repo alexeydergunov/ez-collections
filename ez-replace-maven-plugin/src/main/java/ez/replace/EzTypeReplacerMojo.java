@@ -42,8 +42,11 @@ public class EzTypeReplacerMojo extends AbstractMojo {
 
     private static final String TOKEN_DELIMITERS = "[](){}<>.,;";
 
+    // TODO rewrite this
     private static final Pattern CLASS_NAME_PATTERN = Pattern.compile("_.*?_");
     private static final Pattern PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*T\\*/.*/\\*T\\*/");
+    private static final Pattern TUPLE_FIRST_TYPE_PATTERN = Pattern.compile("/\\*T1\\*/.*/\\*T1\\*/");
+    private static final Pattern TUPLE_SECOND_TYPE_PATTERN = Pattern.compile("/\\*T2\\*/.*/\\*T2\\*/");
     private static final Pattern COMPARABLE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*C\\*/.*/\\*C\\*/");
     private static final Pattern KEY_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*K\\*/.*/\\*K\\*/");
     private static final Pattern COMPARABLE_KEY_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*KC\\*/.*/\\*KC\\*/");
@@ -250,6 +253,20 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                         typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*V*/");
             }
             s = VALUE_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[1].primitiveName);
+        }
+        if (s.contains("/*T1*/")) {
+            if (typeInfos.length != 2) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*T1*/");
+            }
+            s = TUPLE_FIRST_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
+        }
+        if (s.contains("/*T2*/")) {
+            if (typeInfos.length != 2) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*T2*/");
+            }
+            s = TUPLE_SECOND_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[1].primitiveName);
         }
 
         if (s.startsWith("_")) {
