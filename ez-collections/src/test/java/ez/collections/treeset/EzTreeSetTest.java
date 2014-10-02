@@ -31,37 +31,37 @@ public class EzTreeSetTest {
                 Assert.assertFalse(set.isEmpty());
             }
             Assert.assertEquals(set.getFirst(), 0);
-            Assert.assertTrue(set.wasCorrectValueReturned());
+            Assert.assertFalse(set.returnedNull());
             Assert.assertEquals(set.getLast(), n - 1);
-            Assert.assertTrue(set.wasCorrectValueReturned());
+            Assert.assertFalse(set.returnedNull());
             for (int i = -2; i <= n + 1; i++) {
                 int lower = set.lower(i);
                 if (i > 0) {
                     Assert.assertEquals(lower, Math.min(i - 1, n - 1));
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
-                    Assert.assertFalse(set.wasCorrectValueReturned());
+                    Assert.assertTrue(set.returnedNull());
                 }
                 int higher = set.higher(i);
                 if (i < n - 1) {
                     Assert.assertEquals(higher, Math.max(i + 1, 0));
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
-                    Assert.assertFalse(set.wasCorrectValueReturned());
+                    Assert.assertTrue(set.returnedNull());
                 }
                 int floor = set.floor(i);
                 if (i >= 0) {
                     Assert.assertEquals(floor, Math.min(i, n - 1));
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
-                    Assert.assertFalse(set.wasCorrectValueReturned());
+                    Assert.assertTrue(set.returnedNull());
                 }
                 int ceiling = set.ceiling(i);
                 if (i < n) {
                     Assert.assertEquals(ceiling, Math.max(i, 0));
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
-                    Assert.assertFalse(set.wasCorrectValueReturned());
+                    Assert.assertTrue(set.returnedNull());
                 }
             }
             int removed = 0;
@@ -70,10 +70,10 @@ public class EzTreeSetTest {
                 int x = contains ? array[i] : i;
                 if (x == 0) {
                     Assert.assertEquals(set.removeFirst(), x);
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else if (x == n - 1) {
                     Assert.assertEquals(set.removeLast(), x);
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
                     Assert.assertEquals(set.remove(x), contains);
                 }
@@ -116,37 +116,37 @@ public class EzTreeSetTest {
                 Assert.assertFalse(set.isEmpty());
             }
             Assert.assertEquals(set.getFirst(), n - 1);
-            Assert.assertTrue(set.wasCorrectValueReturned());
+            Assert.assertFalse(set.returnedNull());
             Assert.assertEquals(set.getLast(), 0);
-            Assert.assertTrue(set.wasCorrectValueReturned());
+            Assert.assertFalse(set.returnedNull());
             for (int i = -2; i <= n + 1; i++) {
                 int lower = set.lower(i);
                 if (i < n - 1) {
                     Assert.assertEquals(lower, Math.max(i + 1, 0));
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
-                    Assert.assertFalse(set.wasCorrectValueReturned());
+                    Assert.assertTrue(set.returnedNull());
                 }
                 int higher = set.higher(i);
                 if (i > 0) {
                     Assert.assertEquals(higher, Math.min(i - 1, n - 1));
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
-                    Assert.assertFalse(set.wasCorrectValueReturned());
+                    Assert.assertTrue(set.returnedNull());
                 }
                 int floor = set.floor(i);
                 if (i < n) {
                     Assert.assertEquals(floor, Math.max(i, 0));
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
-                    Assert.assertFalse(set.wasCorrectValueReturned());
+                    Assert.assertTrue(set.returnedNull());
                 }
                 int ceiling = set.ceiling(i);
                 if (i >= 0) {
                     Assert.assertEquals(ceiling, Math.min(i, n - 1));
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
-                    Assert.assertFalse(set.wasCorrectValueReturned());
+                    Assert.assertTrue(set.returnedNull());
                 }
             }
             int removed = 0;
@@ -155,10 +155,10 @@ public class EzTreeSetTest {
                 int x = contains ? array[i] : i;
                 if (x == n - 1) {
                     Assert.assertEquals(set.removeFirst(), x);
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else if (x == 0) {
                     Assert.assertEquals(set.removeLast(), x);
-                    Assert.assertTrue(set.wasCorrectValueReturned());
+                    Assert.assertFalse(set.returnedNull());
                 } else {
                     Assert.assertEquals(set.remove(x), contains);
                 }
@@ -245,24 +245,24 @@ public class EzTreeSetTest {
         Assert.assertTrue(set.isEmpty());
         Assert.assertEquals(set.size(), 0);
         set.getFirst();
-        Assert.assertFalse(set.wasCorrectValueReturned());
+        Assert.assertTrue(set.returnedNull());
         set.getLast();
-        Assert.assertFalse(set.wasCorrectValueReturned());
+        Assert.assertTrue(set.returnedNull());
         set.removeFirst();
-        Assert.assertFalse(set.wasCorrectValueReturned());
+        Assert.assertTrue(set.returnedNull());
         set.removeLast();
-        Assert.assertFalse(set.wasCorrectValueReturned());
+        Assert.assertTrue(set.returnedNull());
         for (int x : new int[] {Integer.MIN_VALUE, 0, Integer.MAX_VALUE}) {
             Assert.assertFalse(set.contains(x));
             Assert.assertFalse(set.remove(x));
             set.ceiling(x);
-            Assert.assertFalse(set.wasCorrectValueReturned());
+            Assert.assertTrue(set.returnedNull());
             set.floor(x);
-            Assert.assertFalse(set.wasCorrectValueReturned());
+            Assert.assertTrue(set.returnedNull());
             set.higher(x);
-            Assert.assertFalse(set.wasCorrectValueReturned());
+            Assert.assertTrue(set.returnedNull());
             set.lower(x);
-            Assert.assertFalse(set.wasCorrectValueReturned());
+            Assert.assertTrue(set.returnedNull());
         }
     }
 
@@ -303,9 +303,9 @@ public class EzTreeSetTest {
         Assert.assertEquals(set.getFirst(), 1);
         Assert.assertEquals(set.getLast(), 13);
         Assert.assertEquals(set.removeFirst(), 1);
-        Assert.assertTrue(set.wasCorrectValueReturned());
+        Assert.assertFalse(set.returnedNull());
         Assert.assertEquals(set.removeLast(), 13);
-        Assert.assertTrue(set.wasCorrectValueReturned());
+        Assert.assertFalse(set.returnedNull());
     }
 
     @Test
@@ -320,9 +320,9 @@ public class EzTreeSetTest {
             int lower = set.lower(i);
             Integer javaLower = javaSet.lower(i);
             if (javaLower == null) {
-                Assert.assertFalse(set.wasCorrectValueReturned());
+                Assert.assertTrue(set.returnedNull());
             } else {
-                Assert.assertTrue(set.wasCorrectValueReturned());
+                Assert.assertFalse(set.returnedNull());
                 Assert.assertEquals(lower, javaLower.intValue());
             }
         }
@@ -330,9 +330,9 @@ public class EzTreeSetTest {
             int higher = set.higher(i);
             Integer javaHigher = javaSet.higher(i);
             if (javaHigher == null) {
-                Assert.assertFalse(set.wasCorrectValueReturned());
+                Assert.assertTrue(set.returnedNull());
             } else {
-                Assert.assertTrue(set.wasCorrectValueReturned());
+                Assert.assertFalse(set.returnedNull());
                 Assert.assertEquals(higher, javaHigher.intValue());
             }
         }
@@ -350,9 +350,9 @@ public class EzTreeSetTest {
             int floor = set.floor(i);
             Integer javaFloor = javaSet.floor(i);
             if (javaFloor == null) {
-                Assert.assertFalse(set.wasCorrectValueReturned());
+                Assert.assertTrue(set.returnedNull());
             } else {
-                Assert.assertTrue(set.wasCorrectValueReturned());
+                Assert.assertFalse(set.returnedNull());
                 Assert.assertEquals(floor, javaFloor.intValue());
             }
         }
@@ -360,9 +360,9 @@ public class EzTreeSetTest {
             int ceiling = set.ceiling(i);
             Integer javaCeiling = javaSet.ceiling(i);
             if (javaCeiling == null) {
-                Assert.assertFalse(set.wasCorrectValueReturned());
+                Assert.assertTrue(set.returnedNull());
             } else {
-                Assert.assertTrue(set.wasCorrectValueReturned());
+                Assert.assertFalse(set.returnedNull());
                 Assert.assertEquals(ceiling, javaCeiling.intValue());
             }
         }

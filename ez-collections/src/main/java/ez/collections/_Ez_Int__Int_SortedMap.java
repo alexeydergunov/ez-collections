@@ -24,7 +24,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
     /*V*/int/*V*/ remove(/*KC*/int/*KC*/ key);
 
     @Override
-    boolean wasCorrectValueReturned();
+    boolean returnedNull();
 
     @Override
     void clear();

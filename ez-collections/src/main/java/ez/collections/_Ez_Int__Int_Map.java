@@ -15,7 +15,7 @@ public interface _Ez_Int__Int_Map {
 
     /*V*/int/*V*/ remove(/*K*/int/*K*/ key);
 
-    boolean wasCorrectValueReturned();
+    boolean returnedNull();
 
     void clear();
 

@@ -28,7 +28,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
 
     private int size;
     private int root;
-    private boolean wasCorrectValueReturned;
+    private boolean returnedNull;
 
     public _Ez_Int_TreeSet() {
         this(DEFAULT_CAPACITY);
@@ -47,7 +47,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
         color[NULL] = BLACK;
         size = 0;
         root = NULL;
-        wasCorrectValueReturned = false;
+        returnedNull = false;
     }
 
     public _Ez_Int_TreeSet(_Ez_Int_Collection collection) {
@@ -367,7 +367,6 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
         color[NULL] = BLACK;
         size = 0;
         root = NULL;
-        wasCorrectValueReturned = false;
     }
 
     private void enlarge() {
@@ -398,33 +397,33 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
     @Override
     public /*C*/int/*C*/ getFirst() {
         if (root == NULL) {
-            wasCorrectValueReturned = false;
+            returnedNull = true;
             return key[NULL];
         }
         final int x = firstNode();
-        wasCorrectValueReturned = true;
+        returnedNull = false;
         return key[x];
     }
 
     @Override
     public /*C*/int/*C*/ getLast() {
         if (root == NULL) {
-            wasCorrectValueReturned = false;
+            returnedNull = true;
             return key[NULL];
         }
         final int x = lastNode();
-        wasCorrectValueReturned = true;
+        returnedNull = false;
         return key[x];
     }
 
     @Override
     public /*C*/int/*C*/ removeFirst() {
         if (root == NULL) {
-            wasCorrectValueReturned = false;
+            returnedNull = true;
             return key[NULL];
         }
         final int x = firstNode();
-        wasCorrectValueReturned = true;
+        returnedNull = false;
         final /*C*/int/*C*/ removedElement = key[x];
         removeNode(x);
         return removedElement;
@@ -433,11 +432,11 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
     @Override
     public /*C*/int/*C*/ removeLast() {
         if (root == NULL) {
-            wasCorrectValueReturned = false;
+            returnedNull = true;
             return key[NULL];
         }
         final int x = lastNode();
-        wasCorrectValueReturned = true;
+        returnedNull = false;
         final /*C*/int/*C*/ removedElement = key[x];
         removeNode(x);
         return removedElement;
@@ -451,7 +450,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                 if (right[x] != NULL) {
                     x = right[x];
                 } else {
-                    wasCorrectValueReturned = true;
+                    returnedNull = false;
                     return key[x];
                 }
             } else if (element < key[x]) {
@@ -464,15 +463,15 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                         x = y;
                         y = p[y];
                     }
-                    wasCorrectValueReturned = (y != NULL);
+                    returnedNull = (y == NULL);
                     return key[y];
                 }
             } else {
-                wasCorrectValueReturned = true;
+                returnedNull = false;
                 return key[x];
             }
         }
-        wasCorrectValueReturned = false;
+        returnedNull = true;
         return key[NULL];
     }
 
@@ -484,7 +483,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                 if (left[x] != NULL) {
                     x = left[x];
                 } else {
-                    wasCorrectValueReturned = true;
+                    returnedNull = false;
                     return key[x];
                 }
             } else if (element > key[x]) {
@@ -497,15 +496,15 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                         x = y;
                         y = p[y];
                     }
-                    wasCorrectValueReturned = (y != NULL);
+                    returnedNull = (y == NULL);
                     return key[y];
                 }
             } else {
-                wasCorrectValueReturned = true;
+                returnedNull = false;
                 return key[x];
             }
         }
-        wasCorrectValueReturned = false;
+        returnedNull = true;
         return key[NULL];
     }
 
@@ -517,7 +516,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                 if (right[x] != NULL) {
                     x = right[x];
                 } else {
-                    wasCorrectValueReturned = true;
+                    returnedNull = false;
                     return key[x];
                 }
             } else {
@@ -530,12 +529,12 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                         x = y;
                         y = p[y];
                     }
-                    wasCorrectValueReturned = (y != NULL);
+                    returnedNull = (y == NULL);
                     return key[y];
                 }
             }
         }
-        wasCorrectValueReturned = false;
+        returnedNull = true;
         return key[NULL];
     }
 
@@ -547,7 +546,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                 if (left[x] != NULL) {
                     x = left[x];
                 } else {
-                    wasCorrectValueReturned = true;
+                    returnedNull = false;
                     return key[x];
                 }
             } else {
@@ -560,18 +559,18 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                         x = y;
                         y = p[y];
                     }
-                    wasCorrectValueReturned = (y != NULL);
+                    returnedNull = (y == NULL);
                     return key[y];
                 }
             }
         }
-        wasCorrectValueReturned = false;
+        returnedNull = true;
         return key[NULL];
     }
 
     @Override
-    public boolean wasCorrectValueReturned() {
-        return wasCorrectValueReturned;
+    public boolean returnedNull() {
+        return returnedNull;
     }
 
     @Override
