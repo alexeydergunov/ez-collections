@@ -18,6 +18,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
     private static final boolean BLACK = false;
     private static final boolean RED = true;
     private static final int NULL = 0;
+    private static final /*C*/int/*C*/ DEFAULT_NULL_ELEMENT = (new /*C*/int/*C*/[1])[0];
 
     // Arrays are 1-indexed. Index 0 is a null node.
     private /*C*/int/*C*/[] key;
@@ -398,7 +399,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
     public /*C*/int/*C*/ getFirst() {
         if (root == NULL) {
             returnedNull = true;
-            return key[NULL];
+            return DEFAULT_NULL_ELEMENT;
         }
         final int x = firstNode();
         returnedNull = false;
@@ -409,7 +410,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
     public /*C*/int/*C*/ getLast() {
         if (root == NULL) {
             returnedNull = true;
-            return key[NULL];
+            return DEFAULT_NULL_ELEMENT;
         }
         final int x = lastNode();
         returnedNull = false;
@@ -420,7 +421,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
     public /*C*/int/*C*/ removeFirst() {
         if (root == NULL) {
             returnedNull = true;
-            return key[NULL];
+            return DEFAULT_NULL_ELEMENT;
         }
         final int x = firstNode();
         returnedNull = false;
@@ -433,7 +434,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
     public /*C*/int/*C*/ removeLast() {
         if (root == NULL) {
             returnedNull = true;
-            return key[NULL];
+            return DEFAULT_NULL_ELEMENT;
         }
         final int x = lastNode();
         returnedNull = false;
@@ -463,8 +464,13 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                         x = y;
                         y = p[y];
                     }
-                    returnedNull = (y == NULL);
-                    return key[y];
+                    if (y == NULL) {
+                        returnedNull = true;
+                        return DEFAULT_NULL_ELEMENT;
+                    } else {
+                        returnedNull = false;
+                        return key[y];
+                    }
                 }
             } else {
                 returnedNull = false;
@@ -472,7 +478,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
             }
         }
         returnedNull = true;
-        return key[NULL];
+        return DEFAULT_NULL_ELEMENT;
     }
 
     @Override
@@ -496,8 +502,13 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                         x = y;
                         y = p[y];
                     }
-                    returnedNull = (y == NULL);
-                    return key[y];
+                    if (y == NULL) {
+                        returnedNull = true;
+                        return DEFAULT_NULL_ELEMENT;
+                    } else {
+                        returnedNull = false;
+                        return key[y];
+                    }
                 }
             } else {
                 returnedNull = false;
@@ -505,7 +516,7 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
             }
         }
         returnedNull = true;
-        return key[NULL];
+        return DEFAULT_NULL_ELEMENT;
     }
 
     @Override
@@ -529,13 +540,18 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                         x = y;
                         y = p[y];
                     }
-                    returnedNull = (y == NULL);
-                    return key[y];
+                    if (y == NULL) {
+                        returnedNull = true;
+                        return DEFAULT_NULL_ELEMENT;
+                    } else {
+                        returnedNull = false;
+                        return key[y];
+                    }
                 }
             }
         }
         returnedNull = true;
-        return key[NULL];
+        return DEFAULT_NULL_ELEMENT;
     }
 
     @Override
@@ -559,13 +575,18 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
                         x = y;
                         y = p[y];
                     }
-                    returnedNull = (y == NULL);
-                    return key[y];
+                    if (y == NULL) {
+                        returnedNull = true;
+                        return DEFAULT_NULL_ELEMENT;
+                    } else {
+                        returnedNull = false;
+                        return key[y];
+                    }
                 }
             }
         }
         returnedNull = true;
-        return key[NULL];
+        return DEFAULT_NULL_ELEMENT;
     }
 
     @Override
