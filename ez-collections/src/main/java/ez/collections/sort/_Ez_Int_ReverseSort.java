@@ -1,5 +1,6 @@
 package ez.collections.sort;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -29,6 +30,56 @@ public final class _Ez_Int_ReverseSort {
         }
         int log = Integer.numberOfTrailingZeros(Integer.highestOneBit(length - 1)) + 1;
         return (int) (HEAPSORT_DEPTH_COEFFICIENT * log);
+    }
+
+    private static void randomShuffle(/*C*/int/*C*/[] a, int left, int right) {
+        for (int i = left; i < right; i++) {
+            int j = i + rnd.nextInt(right - i);
+            /*C*/int/*C*/ tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+        }
+    }
+
+    private static void reverse(/*C*/int/*C*/[] a, int left, int right) {
+        right--;
+        while (left < right) {
+            /*C*/int/*C*/ tmp = a[left];
+            a[left++] = a[right];
+            a[right--] = tmp;
+        }
+    }
+
+    /**
+     * Sorts the specified array in the descending order using {@link java.util.Arrays#sort} method. Random shuffling
+     * is applied to the array before sorting to prevent slow execution on anti-quicksort arrays.
+     * @param a the array to be sorted.
+     */
+    public static void safeArraysSort(/*C*/int/*C*/[] a) {
+        int n = a.length;
+        randomShuffle(a, 0, n);
+        Arrays.sort(a, 0, n);
+        reverse(a, 0, n);
+    }
+
+    /**
+     * Sorts the subarray [left, right) of the specified array in the descending order using
+     * {@link java.util.Arrays#sort} method. Random shuffling is applied to the subarray before sorting to prevent
+     * slow execution on anti-quicksort arrays.
+     * @param a the array, which interval [left, right) is to be sorted.
+     * @param left the left bound of the range, inclusive
+     * @param right the right bound of the range, exclusive
+     * @throws IllegalArgumentException if the range is incorrect (if
+     * {@code left > right || left < 0 || right > a.length})
+     */
+    public static void safeArraysSort(/*C*/int/*C*/[] a, int left, int right) {
+        if (left > right || left < 0 || right > a.length) {
+            throw new IllegalArgumentException(
+                    "Incorrect range [" + left + ", " + right + ") was specified for sorting, length = " + a.length);
+        }
+        randomShuffle(a, left, right);
+        Arrays.sort(a, left, right);
+        reverse(a, left, right);
     }
 
     /**
