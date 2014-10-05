@@ -14,6 +14,9 @@ public class EzSortTest {
             System.arraycopy(permutation, 0, copy, 0, length);
             _Ez_Int_Sort.sort(copy);
             Assert.assertEquals(copy, sorted);
+            System.arraycopy(permutation, 0, copy, 0, length);
+            _Ez_Int_Sort.safeArraysSort(copy);
+            Assert.assertEquals(copy, sorted);
             return;
         }
         for (int i = left; i < length; i++) {
@@ -44,48 +47,57 @@ public class EzSortTest {
     @Test
     public void testSmallArrays() {
         Random rnd = new Random(322);
-        for (int it = 0; it < 500000; it++) {
+        for (int it = 0; it < 200000; it++) {
             int length = 1 + rnd.nextInt(42);
             int[] sorted = new int[length];
-            int[] array = new int[length];
+            int[] array1 = new int[length];
+            int[] array2 = new int[length];
             for (int i = 0; i < length; i++) {
-                sorted[i] = array[i] = rnd.nextInt(length);
+                sorted[i] = array1[i] = array2[i] = rnd.nextInt(length);
             }
             Arrays.sort(sorted);
-            _Ez_Int_Sort.sort(array);
-            Assert.assertEquals(array, sorted);
+            _Ez_Int_Sort.sort(array1);
+            _Ez_Int_Sort.safeArraysSort(array2);
+            Assert.assertEquals(array1, sorted);
+            Assert.assertEquals(array2, sorted);
         }
     }
 
     @Test
     public void testLargeArraysWithDifferentElements() {
-        Random rnd = new Random(322);
-        for (int it = 0; it < 100; it++) {
+        Random rnd = new Random(3223);
+        for (int it = 0; it < 50; it++) {
             int length = 50000 + rnd.nextInt(50000);
             int[] sorted = new int[length];
-            int[] array = new int[length];
+            int[] array1 = new int[length];
+            int[] array2 = new int[length];
             for (int i = 0; i < length; i++) {
-                sorted[i] = array[i] = rnd.nextInt();
+                sorted[i] = array1[i] = array2[i] = rnd.nextInt();
             }
             Arrays.sort(sorted);
-            _Ez_Int_Sort.sort(array);
-            Assert.assertEquals(array, sorted);
+            _Ez_Int_Sort.sort(array1);
+            _Ez_Int_Sort.safeArraysSort(array2);
+            Assert.assertEquals(array1, sorted);
+            Assert.assertEquals(array2, sorted);
         }
     }
 
     @Test
     public void testLargeArraysWithManyEqualElements() {
-        Random rnd = new Random(322);
-        for (int it = 0; it < 100; it++) {
+        Random rnd = new Random(32232);
+        for (int it = 0; it < 50; it++) {
             int length = 50000 + rnd.nextInt(50000);
             int[] sorted = new int[length];
-            int[] array = new int[length];
+            int[] array1 = new int[length];
+            int[] array2 = new int[length];
             for (int i = 0; i < length; i++) {
-                sorted[i] = array[i] = rnd.nextInt(200);
+                sorted[i] = array1[i] = array2[i] = rnd.nextInt(200);
             }
             Arrays.sort(sorted);
-            _Ez_Int_Sort.sort(array);
-            Assert.assertEquals(array, sorted);
+            _Ez_Int_Sort.sort(array1);
+            _Ez_Int_Sort.safeArraysSort(array2);
+            Assert.assertEquals(array1, sorted);
+            Assert.assertEquals(array2, sorted);
         }
     }
 
@@ -156,18 +168,21 @@ public class EzSortTest {
 
     @Test
     public void testReverseSort() {
-        Random rnd = new Random(322);
-        for (int it = 0; it < 100; it++) {
+        Random rnd = new Random(322322);
+        for (int it = 0; it < 50; it++) {
             int length = 50000 + rnd.nextInt(50000);
             int[] sorted = new int[length];
-            int[] array = new int[length];
+            int[] array1 = new int[length];
+            int[] array2 = new int[length];
             for (int i = 0; i < length; i++) {
-                sorted[i] = array[i] = rnd.nextInt();
+                sorted[i] = array1[i] = array2[i] = rnd.nextInt();
             }
             Arrays.sort(sorted);
             reverse(sorted);
-            _Ez_Int_ReverseSort.sort(array);
-            Assert.assertEquals(array, sorted);
+            _Ez_Int_ReverseSort.sort(array1);
+            _Ez_Int_ReverseSort.safeArraysSort(array2);
+            Assert.assertEquals(array1, sorted);
+            Assert.assertEquals(array2, sorted);
         }
     }
 
@@ -181,8 +196,8 @@ public class EzSortTest {
                 return 0;
             }
         };
-        Random rnd = new Random(322);
-        for (int it = 0; it < 100; it++) {
+        Random rnd = new Random(3223223);
+        for (int it = 0; it < 50; it++) {
             int length = 50000 + rnd.nextInt(50000);
             int[] sorted = new int[length];
             int[] array = new int[length];
