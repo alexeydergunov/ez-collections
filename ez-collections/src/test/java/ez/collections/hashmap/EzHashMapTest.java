@@ -211,6 +211,27 @@ public class EzHashMapTest {
     }
 
     @Test
+    public void testConstructors() {
+        _Ez_Int__Int_HashMap srcMap = new _Ez_Int__Int_HashMap();
+        HashMap<Integer, Integer> javaMap = new HashMap<Integer, Integer>();
+        int n = 10000;
+        for (int i = 0; i < n; i++) {
+            srcMap.put(~i, i);
+            javaMap.put(~i, i);
+        }
+        _Ez_Int__Int_HashMap map1 = new _Ez_Int__Int_HashMap(srcMap);
+        _Ez_Int__Int_HashMap map2 = new _Ez_Int__Int_HashMap(javaMap);
+        Assert.assertEquals(map1.size(), n);
+        Assert.assertEquals(map2.size(), n);
+        for (int i = 0; i < n; i++) {
+            Assert.assertEquals(map1.get(~i), i);
+            Assert.assertEquals(map2.get(~i), i);
+        }
+        Assert.assertEquals(map1, srcMap);
+        Assert.assertEquals(map2, srcMap);
+    }
+
+    @Test
     public void testIterator() {
         Random rnd = new Random(322322322);
         int n = 1000;

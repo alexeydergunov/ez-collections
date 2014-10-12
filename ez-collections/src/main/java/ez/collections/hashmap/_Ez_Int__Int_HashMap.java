@@ -5,6 +5,7 @@ import ez.collections._Ez_Int__Int_MapIterator;
 import ez.collections.misc.PrimitiveHashCalculator;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -64,6 +65,20 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         mask = capacity - 1;
         returnedNull = false;
         hashSeed = rnd.nextInt();
+    }
+
+    public _Ez_Int__Int_HashMap(_Ez_Int__Int_Map map) {
+        this(map.size());
+        for (_Ez_Int__Int_MapIterator it = map.iterator(); it.hasNext(); it.next()) {
+            put(it.getKey(), it.getValue());
+        }
+    }
+
+    public _Ez_Int__Int_HashMap(Map</*KW*/Integer/*KW*/, /*VW*/Integer/*VW*/> javaMap) {
+        this(javaMap.size());
+        for (Map.Entry</*KW*/Integer/*KW*/, /*VW*/Integer/*VW*/> e : javaMap.entrySet()) {
+            put(e.getKey(), e.getValue());
+        }
     }
 
     private int getStartPos(int h) {

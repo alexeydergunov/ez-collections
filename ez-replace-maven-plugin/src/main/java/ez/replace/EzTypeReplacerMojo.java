@@ -53,6 +53,8 @@ public class EzTypeReplacerMojo extends AbstractMojo {
     private static final Pattern VALUE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*V\\*/.*/\\*V\\*/");
     private static final Pattern WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*W\\*/.*/\\*W\\*/");
     private static final Pattern COMPARABLE_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*WC\\*/.*/\\*WC\\*/");
+    private static final Pattern KEY_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*KW\\*/.*/\\*KW\\*/");
+    private static final Pattern VALUE_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*VW\\*/.*/\\*VW\\*/");
 
     private static final FileFilter JAVA_FILTER = new FileFilter() {
         @Override
@@ -237,6 +239,13 @@ public class EzTypeReplacerMojo extends AbstractMojo {
             }
             s = KEY_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
         }
+        if (s.contains("/*KW*/")) {
+            if (typeInfos.length != 2) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*KW*/");
+            }
+            s = KEY_WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].wrapperName);
+        }
         if (s.contains("/*KC*/")) {
             if (typeInfos.length != 2) {
                 throw new IllegalArgumentException(
@@ -253,6 +262,13 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                         typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*V*/");
             }
             s = VALUE_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[1].primitiveName);
+        }
+        if (s.contains("/*VW*/")) {
+            if (typeInfos.length != 2) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*VW*/");
+            }
+            s = VALUE_WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[1].wrapperName);
         }
         if (s.contains("/*T1*/")) {
             if (typeInfos.length != 2) {
