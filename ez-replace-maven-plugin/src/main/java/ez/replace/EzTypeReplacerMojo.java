@@ -53,6 +53,7 @@ public class EzTypeReplacerMojo extends AbstractMojo {
     private static final Pattern VALUE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*V\\*/.*/\\*V\\*/");
     private static final Pattern WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*W\\*/.*/\\*W\\*/");
     private static final Pattern COMPARABLE_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*WC\\*/.*/\\*WC\\*/");
+    private static final Pattern COMPARABLE_KEY_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*KWC\\*/.*/\\*KWC\\*/");
     private static final Pattern KEY_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*KW\\*/.*/\\*KW\\*/");
     private static final Pattern VALUE_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*VW\\*/.*/\\*VW\\*/");
 
@@ -255,6 +256,16 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                 throw new UnsupportedTypeException("/*KC*/ cannot be boolean");
             }
             s = COMPARABLE_KEY_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
+        }
+        if (s.contains("/*KWC*/")) {
+            if (typeInfos.length != 2) {
+                throw new IllegalArgumentException(
+                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*KWC*/");
+            }
+            if (typeInfos[0] == TypeInfo.BOOLEAN) {
+                throw new UnsupportedTypeException("/*KWC*/ cannot be boolean");
+            }
+            s = COMPARABLE_KEY_WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].wrapperName);
         }
         if (s.contains("/*V*/")) {
             if (typeInfos.length != 2) {

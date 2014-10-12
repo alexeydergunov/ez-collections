@@ -30,7 +30,6 @@
                     <sourceDirectory>src/main/java</sourceDirectory>
                     <targetDirectory>target/generated-sources/java</targetDirectory>
                     <excludedClasses>
-                        <excludedClass>_Ez_Int__Int_SortedMap</excludedClass>
                     </excludedClasses>
                 </configuration>
             </plugin>
