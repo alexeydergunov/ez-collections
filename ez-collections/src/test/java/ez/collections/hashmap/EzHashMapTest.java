@@ -272,11 +272,7 @@ public class EzHashMapTest {
             } catch (NoSuchElementException e) {
                 // as expected
             }
-            try {
-                it.next();
-            } catch (NoSuchElementException e) {
-                // as expected
-            }
+            it.next(); // nothing must happen
         }
     }
 

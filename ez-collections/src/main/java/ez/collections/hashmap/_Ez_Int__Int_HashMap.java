@@ -337,7 +337,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         @Override
         public /*K*/int/*K*/ getKey() {
             if (curIndex == keys.length) {
-                throw new NoSuchElementException("Iterator doesn't have more elements");
+                throw new NoSuchElementException("Iterator doesn't have more entries");
             }
             return keys[curIndex];
         }
@@ -345,7 +345,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         @Override
         public /*V*/int/*V*/ getValue() {
             if (curIndex == values.length) {
-                throw new NoSuchElementException("Iterator doesn't have more elements");
+                throw new NoSuchElementException("Iterator doesn't have more entries");
             }
             return values[curIndex];
         }
@@ -353,7 +353,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         @Override
         public void next() {
             if (curIndex == status.length) {
-                throw new NoSuchElementException("Iterator doesn't have more elements");
+                return;
             }
             curIndex++;
             while (curIndex < status.length && status[curIndex] != FILLED) {
