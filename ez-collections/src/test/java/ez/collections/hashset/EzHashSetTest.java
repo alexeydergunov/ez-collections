@@ -2,6 +2,7 @@ package ez.collections.hashset;
 
 import ez.collections._Ez_Int_Iterator;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -223,6 +224,44 @@ public class EzHashSetTest {
         } catch (NoSuchElementException e) {
             // as expected
         }
+    }
+
+    @DataProvider
+    public Object[][] getHashSetAfterManyRemoves() {
+        int n = 1000000;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = i;
+        }
+        Random rnd = new Random(32222222);
+        for (int i = 0; i < n; i++) {
+            int j = i + rnd.nextInt(n - i);
+            int tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+        }
+        _Ez_Int_HashSet set = new _Ez_Int_HashSet();
+        for (int i = 0; i < n; i++) {
+            set.add(a[i]);
+        }
+        for (int i = 0; i < n - 1000; i++) {
+            set.remove(a[i]);
+        }
+        Assert.assertEquals(set.size(), 1000);
+        return new Object[][] {{set}};
+    }
+
+    @Test(timeOut = 1000, dataProvider = "getHashSetAfterManyRemoves")
+    public void testCompressingAfterRemoving(_Ez_Int_HashSet set) {
+        Assert.assertEquals(set.size(), 1000);
+        // Length of the arrays in the set must be O(size). If it's not, there will be a timeout
+        int dummy = 0;
+        for (int i = 0; i < 1000; i++) {
+            for (_Ez_Int_Iterator it = set.iterator(); it.hasNext(); ) {
+                dummy ^= it.next();
+            }
+        }
+        Assert.assertEquals(dummy, 0);
     }
 
     @Test

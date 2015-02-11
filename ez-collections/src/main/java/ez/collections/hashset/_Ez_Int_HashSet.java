@@ -13,8 +13,15 @@ import java.util.Random;
 
 public class _Ez_Int_HashSet implements _Ez_Int_Set {
     private static final int DEFAULT_CAPACITY = 8;
-    private static final double ENLARGE_NON_FREE_CELLS_RATIO = 0.5;
-    private static final double REBUILD_REMOVED_CELLS_RATIO = 0.25;
+
+    // There are three invariants for size, removedCount and arraysLength:
+    // 1. size + removedCount <= 1/2 arraysLength
+    // 2. size > 1/8 arraysLength
+    // 3. size >= removedCount
+    // arraysLength can be only multiplied by 2 and divided by 2.
+    // Also, if it becomes >= 32, it can't become less anymore.
+    private static final int REBUILD_LENGTH_THRESHOLD = 32;
+
     private static final int HASHCODE_INITIAL_VALUE = 0x811c9dc5;
     private static final int HASHCODE_MULTIPLIER = 0x01000193;
 
@@ -50,16 +57,13 @@ public class _Ez_Int_HashSet implements _Ez_Int_Set {
         if (capacity < 0) {
             throw new IllegalArgumentException("Capacity must be non-negative");
         }
-        capacity = Math.max(4, (int) (capacity / ENLARGE_NON_FREE_CELLS_RATIO));
-        if ((capacity & (capacity - 1)) != 0) {
-            capacity = Integer.highestOneBit(capacity) << 1;
+        // Actually we need 4x more memory
+        int length = 4 * Math.max(1, capacity);
+        if ((length & (length - 1)) != 0) {
+            length = Integer.highestOneBit(length) << 1;
         }
-        // Capacity is a power of 2 now
-        table = new /*T*/int/*T*/[capacity];
-        status = new byte[capacity];
-        size = 0;
-        removedCount = 0;
-        mask = capacity - 1;
+        // Length is a power of 2 now
+        initEmptyTable(length);
         hashSeed = rnd.nextInt();
     }
 
@@ -149,8 +153,8 @@ public class _Ez_Int_HashSet implements _Ez_Int_Set {
             status[pos] = FILLED;
             table[pos] = element;
             size++;
-            if (size + removedCount > table.length * ENLARGE_NON_FREE_CELLS_RATIO) {
-                rebuild(table.length * 2);
+            if ((size + removedCount) * 2 > table.length) {
+                rebuild(table.length * 2); // enlarge the table
             }
             return true;
         }
@@ -177,8 +181,12 @@ public class _Ez_Int_HashSet implements _Ez_Int_Set {
                 status[pos] = REMOVED;
                 size--;
                 removedCount++;
-                if (removedCount > table.length * REBUILD_REMOVED_CELLS_RATIO) {
-                    rebuild(table.length);
+                if (table.length > REBUILD_LENGTH_THRESHOLD) {
+                    if (8 * size <= table.length) {
+                        rebuild(table.length / 2); // compress the table
+                    } else if (size < removedCount) {
+                        rebuild(table.length); // just rebuild the table
+                    }
                 }
                 return true;
             }
@@ -188,24 +196,32 @@ public class _Ez_Int_HashSet implements _Ez_Int_Set {
 
     @Override
     public void clear() {
-        Arrays.fill(status, FREE);
-        size = 0;
-        removedCount = 0;
+        if (table.length > REBUILD_LENGTH_THRESHOLD) {
+            initEmptyTable(REBUILD_LENGTH_THRESHOLD);
+        } else {
+            Arrays.fill(status, FREE);
+            size = 0;
+            removedCount = 0;
+        }
     }
 
-    private void rebuild(int newCapacity) {
+    private void rebuild(int newLength) {
         /*T*/int/*T*/[] oldTable = table;
         byte[] oldStatus = status;
-        table = new /*T*/int/*T*/[newCapacity];
-        status = new byte[newCapacity];
-        size = 0;
-        removedCount = 0;
-        mask = newCapacity - 1;
+        initEmptyTable(newLength);
         for (int i = 0; i < oldTable.length; i++) {
             if (oldStatus[i] == FILLED) {
                 add(oldTable[i]);
             }
         }
+    }
+
+    private void initEmptyTable(int length) {
+        table = new /*T*/int/*T*/[length];
+        status = new byte[length];
+        size = 0;
+        removedCount = 0;
+        mask = length - 1;
     }
 
     @Override
