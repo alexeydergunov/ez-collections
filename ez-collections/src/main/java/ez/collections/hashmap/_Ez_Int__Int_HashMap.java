@@ -11,8 +11,15 @@ import java.util.Random;
 
 public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     private static final int DEFAULT_CAPACITY = 8;
-    private static final double ENLARGE_NON_FREE_CELLS_RATIO = 0.5;
-    private static final double REBUILD_REMOVED_CELLS_RATIO = 0.25;
+
+    // There are three invariants for size, removedCount and arraysLength:
+    // 1. size + removedCount <= 1/2 arraysLength
+    // 2. size > 1/8 arraysLength
+    // 3. size >= removedCount
+    // arraysLength can be only multiplied by 2 and divided by 2.
+    // Also, if it becomes >= 32, it can't become less anymore.
+    private static final int REBUILD_LENGTH_THRESHOLD = 32;
+
     private static final int HASHCODE_INITIAL_VALUE = 0x811c9dc5;
     private static final int HASHCODE_MULTIPLIER = 0x01000193;
 
@@ -52,17 +59,13 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         if (capacity < 0) {
             throw new IllegalArgumentException("Capacity must be non-negative");
         }
-        capacity = Math.max(4, (int) (capacity / ENLARGE_NON_FREE_CELLS_RATIO));
-        if ((capacity & (capacity - 1)) != 0) {
-            capacity = Integer.highestOneBit(capacity) << 1;
+        // Actually we need 4x more memory
+        int length = 4 * Math.max(1, capacity);
+        if ((length & (length - 1)) != 0) {
+            length = Integer.highestOneBit(length) << 1;
         }
-        // Capacity is a power of 2 now
-        keys = new /*K*/int/*K*/[capacity];
-        values = new /*V*/int/*V*/[capacity];
-        status = new byte[capacity];
-        size = 0;
-        removedCount = 0;
-        mask = capacity - 1;
+        // Length is a power of 2 now
+        initEmptyTable(length);
         returnedNull = false;
         hashSeed = rnd.nextInt();
     }
@@ -149,8 +152,8 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
             keys[pos] = key;
             values[pos] = value;
             size++;
-            if (size + removedCount > keys.length * ENLARGE_NON_FREE_CELLS_RATIO) {
-                rebuild(keys.length * 2);
+            if ((size + removedCount) * 2 > keys.length) {
+                rebuild(keys.length * 2); // enlarge the table
             }
             returnedNull = true;
             return DEFAULT_NULL_VALUE;
@@ -184,8 +187,12 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
                 status[pos] = REMOVED;
                 size--;
                 removedCount++;
-                if (removedCount > keys.length * REBUILD_REMOVED_CELLS_RATIO) {
-                    rebuild(keys.length);
+                if (keys.length > REBUILD_LENGTH_THRESHOLD) {
+                    if (8 * size <= keys.length) {
+                        rebuild(keys.length / 2); // compress the table
+                    } else if (size < removedCount) {
+                        rebuild(keys.length); // just rebuild the table
+                    }
                 }
                 returnedNull = false;
                 return removedValue;
@@ -202,9 +209,13 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
 
     @Override
     public void clear() {
-        Arrays.fill(status, FREE);
-        size = 0;
-        removedCount = 0;
+        if (keys.length > REBUILD_LENGTH_THRESHOLD) {
+            initEmptyTable(REBUILD_LENGTH_THRESHOLD);
+        } else {
+            Arrays.fill(status, FREE);
+            size = 0;
+            removedCount = 0;
+        }
     }
 
     @Override
@@ -234,21 +245,25 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         return new _Ez_Int__Int_HashMapIterator();
     }
 
-    private void rebuild(int newCapacity) {
+    private void rebuild(int newLength) {
         /*K*/int/*K*/[] oldKeys = keys;
         /*V*/int/*V*/[] oldValues = values;
         byte[] oldStatus = status;
-        keys = new /*K*/int/*K*/[newCapacity];
-        values = new /*V*/int/*V*/[newCapacity];
-        status = new byte[newCapacity];
-        size = 0;
-        removedCount = 0;
-        mask = newCapacity - 1;
+        initEmptyTable(newLength);
         for (int i = 0; i < oldKeys.length; i++) {
             if (oldStatus[i] == FILLED) {
                 put(oldKeys[i], oldValues[i]);
             }
         }
+    }
+
+    private void initEmptyTable(int length) {
+        keys = new /*K*/int/*K*/[length];
+        values = new /*V*/int/*V*/[length];
+        status = new byte[length];
+        size = 0;
+        removedCount = 0;
+        mask = length - 1;
     }
 
     @Override

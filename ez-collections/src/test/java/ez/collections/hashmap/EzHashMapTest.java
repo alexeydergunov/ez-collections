@@ -2,6 +2,7 @@ package ez.collections.hashmap;
 
 import ez.collections._Ez_Int__Int_MapIterator;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -274,6 +275,47 @@ public class EzHashMapTest {
             }
             it.next(); // nothing must happen
         }
+    }
+
+    @DataProvider
+    public Object[][] getHashMapAfterManyRemoves() {
+        int n = 1000000;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = i;
+        }
+        Random rnd = new Random(3223223223L);
+        for (int i = 0; i < n; i++) {
+            int j = i + rnd.nextInt(n - i);
+            int tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+        }
+        _Ez_Int__Int_HashMap map = new _Ez_Int__Int_HashMap();
+        for (int i = 0; i < n; i++) {
+            map.put(a[i], i);
+        }
+        for (int i = 0; i < n - 1000; i++) {
+            map.remove(a[i]);
+            Assert.assertFalse(map.returnedNull());
+        }
+        Assert.assertEquals(map.size(), 1000);
+        return new Object[][] {{map}};
+    }
+
+    @Test(timeOut = 1000, dataProvider = "getHashMapAfterManyRemoves")
+    public void testCompressingAfterRemoving(_Ez_Int__Int_HashMap map) {
+        Assert.assertEquals(map.size(), 1000);
+        // Length of the arrays in the map must be O(size). If it's not, there will be a timeout
+        int dummy1 = 0, dummy2 = 0;
+        for (int i = 0; i < 1000; i++) {
+            for (_Ez_Int__Int_MapIterator it = map.iterator(); it.hasNext(); it.next()) {
+                dummy1 ^= it.getKey();
+                dummy2 ^= it.getValue();
+            }
+        }
+        Assert.assertEquals(dummy1, 0);
+        Assert.assertEquals(dummy2, 0);
     }
 
     @Test
