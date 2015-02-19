@@ -7,7 +7,7 @@ package ez.collections;
  * same element. Sets provide you only basic operations with collections: {@link #add}, {@link #remove},
  * {@link #contains}. Child interfaces can give you more functionality.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.hashset._Ez_Int_HashSet
  * @see ez.collections.treeset._Ez_Int_TreeSet
  * @see ez.collections.treeset._Ez_Int_CustomTreeSet

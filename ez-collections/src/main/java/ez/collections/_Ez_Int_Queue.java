@@ -6,7 +6,7 @@ package ez.collections;
  * Queue in EZ Collections is an analogue of {@link java.util.Queue}. Queue is a sequence of elements that allows you
  * to add elements to the end and get/remove elements from the beginning.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.arraydeque._Ez_Int_ArrayDeque
  */
 public interface _Ez_Int_Queue extends _Ez_Int_Collection {

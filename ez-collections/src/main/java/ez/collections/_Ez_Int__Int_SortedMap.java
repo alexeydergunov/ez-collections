@@ -10,7 +10,7 @@ import ez.collections.tuples._Ez_Int__Int_Pair;
  * get first and last keys and entries, and to get lower / higher / floor / ceiling keys and entries for the given key.
  * See the javadocs of the methods to get more information.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.treemap._Ez_Int__Int_TreeMap
  */
 public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {

@@ -8,7 +8,7 @@ package ez.collections;
  * map operations: check if the key is contained in the map, get the value by the key, put / override the value for
  * the key, or remove the key and its value from the map. Child interfaces can provide you more functionality.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.hashmap._Ez_Int__Int_HashMap
  * @see ez.collections.treemap._Ez_Int__Int_TreeMap
  */

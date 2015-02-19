@@ -8,7 +8,7 @@ package ez.collections;
  * {@link #remove}, {@link #contains}, sorted sets allow you to get/remove the first or the last element, as well as
  * get lower/floor/ceiling/higher elements relative to the given element. See javadocs of the methods for more details.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.treeset._Ez_Int_TreeSet
  * @see ez.collections.treeset._Ez_Int_CustomTreeSet
  */

@@ -6,7 +6,7 @@ package ez.collections;
  * Priority queue in EZ Collections is an analogue of {@link java.util.PriorityQueue} (but is an interface and can have
  * different implementations). Priority queue allows you to add elements and get/remove the minimal element.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.heap._Ez_Int_Heap
  * @see ez.collections.heap._Ez_Int_MaxHeap
  * @see ez.collections.heap._Ez_Int_CustomHeap

@@ -8,7 +8,7 @@ package ez.collections;
  * have one huge advantage: they store elements not as objects, but as primitives. So in this library you can find an
  * implementation of every collection for every primitive type. It greatly increases the performance.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface _Ez_Int_Collection {
     /**

@@ -10,7 +10,7 @@ package ez.collections;
  * Lists are zero-indexed, i.e. the first element has the index 0, and the last element has the index
  * {@code size() - 1}.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.arraylist._Ez_Int_ArrayList
  * @see ez.collections.arraydeque._Ez_Int_ArrayDeque
  */

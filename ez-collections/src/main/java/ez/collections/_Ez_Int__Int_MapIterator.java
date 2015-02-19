@@ -8,7 +8,7 @@ package ez.collections;
  * which can give you iterators. The only difference is that iterators in EZ Collections are read-only and cannot
  * remove entries.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface _Ez_Int__Int_MapIterator {
     /**

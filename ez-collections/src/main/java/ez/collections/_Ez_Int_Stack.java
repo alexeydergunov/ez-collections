@@ -7,7 +7,7 @@ package ez.collections;
  * from the end. Java Collections doesn't have the similar interface, though you can still use {@link java.util.Deque},
  * which provides the full functionality of stack.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.arraylist._Ez_Int_ArrayList
  * @see ez.collections.arraydeque._Ez_Int_ArrayDeque
  */

@@ -5,7 +5,7 @@ import ez.collections.misc.PrimitiveHashCalculator;
 /**
  * A mutable pair of two primitive types. Its fields are public to speedup the access.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class _Ez_Int__Int_Pair {
     private static final int HASHCODE_INITIAL_VALUE = 0x811c9dc5;

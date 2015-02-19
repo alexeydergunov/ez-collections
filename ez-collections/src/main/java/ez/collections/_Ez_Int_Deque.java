@@ -7,7 +7,7 @@ package ez.collections;
  * elements that gives you access to the first and last its elements. You can get their values, add new element to the
  * beginning or to the end of the deque or remove elements from the beginning or from the end.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.arraydeque._Ez_Int_ArrayDeque
  */
 public interface _Ez_Int_Deque extends _Ez_Int_Queue, _Ez_Int_Stack {

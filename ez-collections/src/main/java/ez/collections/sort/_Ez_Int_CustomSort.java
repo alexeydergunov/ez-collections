@@ -16,7 +16,7 @@ import java.util.Random;
  * In general this implementation is slower than the one in {@link java.util.Arrays}, so if you are absolutely sure
  * that nobody will give you an anti-quicksort array, you can use a standard algorithm.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections._Ez_Int_Comparator
  */
 public final class _Ez_Int_CustomSort {

@@ -3,7 +3,7 @@ package ez.collections;
 /**
  * An analogue of {@link java.util.Comparator}, an interface which is used to define a custom ordering for the elements.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  * @see ez.collections.sort._Ez_Int_CustomSort
  * @see ez.collections.heap._Ez_Int_CustomHeap
  * @see ez.collections.treeset._Ez_Int_CustomTreeSet

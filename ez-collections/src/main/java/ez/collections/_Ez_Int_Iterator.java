@@ -6,7 +6,7 @@ package ez.collections;
  * Iterators are used to go through a collection and get its elements. This interface provides the same methods as
  * {@link java.util.Iterator} except {@code remove()} method.
  * @author Alexey Dergunov
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface _Ez_Int_Iterator {
     /**
