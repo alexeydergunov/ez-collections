@@ -1,5 +1,8 @@
 # EZ Collections
 
+[![Build Status](https://travis-ci.org/alexeydergunov/ez-collections.svg?branch=master)]
+(https://travis-ci.org/alexeydergunov/ez-collections)
+
 EZ Collections is a Java library providing collections of the primitive types. These collections work faster and consume
 less memory than standard collections from java.util package.
 
