@@ -1,5 +1,6 @@
 package ez.collections.hashset;
 
+import ez.collections._Ez_Int_Hasher;
 import ez.collections._Ez_Int_Iterator;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -78,6 +79,44 @@ public class EzHashSetTest {
     public void testAddRemoveContainsBig() {
         Random rnd = new Random(32222);
         _Ez_Int_HashSet set = new _Ez_Int_HashSet(4);
+        boolean[] contains = new boolean[10000];
+        int size = 0;
+        for (int i = 0; i < 200000; i++) {
+            int x = rnd.nextInt(10000);
+            if (rnd.nextBoolean()) {
+                // add
+                if (contains[x]) {
+                    Assert.assertFalse(set.add(x));
+                } else {
+                    Assert.assertTrue(set.add(x));
+                    contains[x] = true;
+                    size++;
+                }
+            } else {
+                // remove
+                if (contains[x]) {
+                    Assert.assertTrue(set.remove(x));
+                    contains[x] = false;
+                    size--;
+                } else {
+                    Assert.assertFalse(set.remove(x));
+                }
+            }
+            Assert.assertEquals(set.contains(x), contains[x]);
+            Assert.assertEquals(set.size(), size);
+        }
+    }
+
+    @Test
+    public void testAddRemoveContainsBigForCustomHasher() {
+        Random rnd = new Random(32222);
+        _Ez_Int_Hasher hasher = new _Ez_Int_Hasher() {
+            @Override
+            public int getHash(int x) {
+                return (~x) ^ 0xABACABA;
+            }
+        };
+        _Ez_Int_CustomHashSet set = new _Ez_Int_CustomHashSet(4, hasher);
         boolean[] contains = new boolean[10000];
         int size = 0;
         for (int i = 0; i < 200000; i++) {
