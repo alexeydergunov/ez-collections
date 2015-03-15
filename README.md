@@ -20,6 +20,7 @@ Here is the list of already implemented collections and algorithms:
 - Heap
 - HashSet / HashMap (open-addressing implementation)
 - TreeSet / TreeMap
+- TreeList (list that performs add, set, insert and removeAt operations in O(logN))
 - Sorting algorithms (guaranteed O(NlogN) implementation)
 - Pair classes
 
