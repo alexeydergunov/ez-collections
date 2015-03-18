@@ -29,15 +29,11 @@ Here is the list of already implemented collections and algorithms:
 To build the library, you need Maven installed. Enter the library's root directory and execute `mvn clean install`.
 After that the library's jar files will be saved in your local Maven repository.
 
-To use it at programming contests, it's recommended to install CHelper plugin for IDEA by Egor Kulikov. However, it has
-some bugs, so I created [the clone at Google Code](https://code.google.com/r/alexeydergunov-chelper-fixes/source/list)
-and made some fixes. The best way is to download pre-built plugin ([latest revisions](https://yadi.sk/d/vSEuSNnHbjJB2),
-the last one is [chelper-05b00a70e4cf.zip](https://yadi.sk/d/0Gq80hMxegcsW)) and install it in IDEA.
+To use it at programming contests, it's recommended to install [CHelper](https://github.com/EgorKulikov/idea-chelper)
+plugin for IDEA by Egor Kulikov. For now the best way is to download pre-built plugin: [chelper-github-29dc20b.zip]
+(https://yadi.sk/d/28lnufuXfKEbp)) and install it in IDEA.
 
-Note that my CHelper's clone has version 3.92, so it doesn't contain newer updates. If you need those updates, you have
-to clone CHelper, apply my patches and build it by yourself.
-
-After installing fixed CHelper plugin, just add the dependency on EZ Collections in your project. Note that you have to
+After installing CHelper plugin, just add the dependency on EZ Collections in your project. Note that you have to
 specify both jar files: one contains class files, and the other one contains sources.
 
 ## Notes
