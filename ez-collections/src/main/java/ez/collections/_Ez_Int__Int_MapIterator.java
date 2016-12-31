@@ -22,14 +22,14 @@ public interface _Ez_Int__Int_MapIterator {
      * @return the key of the entry at which the iterator currently points
      * @throws java.util.NoSuchElementException if the iterator doesn't have more entries
      */
-    /*K*/int/*K*/ getKey();
+    /*T1*/int/*T1*/ getKey();
 
     /**
      * Returns the value of the entry at which the iterator currently points.
      * @return the value of the entry at which the iterator currently points
      * @throws java.util.NoSuchElementException if the iterator doesn't have more entries
      */
-    /*V*/int/*V*/ getValue();
+    /*T2*/int/*T2*/ getValue();
 
     /**
      * Moves the iterator to the next entry in the map. If there are no remaining entries, does nothing.

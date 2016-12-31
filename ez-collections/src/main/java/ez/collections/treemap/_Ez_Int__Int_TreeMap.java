@@ -19,12 +19,12 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     private static final boolean BLACK = false;
     private static final boolean RED = true;
     private static final int NULL = 0;
-    private static final /*KC*/int/*KC*/ DEFAULT_NULL_KEY = (new /*KC*/int/*KC*/[1])[0];
-    private static final /*V*/int/*V*/ DEFAULT_NULL_VALUE = (new /*V*/int/*V*/[1])[0];
+    private static final /*C1*/int/*C1*/ DEFAULT_NULL_KEY = (new /*C1*/int/*C1*/[1])[0];
+    private static final /*T2*/int/*T2*/ DEFAULT_NULL_VALUE = (new /*T2*/int/*T2*/[1])[0];
 
     // Arrays are 1-indexed. Index 0 is a null node.
-    private /*KC*/int/*KC*/[] keys;
-    private /*V*/int/*V*/[] values;
+    private /*C1*/int/*C1*/[] keys;
+    private /*T2*/int/*T2*/[] values;
     private int[] left;
     private int[] right;
     private int[] p;
@@ -43,8 +43,8 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
             throw new IllegalArgumentException("Capacity must be non-negative");
         }
         capacity++;
-        keys = new /*KC*/int/*KC*/[capacity];
-        values = new /*V*/int/*V*/[capacity];
+        keys = new /*C1*/int/*C1*/[capacity];
+        values = new /*T2*/int/*T2*/[capacity];
         left = new int[capacity];
         right = new int[capacity];
         p = new int[capacity];
@@ -62,9 +62,9 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
         }
     }
 
-    public _Ez_Int__Int_TreeMap(Map</*KWC*/Integer/*KWC*/, /*VW*/Integer/*VW*/> javaMap) {
+    public _Ez_Int__Int_TreeMap(Map</*WC1*/Integer/*WC1*/, /*W2*/Integer/*W2*/> javaMap) {
         this(javaMap.size());
-        for (Map.Entry</*KWC*/Integer/*KWC*/, /*VW*/Integer/*VW*/> e : javaMap.entrySet()) {
+        for (Map.Entry</*WC1*/Integer/*WC1*/, /*W2*/Integer/*W2*/> e : javaMap.entrySet()) {
             put(e.getKey(), e.getValue());
         }
     }
@@ -80,7 +80,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public boolean containsKey(/*KC*/int/*KC*/ key) {
+    public boolean containsKey(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key < keys[x]) {
@@ -95,7 +95,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*V*/int/*V*/ get(/*KC*/int/*KC*/ key) {
+    public /*T2*/int/*T2*/ get(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key < keys[x]) {
@@ -112,7 +112,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*V*/int/*V*/ put(/*KC*/int/*KC*/ key, /*V*/int/*V*/ value) {
+    public /*T2*/int/*T2*/ put(/*C1*/int/*C1*/ key, /*T2*/int/*T2*/ value) {
         int y = NULL;
         int x = root;
         while (x != NULL) {
@@ -123,7 +123,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
             } else if (key > keys[x]) {
                 x = right[x];
             } else {
-                final /*V*/int/*V*/ oldValue = values[x];
+                final /*T2*/int/*T2*/ oldValue = values[x];
                 values[x] = value;
                 returnedNull = false;
                 return oldValue;
@@ -154,7 +154,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*V*/int/*V*/ remove(/*KC*/int/*KC*/ key) {
+    public /*T2*/int/*T2*/ remove(/*C1*/int/*C1*/ key) {
         int z = root;
         while (z != NULL) {
             if (key < keys[z]) {
@@ -162,7 +162,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
             } else if (key > keys[z]) {
                 z = right[z];
             } else {
-                final /*V*/int/*V*/ removedValue = values[z];
+                final /*T2*/int/*T2*/ removedValue = values[z];
                 removeNode(z);
                 returnedNull = false;
                 return removedValue;
@@ -386,8 +386,8 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*KC*/int/*KC*/[] keys() {
-        /*KC*/int/*KC*/[] result = new /*KC*/int/*KC*/[size];
+    public /*C1*/int/*C1*/[] keys() {
+        /*C1*/int/*C1*/[] result = new /*C1*/int/*C1*/[size];
         for (int i = 0, x = firstNode(); x != NULL; x = successorNode(x), i++) {
             result[i] = keys[x];
         }
@@ -395,8 +395,8 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*V*/int/*V*/[] values() {
-        /*V*/int/*V*/[] result = new /*V*/int/*V*/[size];
+    public /*T2*/int/*T2*/[] values() {
+        /*T2*/int/*T2*/[] result = new /*T2*/int/*T2*/[size];
         for (int i = 0, x = firstNode(); x != NULL; x = successorNode(x), i++) {
             result[i] = values[x];
         }
@@ -435,7 +435,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*KC*/int/*KC*/ getFirstKey() {
+    public /*C1*/int/*C1*/ getFirstKey() {
         if (root == NULL) {
             returnedNull = true;
             return DEFAULT_NULL_KEY;
@@ -446,7 +446,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*KC*/int/*KC*/ getLastKey() {
+    public /*C1*/int/*C1*/ getLastKey() {
         if (root == NULL) {
             returnedNull = true;
             return DEFAULT_NULL_KEY;
@@ -479,7 +479,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*KC*/int/*KC*/ floorKey(/*KC*/int/*KC*/ key) {
+    public /*C1*/int/*C1*/ floorKey(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key > keys[x]) {
@@ -517,7 +517,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*KC*/int/*KC*/ ceilingKey(/*KC*/int/*KC*/ key) {
+    public /*C1*/int/*C1*/ ceilingKey(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key < keys[x]) {
@@ -555,7 +555,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*KC*/int/*KC*/ lowerKey(/*KC*/int/*KC*/ key) {
+    public /*C1*/int/*C1*/ lowerKey(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key > keys[x]) {
@@ -590,7 +590,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public /*KC*/int/*KC*/ higherKey(/*KC*/int/*KC*/ key) {
+    public /*C1*/int/*C1*/ higherKey(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key < keys[x]) {
@@ -625,7 +625,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public _Ez_Int__Int_Pair floorEntry(/*KC*/int/*KC*/ key) {
+    public _Ez_Int__Int_Pair floorEntry(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key > keys[x]) {
@@ -663,7 +663,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public _Ez_Int__Int_Pair ceilingEntry(/*KC*/int/*KC*/ key) {
+    public _Ez_Int__Int_Pair ceilingEntry(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key < keys[x]) {
@@ -701,7 +701,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public _Ez_Int__Int_Pair lowerEntry(/*KC*/int/*KC*/ key) {
+    public _Ez_Int__Int_Pair lowerEntry(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key > keys[x]) {
@@ -736,7 +736,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
     }
 
     @Override
-    public _Ez_Int__Int_Pair higherEntry(/*KC*/int/*KC*/ key) {
+    public _Ez_Int__Int_Pair higherEntry(/*C1*/int/*C1*/ key) {
         int x = root;
         while (x != NULL) {
             if (key < keys[x]) {
@@ -830,7 +830,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
         }
 
         @Override
-        public /*KC*/int/*KC*/ getKey() {
+        public /*C1*/int/*C1*/ getKey() {
             if (x == NULL) {
                 throw new NoSuchElementException("Iterator doesn't have more entries");
             }
@@ -838,7 +838,7 @@ public class _Ez_Int__Int_TreeMap implements _Ez_Int__Int_SortedMap {
         }
 
         @Override
-        public /*V*/int/*V*/ getValue() {
+        public /*T2*/int/*T2*/ getValue() {
             if (x == NULL) {
                 throw new NoSuchElementException("Iterator doesn't have more entries");
             }

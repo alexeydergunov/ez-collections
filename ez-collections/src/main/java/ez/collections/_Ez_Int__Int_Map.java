@@ -32,7 +32,7 @@ public interface _Ez_Int__Int_Map {
      * @param key the key to be checked
      * @return {@code true} if the map contains the entry with the specified key, {@code false} otherwise
      */
-    boolean containsKey(/*K*/int/*K*/ key);
+    boolean containsKey(/*T1*/int/*T1*/ key);
 
     /**
      * Returns the value for the specified key. If the map doesn't contain the entry with the specified key, this
@@ -51,7 +51,7 @@ public interface _Ez_Int__Int_Map {
      * @return the value for the specified key
      * @see #returnedNull()
      */
-    /*V*/int/*V*/ get(/*K*/int/*K*/ key);
+    /*T2*/int/*T2*/ get(/*T1*/int/*T1*/ key);
 
     /**
      * Puts the specified key-value pair into the map. That is, if the map already contains the entry for the specified
@@ -72,7 +72,7 @@ public interface _Ez_Int__Int_Map {
      * @return the previous value for the specified key
      * @see #returnedNull()
      */
-    /*V*/int/*V*/ put(/*K*/int/*K*/ key, /*V*/int/*V*/ value);
+    /*T2*/int/*T2*/ put(/*T1*/int/*T1*/ key, /*T2*/int/*T2*/ value);
 
     /**
      * Removes the entry with the specified key from the map. This method returns the value of the removed entry,
@@ -91,7 +91,7 @@ public interface _Ez_Int__Int_Map {
      * @return the value of the removed entry
      * @see #returnedNull()
      */
-    /*V*/int/*V*/ remove(/*K*/int/*K*/ key);
+    /*T2*/int/*T2*/ remove(/*T1*/int/*T1*/ key);
 
     /**
      * Checks if the last call of {@link #get}, {@link #put} or {@link #remove} has returned 'null'. Since we can't
@@ -118,7 +118,7 @@ public interface _Ez_Int__Int_Map {
      * be changed, and vice versa.
      * @return the array which contains all keys in this map
      */
-    /*K*/int/*K*/[] keys();
+    /*T1*/int/*T1*/[] keys();
 
     /**
      * Returns the array which contains all values in this map. It is not guaranteed that the array will be ordered in
@@ -128,7 +128,7 @@ public interface _Ez_Int__Int_Map {
      * be changed, and vice versa.
      * @return the array which contains all values in this map
      */
-    /*V*/int/*V*/[] values();
+    /*T2*/int/*T2*/[] values();
 
     /**
      * Returns the iterator which can be used to go through the entries of this map. It is not guaranteed that the

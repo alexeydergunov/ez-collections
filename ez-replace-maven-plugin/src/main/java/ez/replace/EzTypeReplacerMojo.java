@@ -44,18 +44,10 @@ public class EzTypeReplacerMojo extends AbstractMojo {
 
     // TODO rewrite this
     private static final Pattern CLASS_NAME_PATTERN = Pattern.compile("_.*?_");
-    private static final Pattern PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*T\\*/.*/\\*T\\*/");
-    private static final Pattern TUPLE_FIRST_TYPE_PATTERN = Pattern.compile("/\\*T1\\*/.*/\\*T1\\*/");
-    private static final Pattern TUPLE_SECOND_TYPE_PATTERN = Pattern.compile("/\\*T2\\*/.*/\\*T2\\*/");
-    private static final Pattern COMPARABLE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*C\\*/.*/\\*C\\*/");
-    private static final Pattern KEY_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*K\\*/.*/\\*K\\*/");
-    private static final Pattern COMPARABLE_KEY_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*KC\\*/.*/\\*KC\\*/");
-    private static final Pattern VALUE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*V\\*/.*/\\*V\\*/");
-    private static final Pattern WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*W\\*/.*/\\*W\\*/");
-    private static final Pattern COMPARABLE_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*WC\\*/.*/\\*WC\\*/");
-    private static final Pattern COMPARABLE_KEY_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*KWC\\*/.*/\\*KWC\\*/");
-    private static final Pattern KEY_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*KW\\*/.*/\\*KW\\*/");
-    private static final Pattern VALUE_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*VW\\*/.*/\\*VW\\*/");
+    private static final Pattern PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*(T)([0-9]*)\\*/.*/\\*(T)([0-9]*)\\*/");
+    private static final Pattern COMPARABLE_PRIMITIVE_TYPE_PATTERN = Pattern.compile("/\\*(C)([0-9]*)\\*/.*/\\*(C)([0-9]*)\\*/");
+    private static final Pattern WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*(W)([0-9]*)\\*/.*/\\*(W)([0-9]*)\\*/");
+    private static final Pattern COMPARABLE_WRAPPER_TYPE_PATTERN = Pattern.compile("/\\*(WC)([0-9]*)\\*/.*/\\*(WC)([0-9]*)\\*/");
 
     private static final FileFilter JAVA_FILTER = new FileFilter() {
         @Override
@@ -197,105 +189,11 @@ public class EzTypeReplacerMojo extends AbstractMojo {
         return Character.isWhitespace(c) || TOKEN_DELIMITERS.contains(Character.toString(c));
     }
 
-    private String transformToken(String s, TypeInfo... typeInfos) throws UnsupportedTypeException {
-        if (s.contains("/*T*/")) {
-            if (typeInfos.length != 1) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*T*/");
-            }
-            s = PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
-        }
-        if (s.contains("/*C*/")) {
-            if (typeInfos.length != 1) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*C*/");
-            }
-            if (typeInfos[0] == TypeInfo.BOOLEAN) {
-                throw new UnsupportedTypeException("/*C*/ cannot be boolean");
-            }
-            s = COMPARABLE_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
-        }
-        if (s.contains("/*W*/")) {
-            if (typeInfos.length != 1) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*W*/");
-            }
-            s = WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].wrapperName);
-        }
-        if (s.contains("/*WC*/")) {
-            if (typeInfos.length != 1) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 1 TypeInfo's were passed to transform /*WC*/");
-            }
-            if (typeInfos[0] == TypeInfo.BOOLEAN) {
-                throw new UnsupportedTypeException("/*WC*/ cannot be boolean");
-            }
-            s = COMPARABLE_WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].wrapperName);
-        }
-
-        if (s.contains("/*K*/")) {
-            if (typeInfos.length != 2) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*K*/");
-            }
-            s = KEY_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
-        }
-        if (s.contains("/*KW*/")) {
-            if (typeInfos.length != 2) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*KW*/");
-            }
-            s = KEY_WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].wrapperName);
-        }
-        if (s.contains("/*KC*/")) {
-            if (typeInfos.length != 2) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*KC*/");
-            }
-            if (typeInfos[0] == TypeInfo.BOOLEAN) {
-                throw new UnsupportedTypeException("/*KC*/ cannot be boolean");
-            }
-            s = COMPARABLE_KEY_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
-        }
-        if (s.contains("/*KWC*/")) {
-            if (typeInfos.length != 2) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*KWC*/");
-            }
-            if (typeInfos[0] == TypeInfo.BOOLEAN) {
-                throw new UnsupportedTypeException("/*KWC*/ cannot be boolean");
-            }
-            s = COMPARABLE_KEY_WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].wrapperName);
-        }
-        if (s.contains("/*V*/")) {
-            if (typeInfos.length != 2) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*V*/");
-            }
-            s = VALUE_PRIMITIVE_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[1].primitiveName);
-        }
-        if (s.contains("/*VW*/")) {
-            if (typeInfos.length != 2) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*VW*/");
-            }
-            s = VALUE_WRAPPER_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[1].wrapperName);
-        }
-        if (s.contains("/*T1*/")) {
-            if (typeInfos.length != 2) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*T1*/");
-            }
-            s = TUPLE_FIRST_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[0].primitiveName);
-        }
-        if (s.contains("/*T2*/")) {
-            if (typeInfos.length != 2) {
-                throw new IllegalArgumentException(
-                        typeInfos.length + " instead of 2 TypeInfo's were passed to transform /*T2*/");
-            }
-            s = TUPLE_SECOND_TYPE_PATTERN.matcher(s).replaceAll(typeInfos[1].primitiveName);
-        }
-
+    private String transformToken(String s, TypeInfo[] typeInfos) throws UnsupportedTypeException {
+        s = tryApplyPattern(s, PRIMITIVE_TYPE_PATTERN, typeInfos);
+        s = tryApplyPattern(s, COMPARABLE_PRIMITIVE_TYPE_PATTERN, typeInfos);
+        s = tryApplyPattern(s, WRAPPER_TYPE_PATTERN, typeInfos);
+        s = tryApplyPattern(s, COMPARABLE_WRAPPER_TYPE_PATTERN, typeInfos);
         if (s.startsWith("_")) {
             s = s.substring(1);
             Matcher matcher = CLASS_NAME_PATTERN.matcher(s);
@@ -311,5 +209,53 @@ public class EzTypeReplacerMojo extends AbstractMojo {
             s = sb.toString();
         }
         return s;
+    }
+
+    private String tryApplyPattern(String s, Pattern pattern, TypeInfo[] typeInfos) throws UnsupportedTypeException {
+        Matcher matcher = pattern.matcher(s);
+        if (matcher.matches()) {
+            if (matcher.groupCount() != 4) {
+                throw new IllegalArgumentException("Wrong number of groups in pattern");
+            }
+            String typeName1 = matcher.group(1);
+            String groupName1 = matcher.group(2);
+            String typeName2 = matcher.group(3);
+            String groupName2 = matcher.group(4);
+            if (!typeName1.equals(typeName2)) {
+                throw new IllegalArgumentException("Type names in pattern are not equal");
+            }
+            if (!groupName1.equals(groupName2)) {
+                throw new IllegalArgumentException("Type indices in pattern are not equal");
+            }
+            int index = groupName1.isEmpty() ? 0 : Integer.parseInt(groupName1) - 1;
+            if (index < 0 || index >= typeInfos.length) {
+                throw new IllegalArgumentException("Type index doesn't match the array of TypeInfo's");
+            }
+            String replacement = getJavaName(typeName1, typeInfos[index]);
+            s = matcher.replaceAll(replacement);
+        }
+        return s;
+    }
+
+    private String getJavaName(String typeName, TypeInfo typeInfo) throws UnsupportedTypeException {
+        if (typeName.equals("T")) {
+            return typeInfo.primitiveName;
+        }
+        if (typeName.equals("W")) {
+            return typeInfo.wrapperName;
+        }
+        if (typeName.equals("C")) {
+            if (typeInfo == TypeInfo.BOOLEAN) {
+                throw new UnsupportedTypeException("/*C*/ cannot be boolean");
+            }
+            return typeInfo.primitiveName;
+        }
+        if (typeName.equals("WC")) {
+            if (typeInfo == TypeInfo.BOOLEAN) {
+                throw new UnsupportedTypeException("/*WC*/ cannot be boolean");
+            }
+            return typeInfo.wrapperName;
+        }
+        throw new IllegalArgumentException("Wrong type name " + typeName);
     }
 }

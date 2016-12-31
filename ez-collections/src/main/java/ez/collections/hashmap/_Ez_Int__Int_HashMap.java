@@ -27,7 +27,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     private static final byte REMOVED = 1;
     private static final byte FILLED = 2;
 
-    private static final /*V*/int/*V*/ DEFAULT_NULL_VALUE = (new /*V*/int/*V*/[1])[0];
+    private static final /*T2*/int/*T2*/ DEFAULT_NULL_VALUE = (new /*T2*/int/*T2*/[1])[0];
 
     private static final Random rnd = new Random();
     private static final int POS_RANDOM_SHIFT_1;
@@ -42,8 +42,8 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         STEP_RANDOM_SHIFT_2 = rnd.nextInt(10) + 21;
     }
 
-    private /*K*/int/*K*/[] keys;
-    private /*V*/int/*V*/[] values;
+    private /*T1*/int/*T1*/[] keys;
+    private /*T2*/int/*T2*/[] values;
     private byte[] status;
     private int size;
     private int removedCount;
@@ -77,9 +77,9 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         }
     }
 
-    public _Ez_Int__Int_HashMap(Map</*KW*/Integer/*KW*/, /*VW*/Integer/*VW*/> javaMap) {
+    public _Ez_Int__Int_HashMap(Map</*W1*/Integer/*W1*/, /*W2*/Integer/*W2*/> javaMap) {
         this(javaMap.size());
-        for (Map.Entry</*KW*/Integer/*KW*/, /*VW*/Integer/*VW*/> e : javaMap.entrySet()) {
+        for (Map.Entry</*W1*/Integer/*W1*/, /*W2*/Integer/*W2*/> e : javaMap.entrySet()) {
             put(e.getKey(), e.getValue());
         }
     }
@@ -107,7 +107,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     }
 
     @Override
-    public boolean containsKey(/*K*/int/*K*/ key) {
+    public boolean containsKey(/*T1*/int/*T1*/ key) {
         final int keyHash = PrimitiveHashCalculator.getHash(key);
         int pos = getStartPos(keyHash);
         final int step = getStep(keyHash);
@@ -120,7 +120,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     }
 
     @Override
-    public /*V*/int/*V*/ get(/*K*/int/*K*/ key) {
+    public /*T2*/int/*T2*/ get(/*T1*/int/*T1*/ key) {
         final int keyHash = PrimitiveHashCalculator.getHash(key);
         int pos = getStartPos(keyHash);
         final int step = getStep(keyHash);
@@ -135,13 +135,13 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     }
 
     @Override
-    public /*V*/int/*V*/ put(/*K*/int/*K*/ key, /*V*/int/*V*/ value) {
+    public /*T2*/int/*T2*/ put(/*T1*/int/*T1*/ key, /*T2*/int/*T2*/ value) {
         final int keyHash = PrimitiveHashCalculator.getHash(key);
         int pos = getStartPos(keyHash);
         final int step = getStep(keyHash);
         for (; status[pos] == FILLED; pos = (pos + step) & mask) {
             if (keys[pos] == key) {
-                final /*V*/int/*V*/ oldValue = values[pos];
+                final /*T2*/int/*T2*/ oldValue = values[pos];
                 values[pos] = value;
                 returnedNull = false;
                 return oldValue;
@@ -161,7 +161,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         final int removedPos = pos;
         for (pos = (pos + step) & mask; status[pos] != FREE; pos = (pos + step) & mask) {
             if (status[pos] == FILLED && keys[pos] == key) {
-                final /*V*/int/*V*/ oldValue = values[pos];
+                final /*T2*/int/*T2*/ oldValue = values[pos];
                 values[pos] = value;
                 returnedNull = false;
                 return oldValue;
@@ -177,13 +177,13 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     }
 
     @Override
-    public /*V*/int/*V*/ remove(/*K*/int/*K*/ key) {
+    public /*T2*/int/*T2*/ remove(/*T1*/int/*T1*/ key) {
         final int keyHash = PrimitiveHashCalculator.getHash(key);
         int pos = getStartPos(keyHash);
         final int step = getStep(keyHash);
         for (; status[pos] != FREE; pos = (pos + step) & mask) {
             if (status[pos] == FILLED && keys[pos] == key) {
-                final /*V*/int/*V*/ removedValue = values[pos];
+                final /*T2*/int/*T2*/ removedValue = values[pos];
                 status[pos] = REMOVED;
                 size--;
                 removedCount++;
@@ -219,8 +219,8 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     }
 
     @Override
-    public /*K*/int/*K*/[] keys() {
-        /*K*/int/*K*/[] result = new /*K*/int/*K*/[size];
+    public /*T1*/int/*T1*/[] keys() {
+        /*T1*/int/*T1*/[] result = new /*T1*/int/*T1*/[size];
         for (int i = 0, j = 0; i < keys.length; i++) {
             if (status[i] == FILLED) {
                 result[j++] = keys[i];
@@ -230,8 +230,8 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     }
 
     @Override
-    public /*V*/int/*V*/[] values() {
-        /*V*/int/*V*/[] result = new /*V*/int/*V*/[size];
+    public /*T2*/int/*T2*/[] values() {
+        /*T2*/int/*T2*/[] result = new /*T2*/int/*T2*/[size];
         for (int i = 0, j = 0; i < values.length; i++) {
             if (status[i] == FILLED) {
                 result[j++] = values[i];
@@ -246,8 +246,8 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     }
 
     private void rebuild(int newLength) {
-        /*K*/int/*K*/[] oldKeys = keys;
-        /*V*/int/*V*/[] oldValues = values;
+        /*T1*/int/*T1*/[] oldKeys = keys;
+        /*T2*/int/*T2*/[] oldValues = values;
         byte[] oldStatus = status;
         initEmptyTable(newLength);
         for (int i = 0; i < oldKeys.length; i++) {
@@ -258,8 +258,8 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
     }
 
     private void initEmptyTable(int length) {
-        keys = new /*K*/int/*K*/[length];
-        values = new /*V*/int/*V*/[length];
+        keys = new /*T1*/int/*T1*/[length];
+        values = new /*T2*/int/*T2*/[length];
         status = new byte[length];
         size = 0;
         removedCount = 0;
@@ -277,7 +277,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         }
         for (int i = 0; i < keys.length; i++) {
             if (status[i] == FILLED) {
-                /*V*/int/*V*/ thatValue = that.get(keys[i]);
+                /*T2*/int/*T2*/ thatValue = that.get(keys[i]);
                 if (that.returnedNull || thatValue != values[i]) {
                     return false;
                 }
@@ -350,7 +350,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         }
 
         @Override
-        public /*K*/int/*K*/ getKey() {
+        public /*T1*/int/*T1*/ getKey() {
             if (curIndex == keys.length) {
                 throw new NoSuchElementException("Iterator doesn't have more entries");
             }
@@ -358,7 +358,7 @@ public class _Ez_Int__Int_HashMap implements _Ez_Int__Int_Map {
         }
 
         @Override
-        public /*V*/int/*V*/ getValue() {
+        public /*T2*/int/*T2*/ getValue() {
             if (curIndex == values.length) {
                 throw new NoSuchElementException("Iterator doesn't have more entries");
             }

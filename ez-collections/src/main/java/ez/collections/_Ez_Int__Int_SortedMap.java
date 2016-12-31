@@ -36,7 +36,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @return {@code true} if the map contains the entry with the specified key, {@code false} otherwise
      */
     @Override
-    boolean containsKey(/*KC*/int/*KC*/ key);
+    boolean containsKey(/*C1*/int/*C1*/ key);
 
     /**
      * Returns the value for the specified key. If the map doesn't contain the entry with the specified key, this
@@ -56,7 +56,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @see #returnedNull()
      */
     @Override
-    /*V*/int/*V*/ get(/*KC*/int/*KC*/ key);
+    /*T2*/int/*T2*/ get(/*C1*/int/*C1*/ key);
 
     /**
      * Puts the specified key-value pair into the map. That is, if the map already contains the entry for the specified
@@ -78,7 +78,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @see #returnedNull()
      */
     @Override
-    /*V*/int/*V*/ put(/*KC*/int/*KC*/ key, /*V*/int/*V*/ value);
+    /*T2*/int/*T2*/ put(/*C1*/int/*C1*/ key, /*T2*/int/*T2*/ value);
 
     /**
      * Removes the entry with the specified key from the map. This method returns the value of the removed entry,
@@ -98,7 +98,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @see #returnedNull()
      */
     @Override
-    /*V*/int/*V*/ remove(/*KC*/int/*KC*/ key);
+    /*T2*/int/*T2*/ remove(/*C1*/int/*C1*/ key);
 
     /**
      * Checks if the last call of {@link #get}, {@link #put}, {@link #remove}, {@link #getFirstKey},
@@ -134,7 +134,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @return the array which contains all keys in this map
      */
     @Override
-    /*KC*/int/*KC*/[] keys();
+    /*C1*/int/*C1*/[] keys();
 
     /**
      * Returns the array which contains all values in this map. The array will be sorted in the ascending order of the
@@ -145,7 +145,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @return the array which contains all values in this map
      */
     @Override
-    /*V*/int/*V*/[] values();
+    /*T2*/int/*T2*/[] values();
 
     /**
      * Returns the iterator which can be used to go through the entries of this map. The iterator will return the
@@ -195,7 +195,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @return the smallest key, in the case the map isn't empty
      * @see #returnedNull()
      */
-    /*KC*/int/*KC*/ getFirstKey();
+    /*C1*/int/*C1*/ getFirstKey();
 
     /**
      * Returns the largest key in the map. If the map is empty, it can return everything, but sets the special flag,
@@ -212,7 +212,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @return the largest key, in the case the map isn't empty
      * @see #returnedNull()
      */
-    /*KC*/int/*KC*/ getLastKey();
+    /*C1*/int/*C1*/ getLastKey();
 
     /**
      * Returns the entry with the smallest key. The field {@code first} of the returned pair will contain the key, and
@@ -249,7 +249,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @return the greatest key in the map that is less than or equal to the specified one
      * @see #returnedNull()
      */
-    /*KC*/int/*KC*/ floorKey(/*KC*/int/*KC*/ key);
+    /*C1*/int/*C1*/ floorKey(/*C1*/int/*C1*/ key);
 
     /**
      * Returns the least key in the map that is greater than or equal to the specified one. If the map doesn't contain
@@ -268,7 +268,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @return the least key in the map that is greater than or equal to the specified one
      * @see #returnedNull()
      */
-    /*KC*/int/*KC*/ ceilingKey(/*KC*/int/*KC*/ key);
+    /*C1*/int/*C1*/ ceilingKey(/*C1*/int/*C1*/ key);
 
     /**
      * Returns the greatest key in the map that is strictly less than the specified one. If the map doesn't contain
@@ -287,7 +287,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @return the greatest key in the map that is strictly less than the specified one
      * @see #returnedNull()
      */
-    /*KC*/int/*KC*/ lowerKey(/*KC*/int/*KC*/ key);
+    /*C1*/int/*C1*/ lowerKey(/*C1*/int/*C1*/ key);
 
     /**
      * Returns the least key in the map that is strictly greater than the specified one. If the map doesn't contain
@@ -306,7 +306,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * @return the least key in the map that is strictly greater than the specified one
      * @see #returnedNull()
      */
-    /*KC*/int/*KC*/ higherKey(/*KC*/int/*KC*/ key);
+    /*C1*/int/*C1*/ higherKey(/*C1*/int/*C1*/ key);
 
     /**
      * Returns the entry with the greatest key that is less than or equal to the specified one. The field {@code first}
@@ -317,7 +317,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * map is empty
      * @see #returnedNull()
      */
-    _Ez_Int__Int_Pair floorEntry(/*KC*/int/*KC*/ key);
+    _Ez_Int__Int_Pair floorEntry(/*C1*/int/*C1*/ key);
 
     /**
      * Returns the entry with the least key that is greater than or equal to the specified one. The field {@code first}
@@ -328,7 +328,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * map is empty
      * @see #returnedNull()
      */
-    _Ez_Int__Int_Pair ceilingEntry(/*KC*/int/*KC*/ key);
+    _Ez_Int__Int_Pair ceilingEntry(/*C1*/int/*C1*/ key);
 
     /**
      * Returns the entry with the greatest key that is strictly less than the specified one. The field {@code first}
@@ -339,7 +339,7 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * map is empty
      * @see #returnedNull()
      */
-    _Ez_Int__Int_Pair lowerEntry(/*KC*/int/*KC*/ key);
+    _Ez_Int__Int_Pair lowerEntry(/*C1*/int/*C1*/ key);
 
     /**
      * Returns the entry with the least key that is strictly greater than the specified one. The field {@code first}
@@ -350,5 +350,5 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
      * map is empty
      * @see #returnedNull()
      */
-    _Ez_Int__Int_Pair higherEntry(/*KC*/int/*KC*/ key);
+    _Ez_Int__Int_Pair higherEntry(/*C1*/int/*C1*/ key);
 }
