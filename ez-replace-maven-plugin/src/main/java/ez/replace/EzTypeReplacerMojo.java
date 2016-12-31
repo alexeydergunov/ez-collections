@@ -231,16 +231,16 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                 throw new IllegalArgumentException("Wrong number of groups in pattern");
             }
             String typeName1 = matcher.group(1);
-            String groupName1 = matcher.group(2);
+            String typeIndex1 = matcher.group(2);
             String typeName2 = matcher.group(3);
-            String groupName2 = matcher.group(4);
+            String typeIndex2 = matcher.group(4);
             if (!typeName1.equals(typeName2)) {
                 throw new IllegalArgumentException("Type names in pattern are not equal");
             }
-            if (!groupName1.equals(groupName2)) {
+            if (!typeIndex1.equals(typeIndex2)) {
                 throw new IllegalArgumentException("Type indices in pattern are not equal");
             }
-            int index = groupName1.isEmpty() ? 0 : Integer.parseInt(groupName1) - 1;
+            int index = typeIndex1.isEmpty() ? 0 : Integer.parseInt(typeIndex1) - 1;
             if (index < 0 || index >= typeInfos.length) {
                 throw new IllegalArgumentException("Type index doesn't match the array of TypeInfo's");
             }
