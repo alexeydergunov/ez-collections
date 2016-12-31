@@ -22,7 +22,7 @@ Here is the list of already implemented collections and algorithms:
 - TreeSet / TreeMap
 - TreeList (list that performs add, set, insert and removeAt operations in O(logN))
 - Sorting algorithms (guaranteed O(NlogN) implementation)
-- Pair classes
+- Pair and Triple classes
 
 ## Installation and usage
 
