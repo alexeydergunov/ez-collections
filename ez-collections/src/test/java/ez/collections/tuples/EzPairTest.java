@@ -51,6 +51,33 @@ public class EzPairTest {
     }
 
     @Test
+    public void testCompare() {
+        final int[] values = {
+                Integer.MIN_VALUE, Integer.MIN_VALUE + 1, Integer.MIN_VALUE + 2, Integer.MIN_VALUE + 3,
+                -3, -2, -1, 0, 1, 2, 3,
+                Integer.MAX_VALUE - 3, Integer.MAX_VALUE - 2, Integer.MAX_VALUE - 1, Integer.MAX_VALUE
+        };
+        _Ez_Int__Int_Pair[] arr = new _Ez_Int__Int_Pair[values.length * values.length];
+        for (int i = 0; i < values.length; i++) {
+            for (int j = 0; j < values.length; j++) {
+                arr[i*values.length + j] = new _Ez_Int__Int_Pair(values[i], values[j]);
+            }
+        }
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                int cmp = arr[i].compareTo(arr[j]);
+                if (i < j) {
+                    Assert.assertTrue(cmp < 0);
+                } else if (i > j) {
+                    Assert.assertTrue(cmp > 0);
+                } else {
+                    Assert.assertEquals(cmp, 0);
+                }
+            }
+        }
+    }
+
+    @Test
     public void testToString() {
         Assert.assertEquals(new _Ez_Int__Int_Pair(0, 0).toString(), "(0, 0)");
 

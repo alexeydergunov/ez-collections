@@ -7,7 +7,7 @@ import ez.collections.misc.PrimitiveHashCalculator;
  * @author Alexey Dergunov
  * @since 0.1.0
  */
-public class _Ez_Int__Int_Pair {
+public class _Ez_Int__Int_Pair implements Comparable<_Ez_Int__Int_Pair> {
     private static final int HASHCODE_INITIAL_VALUE = 0x811c9dc5;
     private static final int HASHCODE_MULTIPLIER = 0x01000193;
 
@@ -34,6 +34,15 @@ public class _Ez_Int__Int_Pair {
         hash = (hash ^ PrimitiveHashCalculator.getHash(first)) * HASHCODE_MULTIPLIER;
         hash = (hash ^ PrimitiveHashCalculator.getHash(second)) * HASHCODE_MULTIPLIER;
         return hash;
+    }
+
+    @Override
+    public int compareTo(_Ez_Int__Int_Pair o) {
+        int res = /*W1*/Integer/*W1*/.compare(first, o.first);
+        if (res == 0) {
+            res = /*W2*/Integer/*W2*/.compare(second, o.second);
+        }
+        return res;
     }
 
     @Override

@@ -57,9 +57,6 @@ could have returned null in usual Java Collections. For instance, these code fra
     }
 ```
 
-- boolean is considered to be incomparable type, so Pairs with booleans don't implement Comparable. It will be fixed
-someday.
-
 ## Example
 
 Let's solve the problem [Bertown roads](http://codeforces.com/contest/118/problem/E) from one of the Codeforces rounds.
