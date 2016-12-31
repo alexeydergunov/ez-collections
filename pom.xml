@@ -7,7 +7,7 @@
     <groupId>ez-collections</groupId>
     <artifactId>ez-collections-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.2.0</version>
+    <version>0.2.1-SNAPSHOT</version>
     <modules>
         <module>ez-replace-maven-plugin</module>
         <module>ez-collections</module>
