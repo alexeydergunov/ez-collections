@@ -120,32 +120,45 @@ public class EzTypeReplacerMojo extends AbstractMojo {
                 replacementsCount++;
             }
             if (replacementsCount == 1) {
-                // collection
-                for (TypeInfo typeInfo : TypeInfo.values()) {
+                for (TypeInfo type1 : TypeInfo.values()) {
                     String generatedClassName = replaceSequentially(
-                            CLASS_NAME_PATTERN, className, typeInfo.typeName);
+                            CLASS_NAME_PATTERN, className, type1.typeName);
                     File generatedTarget = new File(target.getParent(), generatedClassName + ".java");
                     if (!generatedTarget.exists()) {
-                        generateSourceCode(source, generatedTarget, typeInfo);
+                        generateSourceCode(source, generatedTarget, type1);
                     }
                 }
                 return;
             }
             if (replacementsCount == 2) {
-                // map
-                for (TypeInfo keyTypeInfo : TypeInfo.values()) {
-                    for (TypeInfo valueTypeInfo : TypeInfo.values()) {
+                for (TypeInfo type1 : TypeInfo.values()) {
+                    for (TypeInfo type2 : TypeInfo.values()) {
                         String generatedClassName = replaceSequentially(
-                                CLASS_NAME_PATTERN, className, keyTypeInfo.typeName, valueTypeInfo.typeName);
+                                CLASS_NAME_PATTERN, className, type1.typeName, type2.typeName);
                         File generatedTarget = new File(target.getParent(), generatedClassName + ".java");
                         if (!generatedTarget.exists()) {
-                            generateSourceCode(source, generatedTarget, keyTypeInfo, valueTypeInfo);
+                            generateSourceCode(source, generatedTarget, type1, type2);
                         }
                     }
                 }
                 return;
             }
-            throw new IllegalStateException("There should be only 1 or 2 type names in the class name");
+            if (replacementsCount == 3) {
+                for (TypeInfo type1 : TypeInfo.values()) {
+                    for (TypeInfo type2 : TypeInfo.values()) {
+                        for (TypeInfo type3 : TypeInfo.values()) {
+                            String generatedClassName = replaceSequentially(
+                                    CLASS_NAME_PATTERN, className, type1.typeName, type2.typeName, type3.typeName);
+                            File generatedTarget = new File(target.getParent(), generatedClassName + ".java");
+                            if (!generatedTarget.exists()) {
+                                generateSourceCode(source, generatedTarget, type1, type2, type3);
+                            }
+                        }
+                    }
+                }
+                return;
+            }
+            throw new IllegalStateException("There should be no more than 3 type names in the class name");
         }
     }
 
