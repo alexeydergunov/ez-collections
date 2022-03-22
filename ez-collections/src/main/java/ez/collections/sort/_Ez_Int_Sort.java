@@ -32,12 +32,12 @@ public final class _Ez_Int_Sort {
         return (int) (HEAPSORT_DEPTH_COEFFICIENT * log);
     }
 
-    private static void randomShuffle(/*C*/int/*C*/[] a, int left, int right) {
+    private static void randomShuffle(/*C*/int/*C*/[] array, int left, int right) {
         for (int i = left; i < right; i++) {
             int j = i + rnd.nextInt(right - i);
-            /*C*/int/*C*/ tmp = a[i];
-            a[i] = a[j];
-            a[j] = tmp;
+            /*C*/int/*C*/ tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
         }
     }
 
