@@ -99,12 +99,6 @@ public interface _Ez_Int_Stack extends _Ez_Int_Collection {
     String toString();
 
     /**
-     * Adds the element to the end of the stack.
-     * @param element the element to be added
-     */
-    void addLast(/*T*/int/*T*/ element);
-
-    /**
      * Returns the last element in the stack.
      * @return the last element in the stack
      * @throws java.util.NoSuchElementException if the stack is empty

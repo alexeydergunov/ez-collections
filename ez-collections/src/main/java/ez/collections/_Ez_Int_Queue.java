@@ -97,12 +97,6 @@ public interface _Ez_Int_Queue extends _Ez_Int_Collection {
     String toString();
 
     /**
-     * Adds the element to the end of the queue.
-     * @param element the element to be added
-     */
-    void addLast(/*T*/int/*T*/ element);
-
-    /**
      * Returns the first element in the queue.
      * @return the first element in the queue
      * @throws java.util.NoSuchElementException if the queue is empty

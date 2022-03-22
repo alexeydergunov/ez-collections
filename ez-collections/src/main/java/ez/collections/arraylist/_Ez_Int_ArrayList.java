@@ -163,7 +163,6 @@ public class _Ez_Int_ArrayList implements _Ez_Int_List, _Ez_Int_Stack {
         return removedElement;
     }
 
-    @Override
     public void addLast(/*T*/int/*T*/ element) {
         if (size == array.length) {
             enlarge();
