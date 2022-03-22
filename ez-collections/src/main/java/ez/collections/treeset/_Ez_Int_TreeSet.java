@@ -164,7 +164,8 @@ public class _Ez_Int_TreeSet implements _Ez_Int_SortedSet {
         return false;
     }
 
-    private void removeNode(int z) {
+    @Override
+    public void removeNode(int z) {
         int y = (left[z] == NULL || right[z] == NULL) ? z : successorNode(z);
         int x = (left[y] != NULL) ? left[y] : right[y];
         p[x] = p[y];

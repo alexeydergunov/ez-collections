@@ -246,6 +246,8 @@ public interface _Ez_Int_SortedSet extends _Ez_Int_Set {
      */
     /*C*/int/*C*/ higher(/*C*/int/*C*/ element);
 
+    public void removeNode(int z);
+
     /**
      * Checks if the last call of {@link #getFirst}, {@link #getLast}, {@link #removeFirst}, {@link #removeLast},
      * {@link #floor}, {@link #ceiling}, {@link #lower} or {@link #higher} has returned 'null'. Since we can't return
