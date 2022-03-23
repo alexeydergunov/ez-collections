@@ -135,6 +135,11 @@ public final class _Ez_Int_Sort {
     private static void down(/*C*/int/*C*/[] a, int index, int offset, int size) {
         final /*C*/int/*C*/ element = a[offset + index];
         final int firstLeaf = (size >>> 1);
+        index = getIndex(a, index, offset, size, element, firstLeaf);
+        a[offset + index] = element;
+    }
+
+    private static int getIndex(int[] a, int index, int offset, int size, int element, int firstLeaf) {
         while (index < firstLeaf) {
             int largestChild = (index << 1) + 1;
             if (largestChild + 1 < size && a[offset + largestChild + 1] > a[offset + largestChild]) {
@@ -146,6 +151,6 @@ public final class _Ez_Int_Sort {
             a[offset + index] = a[offset + largestChild];
             index = largestChild;
         }
-        a[offset + index] = element;
+        return index;
     }
 }
