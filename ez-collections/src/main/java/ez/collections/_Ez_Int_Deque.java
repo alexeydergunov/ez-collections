@@ -91,13 +91,6 @@ public interface _Ez_Int_Deque extends _Ez_Int_Queue, _Ez_Int_Stack {
     int hashCode();
 
     /**
-     * Returns the human-readable string representation of the deque.
-     * @return the string representation of the deque
-     */
-    @Override
-    String toString();
-
-    /**
      * Adds the element to the beginning of the deque.
      * @param element the element to be added
      */

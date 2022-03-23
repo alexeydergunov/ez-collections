@@ -93,11 +93,4 @@ public interface _Ez_Int_Set extends _Ez_Int_Collection {
      */
     @Override
     int hashCode();
-
-    /**
-     * Returns the human-readable string representation of the set.
-     * @return the string representation of the set
-     */
-    @Override
-    String toString();
 }

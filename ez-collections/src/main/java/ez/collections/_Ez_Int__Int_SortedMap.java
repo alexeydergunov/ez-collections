@@ -174,13 +174,6 @@ public interface _Ez_Int__Int_SortedMap extends _Ez_Int__Int_Map {
     int hashCode();
 
     /**
-     * Returns the human-readable string representation of the map.
-     * @return the string representation of the map
-     */
-    @Override
-    String toString();
-
-    /**
      * Returns the smallest key in the map. If the map is empty, it can return everything, but sets the special flag,
      * you should check it immediately after using getFirstKey() this way:
      * <pre>

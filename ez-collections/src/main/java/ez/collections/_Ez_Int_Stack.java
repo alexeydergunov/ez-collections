@@ -50,7 +50,7 @@ public interface _Ez_Int_Stack extends _Ez_Int_Collection {
     /*T*/int/*T*/[] toArray();
 
     /**
-     * Adds the element to the end of this stack (the same as {@link #addLast}).
+     * Adds the element to the end of this stack).
      * @param element the element to be added
      * @return always returns {@code true} (for compatibility with the interface {@link _Ez_Int_Collection})
      */
@@ -90,13 +90,6 @@ public interface _Ez_Int_Stack extends _Ez_Int_Collection {
      */
     @Override
     int hashCode();
-
-    /**
-     * Returns the human-readable string representation of the stack.
-     * @return the string representation of the stack
-     */
-    @Override
-    String toString();
 
     /**
      * Returns the last element in the stack.

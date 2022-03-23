@@ -97,13 +97,6 @@ public interface _Ez_Int_List extends _Ez_Int_Collection {
     int hashCode();
 
     /**
-     * Returns the human-readable string representation of the list.
-     * @return the string representation of the list
-     */
-    @Override
-    String toString();
-
-    /**
      * Returns the element at the specified position in the list.
      * @param index index of the element
      * @return the element at the specified position in the list

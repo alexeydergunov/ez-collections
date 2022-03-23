@@ -96,13 +96,6 @@ public interface _Ez_Int_SortedSet extends _Ez_Int_Set {
     int hashCode();
 
     /**
-     * Returns the human-readable string representation of the set.
-     * @return the string representation of the set
-     */
-    @Override
-    String toString();
-
-    /**
      * Returns the smallest element in the set. If the set is empty, it can return everything, but sets the special
      * flag, you should check it immediately after using getFirst() this way:
      * <pre>

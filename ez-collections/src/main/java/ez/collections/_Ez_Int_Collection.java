@@ -37,6 +37,13 @@ public interface _Ez_Int_Collection {
     _Ez_Int_Iterator iterator();
 
     /**
+     * Returns the human-readable string representation of the collection.
+     * @return the string representation of the collection
+     */
+    @Override
+    String toString();
+
+    /**
      * Returns the array which contains all elements in this collection. This method always allocates new array, so you
      * can modify it and the original collection won't be changed, and vice versa.
      * @return the array which contains all elements in this collection
@@ -84,11 +91,4 @@ public interface _Ez_Int_Collection {
      */
     @Override
     int hashCode();
-
-    /**
-     * Returns the human-readable string representation of the collection.
-     * @return the string representation of the collection
-     */
-    @Override
-    String toString();
 }

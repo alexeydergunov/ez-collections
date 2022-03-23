@@ -154,11 +154,4 @@ public interface _Ez_Int__Int_Map {
      */
     @Override
     int hashCode();
-
-    /**
-     * Returns the human-readable string representation of the map.
-     * @return the string representation of the map
-     */
-    @Override
-    String toString();
 }

@@ -94,13 +94,6 @@ public interface _Ez_Int_PriorityQueue extends _Ez_Int_Collection {
     int hashCode();
 
     /**
-     * Returns the human-readable string representation of the priority queue.
-     * @return the string representation of the priority queue
-     */
-    @Override
-    String toString();
-
-    /**
      * Returns the minimal element in the priority queue.
      * @return the minimal element in the priority queue
      * @throws java.util.NoSuchElementException if the priority queue is empty

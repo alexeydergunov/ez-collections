@@ -90,13 +90,6 @@ public interface _Ez_Int_Queue extends _Ez_Int_Collection {
     int hashCode();
 
     /**
-     * Returns the human-readable string representation of the queue.
-     * @return the string representation of the queue
-     */
-    @Override
-    String toString();
-
-    /**
      * Returns the first element in the queue.
      * @return the first element in the queue
      * @throws java.util.NoSuchElementException if the queue is empty
